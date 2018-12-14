@@ -1,0 +1,39 @@
+ALTER TABLE appointment DROP CONSTRAINT app_fk_patient;
+ALTER TABLE appointment DROP CONSTRAINT app_fk_diagnosis;
+ALTER TABLE doc_app DROP CONSTRAINT doc_app_fk_emp;
+ALTER TABLE doc_app DROP CONSTRAINT doc_app_fk_app;
+ALTER TABLE employee DROP CONSTRAINT emp_fk_pos;
+ALTER TABLE operation DROP CONSTRAINT oper_fk_emp;
+ALTER TABLE medicine DROP CONSTRAINT med_fk_emp;
+ALTER TABLE proced DROP CONSTRAINT proc_fk_emp;
+ALTER TABLE diag_oper DROP CONSTRAINT diag_oper_fk_diag;
+ALTER TABLE diag_oper DROP CONSTRAINT diag_oper_fk_oper;
+ALTER TABLE diag_med DROP CONSTRAINT diag_med_fk_diag;
+ALTER TABLE diag_med DROP CONSTRAINT diag_med_fk_med;
+ALTER TABLE diag_proc DROP CONSTRAINT diag_proc_fk_diag; 
+ALTER TABLE diag_proc DROP CONSTRAINT diag_proc_fk_proc; 
+
+
+
+ALTER TABLE appointment ADD CONSTRAINT app_fk_patient FOREIGN KEY(card_id) REFERENCES patient(card_id);
+ALTER TABLE appointment ADD CONSTRAINT app_fk_diagnosis FOREIGN KEY(diag_id) REFERENCES diagnosis(diag_id);
+
+ALTER TABLE doc_app ADD CONSTRAINT doc_app_fk_emp FOREIGN KEY(doctor_id) REFERENCES employee(emp_id);
+ALTER TABLE doc_app ADD CONSTRAINT doc_app_fk_app FOREIGN KEY(app_id) REFERENCES appointment(app_id);
+
+ALTER TABLE employee ADD CONSTRAINT emp_fk_pos FOREIGN KEY(emp_pos_id) REFERENCES position(pos_id);
+
+ALTER TABLE operation ADD CONSTRAINT oper_fk_emp FOREIGN KEY(doctor_id) REFERENCES employee(emp_id);
+
+ALTER TABLE medicine ADD CONSTRAINT med_fk_emp FOREIGN KEY(emp_id) REFERENCES employee(emp_id);
+
+ALTER TABLE proced ADD CONSTRAINT proc_fk_emp FOREIGN KEY(emp_id) REFERENCES employee(emp_id);
+
+ALTER TABLE diag_oper ADD CONSTRAINT diag_oper_fk_diag FOREIGN KEY(diag_id) REFERENCES diagnosis(diag_id);
+ALTER TABLE diag_oper ADD CONSTRAINT diag_oper_fk_oper FOREIGN KEY(oper_id) REFERENCES operation(oper_id);
+
+ALTER TABLE diag_med ADD CONSTRAINT diag_med_fk_diag FOREIGN KEY(diag_id) REFERENCES diagnosis(diag_id);
+ALTER TABLE diag_med ADD CONSTRAINT diag_med_fk_med FOREIGN KEY(med_id) REFERENCES medicine(med_id);
+
+ALTER TABLE diag_proc ADD CONSTRAINT diag_proc_fk_diag FOREIGN KEY(diag_id) REFERENCES diagnosis(diag_id);
+ALTER TABLE diag_proc ADD CONSTRAINT diag_proc_fk_proc FOREIGN KEY(proc_id) REFERENCES proced(proc_id);

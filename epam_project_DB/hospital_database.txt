@@ -1,0 +1,108 @@
+DROP TABLE patient;
+DROP TABLE appointment;
+DROP TABLE doc_app;
+DROP TABLE diagnosis;
+DROP TABLE operation;
+DROP TABLE medicine;
+DROP TABLE proced;
+DROP TABLE employee;
+DROP TABLE position;
+DROP TABLE diag_oper;
+DROP TABLE diag_med;
+DROP TABLE diag_proc;
+
+CREATE TABLE patient(
+	card_id number(11) NOT NULL PRIMARY KEY,
+	p_name varchar(30) NOT NULL,
+	p_surname varchar(30) NOT NULL,
+	p_patronymic varchar(30) NOT NULL,
+	p_birth_date Date NOT NULL,
+	p_address varchar(30) NOT NULL,
+	p_sex varchar(6) NOT NULL,
+	p_arrival_date Date NOT NULL,
+	p_discharge_date Date
+);
+
+CREATE TABLE appointment(
+	app_id number(11) NOT NULL PRIMARY KEY,
+	app_date Date NOT NULL,
+	app_value number(10,4) NOT NULL,
+	card_id number(11) NOT NULL,
+	diag_id number(11)
+);
+
+CREATE TABLE doc_app(
+	doctor_id number(11) NOT NULL UNIQUE,
+	app_id number(11) NOT NULL UNIQUE,
+	UNIQUE (doctor_id, app_id)
+);
+
+CREATE TABLE diagnosis(
+	diag_id number(11) NOT NULL PRIMARY KEY,
+	diag_name varchar(30) NOT NULL
+);
+
+CREATE TABLE operation(
+	oper_id number(11) NOT NULL PRIMARY KEY,
+	oper_name varchar(30) NOT NULL,
+	oper_value number(10,4) NOT NULL,
+	oper_length Date NOT NULL,
+	doctor_id number(11)
+);
+
+CREATE TABLE medicine(
+	med_id number(11) NOT NULL PRIMARY KEY,
+	med_name varchar(30) NOT NULL,
+	med_value number(10,4) NOT NULL,
+	med_course Date NOT NULL,
+	emp_id number(11)
+);
+
+CREATE TABLE proced(
+	proc_id number(11) NOT NULL PRIMARY KEY,
+	proc_name varchar(30) NOT NULL,
+	proc_value number(10,4) NOT NULL,
+	proc_course Date NOT NULL,
+	emp_id number(11)
+);
+
+CREATE TABLE employee(
+	emp_id number(11) NOT NULL PRIMARY KEY,
+	emp_name varchar(30) NOT NULL,
+	emp_surname varchar(30) NOT NULL,
+	emp_patronymic varchar(30) NOT NULL,
+	emp_hire_date Date NOT NULL,
+	emp_pos_id number(11) NOT NULL
+);
+
+CREATE TABLE position(
+	pos_id number(11) NOT NULL PRIMARY KEY,
+	pos_name varchar(30) NOT NULL,
+	pos_salary number(10,4) NOT NULL,
+	is_md number(1) NOT NULL
+);
+
+CREATE TABLE diag_oper(
+	diag_id number(11),
+	oper_date Date NOT NULL,
+	oper_done number(1) NOT NULL,
+	oper_id number(11) NOT NULL
+);
+
+CREATE TABLE diag_med(
+	diag_id number(11),
+	med_date Date NOT NULL,
+	med_done number(1) NOT NULL,
+	med_id number(11) NOT NULL
+);
+
+CREATE TABLE diag_proc(
+	diag_id number(11),
+	proc_date Date NOT NULL,
+	proc_done number(1) NOT NULL,
+	proc_id number(11) NOT NULL
+);
+
+
+
+
