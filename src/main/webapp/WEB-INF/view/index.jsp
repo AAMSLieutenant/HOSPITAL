@@ -31,31 +31,43 @@
     <%--<hr />--%>
 
 <%--</c:forEach>--%>
-
+<table>
 <c:forEach var="patient" items="${requestScope.patients}">
-    <ul>
 
-        <li>Name: <c:out value="${patient.pName}"/></li>
 
-        <li>surname: <c:out value="${patient.pSurname}"/></li>
+        <tr>
+            <td>Name: <c:out value="${patient.pName}"/></td>
+            <td>surname: <c:out value="${patient.pSurname}"/></td>
+            <td>Patronymic: <c:out value="${patient.pPatronymic}"/></td>
+            <td>Sex: <c:out value="${patient.pSex}"/></td>
+        </tr>
 
-        <li>Patronymic: <c:out value="${patient.pPatronymic}"/></li>
 
-        <li>Sex: <c:out value="${patient.pSex}"/></li>
 
-        <%--<form method="post" action="<c:url value='/delete'/>">--%>
-            <%--<input type="number" hidden name="id" value="${user.id}" />--%>
-            <%--<input type="submit" name="delete" value="Удалить"/>--%>
-        <%--</form>--%>
+    <%--<ul>--%>
 
-        <%--<form method="get" action="<c:url value='/update'/>">--%>
-            <%--<input type="number" hidden name="id" value="${user.id}" />--%>
-            <%--<input type="submit" value="Редактировать"/>--%>
-        <%--</form>--%>
-    </ul>
-    <hr />
+        <%--<li>Name: <c:out value="${patient.pName}"/></li>--%>
+
+        <%--<li>surname: <c:out value="${patient.pSurname}"/></li>--%>
+
+        <%--<li>Patronymic: <c:out value="${patient.pPatronymic}"/></li>--%>
+
+        <%--<li>Sex: <c:out value="${patient.pSex}"/></li>--%>
+
+        <%--&lt;%&ndash;<form method="post" action="<c:url value='/delete'/>">&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<input type="number" hidden name="id" value="${user.id}" />&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<input type="submit" name="delete" value="Удалить"/>&ndash;%&gt;--%>
+        <%--&lt;%&ndash;</form>&ndash;%&gt;--%>
+
+        <%--&lt;%&ndash;<form method="get" action="<c:url value='/update'/>">&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<input type="number" hidden name="id" value="${user.id}" />&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<input type="submit" value="Редактировать"/>&ndash;%&gt;--%>
+        <%--&lt;%&ndash;</form>&ndash;%&gt;--%>
+    <%--</ul>--%>
+    <%--<hr />--%>
 
 </c:forEach>
+</table>
 
 <h2>Создание нового пользователя</h2><br />
 

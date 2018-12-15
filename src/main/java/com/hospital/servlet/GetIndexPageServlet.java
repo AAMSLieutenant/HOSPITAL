@@ -10,15 +10,21 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
+/*
+Сервлет для вывода данных
+ */
 public class GetIndexPageServlet extends HttpServlet {
 
     private Map<Integer, User> users;
     private Map<Integer, Patient> patients;
 
+    /*
+    Метод запуска сервлета
+     */
     @Override
     public void init() throws ServletException {
 
+       //Позволяет достать атрибут из ServletContext
         final Object users = getServletContext().getAttribute("users");
         final Object patients = getServletContext().getAttribute("patients");
 
@@ -40,6 +46,9 @@ public class GetIndexPageServlet extends HttpServlet {
 
     }
 
+    /*
+    Метод вывода данных
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -48,6 +57,7 @@ public class GetIndexPageServlet extends HttpServlet {
 //        req.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(req, resp);
 
         req.setAttribute("patients", patients.values());
+        //Пересылка на сервлет
         req.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(req, resp);
     }
 }

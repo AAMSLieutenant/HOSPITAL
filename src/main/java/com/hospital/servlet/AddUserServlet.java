@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+//Сервлет для добавления пользователя
 public class AddUserServlet extends HttpServlet {
 
     private Map<Integer, User> users;
@@ -34,7 +35,7 @@ public class AddUserServlet extends HttpServlet {
         id = new AtomicInteger(2);
 
     }
-
+    //Получение информации от пользователя
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
@@ -54,6 +55,8 @@ public class AddUserServlet extends HttpServlet {
             users.put(id, user);
         }
 
+        //Отправляет на браузер клиента новый запрос, куда идти
+        //ApplicationContext - тот слеш в настройке сервера приложений при развертывании
         resp.sendRedirect(req.getContextPath() + "/");
     }
 }

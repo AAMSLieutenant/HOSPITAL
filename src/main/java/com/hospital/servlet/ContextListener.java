@@ -12,8 +12,16 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+/*
+Эта сущность реализует область видимости всего приложения (максимум)
+Здесь лежат данные для всего приложения (видимые для всех сервлетов)
+Это необходимо сделать до загрузки всех сервлетов.
+1. Реализовать интерфейс ServletContextListener
+2. Добавить аннтоацию @WebListener
+ */
 
 @WebListener
 public class ContextListener implements ServletContextListener {
@@ -22,10 +30,13 @@ public class ContextListener implements ServletContextListener {
     private Map<Integer, Patient> patients;
 
 
-
+    /*
+    Когда приложение запускается
+     */
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
 
+        Locale.setDefault(Locale.US);
         final ServletContext servletContext =
                 servletContextEvent.getServletContext();
         DaoFactory factory=new OracleDaoFactory();
@@ -35,9 +46,14 @@ public class ContextListener implements ServletContextListener {
         catch(Exception e){
             e.printStackTrace();
         }
+        /*
+        Надо для многопоточности
+         */
         users = new ConcurrentHashMap<>();
         patients=new ConcurrentHashMap<>();
-
+        /*
+        Передача данных по ключу для остальных сервлетов
+         */
         servletContext.setAttribute("users", users);
         servletContext.setAttribute("patients", patients);
 
@@ -49,6 +65,10 @@ public class ContextListener implements ServletContextListener {
         this.patients.put(patient2.getCardId(),patient2);
     }
 
+
+    /*
+    Когда приложение завершается
+     */
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
         //Close recourse.
