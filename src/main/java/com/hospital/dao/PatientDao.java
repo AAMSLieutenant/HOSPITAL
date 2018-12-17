@@ -33,10 +33,10 @@ public class PatientDao implements IPatientDao {
 
 
     private final Connection connection;//Объект соединения с БД
-    private static final org.apache.log4j.Logger log= Logger.getLogger(PatientDao.class);
-    static {
-        PropertyConfigurator.configure("log4j.properties");
-    }
+//    private static final org.apache.log4j.Logger log= Logger.getLogger(PatientDao.class);
+//    static {
+//        PropertyConfigurator.configure("log4j.properties");
+//    }
 
     public PatientDao(Connection connection)
     {

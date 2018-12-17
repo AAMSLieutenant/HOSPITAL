@@ -59,10 +59,13 @@ public class ContextListener implements ServletContextListener {
 
         final User user = Utils.createStubUser(1, "Первый", 10);
         this.users.put(user.getId(), user);
-        final Patient patient=new Patient(00003,"Name2","Surname2","PAtro","Male");
-        final Patient patient2=new Patient(00001,"Name","Surname","PAtro","Male");
-        this.patients.put(patient.getCardId(),patient);
-        this.patients.put(patient2.getCardId(),patient2);
+        final Patient patient=new Patient(1,"Name1","Surname1","Patro1","Male");
+        final Patient patient2=new Patient(2,"Name2","Surname2","PAtro2","Male");
+        final Patient patient3=new Patient(3,"Name3","Surname3","Patro3","Male");
+        this.patients.put(patient.getpCardId(),patient);
+        this.patients.put(patient2.getpCardId(),patient2);
+        this.patients.put(patient3.getpCardId(),patient3);
+        System.out.println("PATIENTS "+this.patients.size());
     }
 
 

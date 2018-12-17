@@ -9,7 +9,7 @@
 
 <h1>Hello from Java Vision!</h1><br />
 
-<h2>Все пользователи</h2><br />
+<%--<h2>Все пользователи</h2><br />--%>
 
 <%--<c:forEach var="user" items="${requestScope.users}">--%>
     <%--<ul>--%>
@@ -32,41 +32,70 @@
 
 <%--</c:forEach>--%>
 
-<c:forEach var="patient" items="${requestScope.patients}">
-    <ul>
+<p>
+    <table align="left" border="1">
+        <tr align="center">
+            <td width="150">Имя</td>
+            <td width="150">Фамилия</td>
+            <td width="150">Отчество</td>
+            <td width="150">Обновить</td>
+            <td width="150">Удалить</td>
+            <td width="150">CardId</td>
+        </tr>
+    <c:forEach var="patient" items="${requestScope.patients}">
 
-        <li>Name: <c:out value="${patient.pName}"/></li>
 
-        <li>surname: <c:out value="${patient.pSurname}"/></li>
+            <tr align="center">
+                <td ><c:out value="${patient.pName}"/></td>
+                <td ><c:out value="${patient.pSurname}"/></td>
+                <td ><c:out value="${patient.pPatronymic}"/></td>
+                <td valign="center">
+                    <form method="get" action="<c:url value='/update'/>">
+                    <input type="number" hidden name="pCardId" value="${patient.pCardId}" />
+                    <input type="submit" value="Редактировать"/>
+                    </form>
+                </td>
+                <td valign="center">
+                    <form method="post" action="<c:url value='/delete'/>">
+                    <input type="number" hidden name="pCardId" value="${patient.pCardId}" />
+                    <input type="submit" name="delete" value="Удалить"/>
+                    </form>
+                </td>
+                <td valign="center"><c:out value="${patient.pCardId}"/></td>
 
-        <li>Patronymic: <c:out value="${patient.pPatronymic}"/></li>
+            </tr>
 
-        <li>Sex: <c:out value="${patient.pSex}"/></li>
 
-        <%--<form method="post" action="<c:url value='/delete'/>">--%>
-            <%--<input type="number" hidden name="id" value="${user.id}" />--%>
-            <%--<input type="submit" name="delete" value="Удалить"/>--%>
-        <%--</form>--%>
 
-        <%--<form method="get" action="<c:url value='/update'/>">--%>
-            <%--<input type="number" hidden name="id" value="${user.id}" />--%>
-            <%--<input type="submit" value="Редактировать"/>--%>
-        <%--</form>--%>
-    </ul>
-    <hr />
+        <%--<ul>--%>
 
-</c:forEach>
+            <%--<form method="post" action="<c:url value='/delete'/>">--%>
+                <%--<input type="number" hidden name="id" value="${user.id}" />--%>
+                <%--<input type="submit" name="delete" value="Удалить"/>--%>
+            <%--</form>--%>
 
-<h2>Создание нового пользователя</h2><br />
+            <%--<form method="get" action="<c:url value='/update'/>">--%>
+                <%--<input type="number" hidden name="id" value="${user.id}" />--%>
+                <%--<input type="submit" value="Редактировать"/>--%>
+            <%--</form>--%>
+        <%--</ul>--%>
+        <%--<hr />--%>
 
-<form method="post" action="<c:url value='/add_user'/>">
+    </c:forEach>
+    </table>
+</p>
+<%--<p>--%>
+<%--<h2>Создание нового пользователя</h2><br />--%>
 
-    <label><input type="text" name="name"></label>Имя<br>
+<%--<form method="post" action="<c:url value='/add_user'/>">--%>
 
-    <label><input type="number" name="age"></label>Возраст<br>
+    <%--<label><input type="text" name="name"></label>Имя<br>--%>
 
-    <input type="submit" value="Ok" name="Ok"><br>
-</form>
+    <%--<label><input type="number" name="age"></label>Возраст<br>--%>
+
+    <%--<input type="submit" value="Ok" name="Ok"><br>--%>
+<%--</form>--%>
+<%--</p>--%>
 
 </body>
 </html>

@@ -6,17 +6,17 @@ import java.util.Objects;
 import com.hospital.model.Address;
 
 public class Patient {
-    private int cardId;
+    private int pCardId;
     private String pName;
     private String pSurname;
     private String pPatronymic;
 
-    public Patient(int cardId,
+    public Patient(int pCardId,
                    String pName,
                    String pSurname,
                    String pPatronymic,
                    String pSex) {
-        this.cardId = cardId;
+        this.pCardId = pCardId;
         this.pName = pName;
         this.pSurname = pSurname;
         this.pPatronymic = pPatronymic;
@@ -29,33 +29,14 @@ public class Patient {
     private Date pDischargeDate;
     private Address pAddress;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Patient)) return false;
-        Patient patient = (Patient) o;
-        return getCardId() == patient.getCardId() &&
-                Objects.equals(getpName(), patient.getpName()) &&
-                Objects.equals(getpSurname(), patient.getpSurname()) &&
-                Objects.equals(getpPatronymic(), patient.getpPatronymic()) &&
-                Objects.equals(getpBirthDate(), patient.getpBirthDate()) &&
-                Objects.equals(getpSex(), patient.getpSex()) &&
-                Objects.equals(getpArrivalDate(), patient.getpArrivalDate()) &&
-                Objects.equals(getpDischargeDate(), patient.getpDischargeDate()) &&
-                Objects.equals(getpAddress(), patient.getpAddress());
+
+
+    public int getpCardId() {
+        return pCardId;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getCardId(), getpName(), getpSurname(), getpPatronymic(), getpBirthDate(), getpSex(), getpArrivalDate(), getpDischargeDate(), getpAddress());
-    }
-
-    public int getCardId() {
-        return cardId;
-    }
-
-    public void setCardId(int cardId) {
-        this.cardId = cardId;
+    public void setpCardId(int pCardId) {
+        this.pCardId = pCardId;
     }
 
     public String getpName() {
@@ -121,9 +102,6 @@ public class Patient {
     public void setpAddress(Address pAddress) {
         this.pAddress = pAddress;
     }
-
-
-
 
 
 
