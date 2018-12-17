@@ -50,16 +50,21 @@
                 <td ><c:out value="${patient.pSurname}"/></td>
                 <td ><c:out value="${patient.pPatronymic}"/></td>
                 <td valign="center">
+                    <div>
                     <form method="get" action="<c:url value='/update'/>">
                     <input type="number" hidden name="pCardId" value="${patient.pCardId}" />
                     <input type="submit" value="Редактировать"/>
                     </form>
+                    </div>
+
                 </td>
                 <td valign="center">
+                    <div>
                     <form method="post" action="<c:url value='/delete'/>">
                     <input type="number" hidden name="pCardId" value="${patient.pCardId}" />
                     <input type="submit" name="delete" value="Удалить"/>
                     </form>
+                    </div>
                 </td>
                 <td valign="center"><c:out value="${patient.pCardId}"/></td>
 

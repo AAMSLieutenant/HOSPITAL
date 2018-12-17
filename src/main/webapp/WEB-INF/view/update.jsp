@@ -13,6 +13,7 @@
 
 <%--<div>Имя: <c:out value="${requestScope.user.name}"/> </div>--%>
 <%--<div>Возраст: <c:out value="${requestScope.user.age}"/> </div>--%>
+<div>pCardId: <c:out value="${requestScope.patient.pCardId}"/> </div>
 <div>Имя: <c:out value="${requestScope.patient.pName}"/> </div>
 <div>Фамилия: <c:out value="${requestScope.patient.pSurname}"/> </div>
 <div>Отчество: <c:out value="${requestScope.patient.pPatronymic}"/> </div>
@@ -25,7 +26,7 @@
     <label>Новая фамилия: <input type="text" name="pSurname" /></label><br>
     <label>Новое отчество: <input type="text" name="pPatronymic" /></label><br>
 
-    <input type="number" hidden name="id" value="${requestScope.patient.cardId}"/>
+    <input type="number" hidden name="pCardId" value="${requestScope.patient.pCardId}"/>
 
     <input type="submit" value="Ok" name="Ok"><br>
 </form>

@@ -22,6 +22,11 @@ public class Patient {
         this.pPatronymic = pPatronymic;
         this.pSex = pSex;
     }
+    public Patient(Patient p){
+        this.pCardId=p.pCardId;
+        this.pName=p.pName;
+        this.pSurname=p.pSurname;
+    }
 
     private Date pBirthDate;
     private String pSex;
