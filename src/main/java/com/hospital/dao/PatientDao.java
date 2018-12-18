@@ -261,8 +261,96 @@ public class PatientDao implements IPatientDao {
     }
 
     /** Сохраняет состояние объекта Employee в базе данных */
-    public void update(long key, Patient patient) throws Exception{
+    public void update(int key, Patient patient) throws Exception{
 
+        boolean flag=false;
+        System.out.println("PatientDao update()");
+        String statement="SELECT CARD_ID FROM PATIENT";
+        PreparedStatement ps=connection.prepareStatement(statement);
+        ResultSet rs=ps.executeQuery();
+        while(rs.next()){
+            if(rs.getInt("card_id")==key){
+                flag=true;
+                System.out.println("PatientDao update() MATCH: "+rs.getLong("card_id"));
+                break;
+            }
+        }
+        if(flag==true){
+            statement="UPDATE PATIENT SET p_name=?, p_surname=?, p_patronymic=? WHERE card_id=?";
+            ps=connection.prepareStatement(statement);
+            ps.setString(1, patient.getpName());
+            ps.setString(2, patient.getpSurname());
+            ps.setString(3, patient.getpPatronymic());
+            ps.setInt(4, key);
+            ps.executeUpdate();
+        }
+
+//                ps=connection.prepareStatement(statement);
+//                ps.setString(1, employee.getObjName());
+//                ps.setObject(2, null);
+//                if(employee.getParObjId()!=null){
+//                    ps.setLong(2, employee.getParObjId());
+//                }
+//                ps.setLong(3, key);
+//                ps.executeUpdate();
+//                connection.commit();
+//
+//
+//
+//                statement="UPDATE parameters"
+//                        + " SET number_info=?"
+//                        + " WHERE object_id=?"
+//                        + " AND attr_id=21";
+//                ps=connection.prepareStatement(statement);
+//                ps.setInt(1, employee.getEmpNum());
+//                ps.setLong(2, key);
+//                ps.executeUpdate();
+//                connection.commit();
+//                //
+//                statement="UPDATE parameters"
+//                        + " SET text_info=?"
+//                        + " WHERE object_id=?"
+//                        + " AND attr_id=22";
+//                ps=connection.prepareStatement(statement);
+//                ps.setString(1, employee.getEmpName());
+//                ps.setLong(2, key);
+//                ps.executeUpdate();
+//                connection.commit();
+//                //
+//                statement="UPDATE parameters"
+//                        + " SET text_info=?"
+//                        + " WHERE object_id=?"
+//                        + " AND attr_id=23";
+//                ps=connection.prepareStatement(statement);
+//                ps.setString(1, employee.getEmpJob());
+//                ps.setLong(2, key);
+//                ps.executeUpdate();
+//                connection.commit();
+//                //
+//                statement="UPDATE parameters"
+//                        + " SET date_info=?"
+//                        + " WHERE object_id=?"
+//                        + " AND attr_id=24";
+//                ps=connection.prepareStatement(statement);
+//
+//                java.sql.Date d=new java.sql.Date(employee.getEmpHireDate().getTime());
+//                ps.setDate(1, d);
+//                ps.setLong(2, key);
+//                ps.executeUpdate();
+//                connection.commit();
+//                //
+//                statement="UPDATE parameters"
+//                        + " SET number_info=?"
+//                        + " WHERE object_id=?"
+//                        + " AND attr_id=25";
+//                ps=connection.prepareStatement(statement);
+//                ps.setDouble(1, employee.getSalary());
+//                ps.setLong(2, key);
+//                ps.executeUpdate();
+//                connection.commit();
+//                //
+//
+//            }
 //        if((consider(getRole(), 'w', 15))==1){
 //
 //

@@ -1,5 +1,6 @@
 package com.hospital.servlet;
 
+import com.hospital.interfaces.IPatientDao;
 import com.hospital.model.User;
 import com.hospital.util.Utils;
 import com.hospital.model.Patient;
@@ -14,8 +15,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class UpdateUserServlet extends HttpServlet {
 
-    private Map<Integer, User> users;
+
     private Map<Integer, Patient> patients;
+    private Map<Integer, Patient> patientsDb;
+    private IPatientDao patientDao;
     private Integer currentId=0;
 
     @Override
@@ -23,6 +26,8 @@ public class UpdateUserServlet extends HttpServlet {
 
 //        final Object users = getServletContext().getAttribute("users");
         final Object patients = getServletContext().getAttribute("patients");
+        final Object patientsDb = getServletContext().getAttribute("patientsDb");
+        final Object patientDao = getServletContext().getAttribute("patientDao");
 
 
 //        if (users == null || !(users instanceof ConcurrentHashMap)) {
@@ -33,12 +38,14 @@ public class UpdateUserServlet extends HttpServlet {
 //            this.users = (ConcurrentHashMap<Integer, User>) users;
 //        }
 
-        if (patients == null || !(patients instanceof ConcurrentHashMap)) {
+        if (patientsDb == null || !(patientsDb instanceof ConcurrentHashMap)) {
 
             throw new IllegalStateException("You're repo does not initialize!");
         } else {
 
-            this.patients = (ConcurrentHashMap<Integer, Patient>) patients;
+            this.patientsDb = (ConcurrentHashMap<Integer, Patient>) patientsDb;
+            this.patientDao=(IPatientDao) patientDao;
+
         }
     }
 
@@ -57,12 +64,18 @@ public class UpdateUserServlet extends HttpServlet {
         System.out.println("Update doPost() Chosen STRING pSurname:"+pSurname);
         System.out.println("Update doPost() Chosen STRING pPatronymic:"+pPatronymic);
         System.out.println("Update doPost() Chosen STRING cardId:"+pCardId);
-        System.out.println("Update doPost() Chosen STRING cardId:"+Integer.parseInt(pCardId));
-        Patient patient = patients.get(Integer.parseInt(pCardId));
+        Patient patient = patientsDb.get(Integer.parseInt(pCardId));
 
         patient.setpName(pName);
         patient.setpSurname(pSurname);
         patient.setpPatronymic(pPatronymic);
+        try {
+            patientDao.update(Integer.parseInt(pCardId), patient);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
 
         resp.sendRedirect(req.getContextPath() + "/");
     }
@@ -79,7 +92,7 @@ public class UpdateUserServlet extends HttpServlet {
 //        }
 
 
-        final Patient patient=patients.get(Integer.parseInt(pCardId));
+        final Patient patient=patientsDb.get(Integer.parseInt(pCardId));
         req.setAttribute("patient", patient);
         req.getRequestDispatcher("/WEB-INF/view/update.jsp")
                 .forward(req, resp);

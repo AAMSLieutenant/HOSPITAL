@@ -25,7 +25,7 @@ public interface IPatientDao {
     public Patient read(int key) throws Exception;
 
     /** Сохраняет состояние объекта group в базе данных */
-    public void update(long key, Patient employee) throws Exception;
+    public void update(int key, Patient employee) throws Exception;
 
     /** Удаляет запись об объекте из базы данных */
     public void delete(int key) throws Exception;
