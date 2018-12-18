@@ -1,0 +1,35 @@
+select * from friend;
+
+
+select f.sender_id as sender_id, u.login as login, u.name, u.surname, u.email, u.phone
+from uuser u
+inner join friend f on u.user_id=f.sender_id and f.receiver_id=3 and is_confirmed=0;
+
+
+/*
+SELECT SENDER_ID
+FROM FRIEND
+WHERE RECEIVER_ID=my_id and IS_CONFIRMED=0;
+*/
+
+CREATE TABLE patient(
+	card_id number(11) NOT NULL PRIMARY KEY,
+	p_name varchar(30),
+	p_surname varchar(30),
+	p_patronymic varchar(30),
+	p_birth_date Date,
+	p_address varchar(30),
+	p_sex varchar(6),
+	p_arrival_date Date,
+	p_discharge_date Date
+);
+
+insert into patient(card_id, p_name, p_surname, p_patronymic, p_sex)
+values(1,'firstName', 'firstSurame', 'firstPatronymic', 'male');
+
+insert into patient(card_id, p_name, p_surname, p_patronymic, p_sex)
+values(2,'secondName', 'secondSurame', 'secondPatronymic', 'male');
+
+insert into patient(card_id, p_name, p_surname, p_patronymic, p_sex)
+values(3,'thirdName', 'thirdSurame', 'thirdPatronymic', 'male');
+

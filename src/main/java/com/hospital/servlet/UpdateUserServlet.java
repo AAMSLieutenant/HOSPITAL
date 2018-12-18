@@ -78,8 +78,7 @@ public class UpdateUserServlet extends HttpServlet {
 //            return;
 //        }
 
-//        final User user = users.get(Integer.parseInt(id));
-//        req.setAttribute("user", user);
+
         final Patient patient=patients.get(Integer.parseInt(pCardId));
         req.setAttribute("patient", patient);
         req.getRequestDispatcher("/WEB-INF/view/update.jsp")

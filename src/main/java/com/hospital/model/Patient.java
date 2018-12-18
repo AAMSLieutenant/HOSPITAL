@@ -11,6 +11,10 @@ public class Patient {
     private String pSurname;
     private String pPatronymic;
 
+    public Patient(){
+
+    }
+
     public Patient(int pCardId,
                    String pName,
                    String pSurname,

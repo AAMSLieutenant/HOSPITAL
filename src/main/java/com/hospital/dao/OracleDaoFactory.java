@@ -61,12 +61,14 @@ public class OracleDaoFactory implements DaoFactory{
 
     public IPatientDao getPatientDao() throws Exception
     {
-
-//            log.info("Employee class connection returned");
+            System.out.println("getPatientDao() returned connection");
             return new PatientDao(DriverManager.getConnection(url, user, password));
 
+//            log.info("Employee class connection returned");
 
-        //return null;
+
+
+
     }
 
     }

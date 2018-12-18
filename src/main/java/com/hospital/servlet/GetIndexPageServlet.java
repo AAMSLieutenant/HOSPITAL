@@ -25,16 +25,9 @@ public class GetIndexPageServlet extends HttpServlet {
     public void init() throws ServletException {
 
        //Позволяет достать атрибут из ServletContext
-        final Object users = getServletContext().getAttribute("users");
+
         final Object patients = getServletContext().getAttribute("patients");
 
-        if (users == null || !(users instanceof ConcurrentHashMap)) {
-
-            throw new IllegalStateException("You're repo does not initialize!");
-        } else {
-
-            this.users = (ConcurrentHashMap<Integer, User>) users;
-        }
 
         if (patients == null || !(patients instanceof ConcurrentHashMap)) {
 
@@ -53,8 +46,7 @@ public class GetIndexPageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-//        req.setAttribute("users", users.values());
-//        req.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(req, resp);
+
 
         req.setAttribute("patients", patients.values());
         //Пересылка на сервлет

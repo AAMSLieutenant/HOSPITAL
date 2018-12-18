@@ -14,22 +14,16 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class DeleteUserServlet extends HttpServlet {
 
-    private Map<Integer, User> users;
+
     private Map<Integer, Patient> patients;
 
     @Override
     public void init() throws ServletException {
 
-//        final Object users = getServletContext().getAttribute("users");
+
         final Object patients = getServletContext().getAttribute("patients");
 
-//        if (users == null || !(users instanceof ConcurrentHashMap)) {
-//
-//            throw new IllegalStateException("You're repo does not initialize!");
-//        } else {
-//
-//            this.users = (ConcurrentHashMap<Integer, User>) users;
-//        }
+
 
         if (patients == null || !(patients instanceof ConcurrentHashMap)) {
 

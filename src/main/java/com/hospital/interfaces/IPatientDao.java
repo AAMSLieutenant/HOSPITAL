@@ -22,7 +22,7 @@ public interface IPatientDao {
     public void create(Patient patient) throws Exception;
 
     /** Возвращает объект соответствующий записи с первичным ключом key или null */
-    public Patient read(long key) throws Exception;
+    public Patient read(int key) throws Exception;
 
     /** Сохраняет состояние объекта group в базе данных */
     public void update(long key, Patient employee) throws Exception;

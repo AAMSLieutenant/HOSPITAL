@@ -7,15 +7,13 @@
 package com.hospital.dao;
 
 import com.hospital.interfaces.IPatientDao;
+
+import java.sql.*;
 import java.util.List;
 import com.hospital.model.Patient;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +39,7 @@ public class PatientDao implements IPatientDao {
     public PatientDao(Connection connection)
     {
         this.connection = connection;
+        System.out.println("PatientDao received connection");
     }
 
     /** Создает новую запись и соответствующий ей объект */
@@ -142,7 +141,64 @@ public class PatientDao implements IPatientDao {
     }
 
     /** Возвращает объект соответствующий записи с первичным ключом key или null */
-    public Patient read(long key) throws Exception{
+    public Patient read(int key) throws Exception{
+
+        System.out.println("PatientDao read()");
+        String statement="SELECT * from PATIENT WHERE card_id=?";
+        PreparedStatement ps=connection.prepareStatement(statement);
+        ps.setInt(1, key);
+        ResultSet rs=ps.executeQuery();
+        Patient p=new Patient();
+
+//        System.out.println("PatientDao read()");
+//        String statement="SELECT * from PATIENT WHERE card_id=";
+//        Statement stmt=connection.createStatement();
+//        ResultSet rs=stmt.executeQuery(statement+key);
+//        Patient p=new Patient();
+
+        while(rs.next()){
+            p.setpCardId(rs.getInt("card_id"));
+            p.setpName(rs.getString("p_name"));
+            p.setpSurname(rs.getString("p_surname"));
+            p.setpPatronymic(rs.getString("p_patronymic"));
+            p.setpSex(rs.getString("p_sex"));
+
+        }
+
+
+
+
+        System.out.println("card_id:"+p.getpCardId());
+        System.out.println("p_name:"+p.getpName());
+        System.out.println("p_surname:"+p.getpSurname());
+        System.out.println("p_patronymic:"+p.getpPatronymic());
+        System.out.println("p_sex:"+p.getpSex());
+        try{
+            ps.close();
+        }
+        catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return p;
+
+//            e.setId(rs.getLong("object_id"));
+//
+//            e.setObjName(rs.getString("object_name"));
+//
+//            e.setParObjId(rs.getLong("parent_object_id"));
+//
+//            if(rs.getInt("attr_id")==21) e.setEmpNum(rs.getInt("number_info"));
+//
+//            if(rs.getInt("attr_id")==22) e.setEmpName(rs.getString("text_info"));
+//
+//            if(rs.getInt("attr_id")==23) e.setEmpJob(rs.getString("text_info"));
+//
+//            if(rs.getInt("attr_id")==24) e.setEmpHireDate(rs.getDate("date_info"));
+//
+//            if(rs.getInt("attr_id")==25) e.setSalary(rs.getDouble("number_info"));
+//
+//
+
 
 //        if((consider(getRole(), 'r', 15))==-1){
 //            log.error("EmployeeDao read() access error");
@@ -206,9 +262,6 @@ public class PatientDao implements IPatientDao {
 ////
 //        return e;
 //
-
-        return null;
-
     }
 
     /** Сохраняет состояние объекта Employee в базе данных */
@@ -373,6 +426,27 @@ public class PatientDao implements IPatientDao {
     /** Возвращает список объектов соответствующих всем записям в базе данных */
     public List<Patient> getAll() throws Exception{
 
+        System.out.println("PatientDao getAll()");
+        List<Integer> ids=new ArrayList<>();
+        List<Patient> patients=new ArrayList<>();
+
+        String statement="SELECT card_id FROM patient";
+        System.out.println("read statement: "+statement);
+        PreparedStatement ps=connection.prepareStatement(statement);
+        ResultSet rs=ps.executeQuery();
+        while(rs.next()){
+            ids.add(rs.getInt("card_id"));
+        }
+        System.out.println("---------------------------------------------------------");
+//        System.out.println("Count of cardIds: "+ids.size());
+        for(int i=0;i<ids.size();i++){
+            System.out.println("current CARD_ID: "+ids.get(i));
+            patients.add(read(ids.get(i)));
+        }
+
+        return patients;
+
+
 //        log.info("EmployeeDao getAll()");
 //        if((consider(getRole(), 'r', 15))==-1){
 //            log.error("EmployeeDao getAll() access error");
@@ -402,8 +476,6 @@ public class PatientDao implements IPatientDao {
 //        }
 //
 //        return objects;
-        return null;
-
 
     }
 

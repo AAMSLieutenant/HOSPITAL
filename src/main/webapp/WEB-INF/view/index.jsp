@@ -11,27 +11,6 @@
 
 <%--<h2>Все пользователи</h2><br />--%>
 
-<%--<c:forEach var="user" items="${requestScope.users}">--%>
-    <%--<ul>--%>
-
-        <%--<li>Имя: <c:out value="${user.name}"/></li>--%>
-
-        <%--<li>Возраст: <c:out value="${user.age}"/></li>--%>
-
-        <%--<form method="post" action="<c:url value='/delete'/>">--%>
-            <%--<input type="number" hidden name="id" value="${user.id}" />--%>
-            <%--<input type="submit" name="delete" value="Удалить"/>--%>
-        <%--</form>--%>
-
-        <%--<form method="get" action="<c:url value='/update'/>">--%>
-            <%--<input type="number" hidden name="id" value="${user.id}" />--%>
-            <%--<input type="submit" value="Редактировать"/>--%>
-        <%--</form>--%>
-    <%--</ul>--%>
-    <%--<hr />--%>
-
-<%--</c:forEach>--%>
-
 <p>
     <table align="left" border="1">
         <tr align="center">
@@ -71,20 +50,6 @@
             </tr>
 
 
-
-        <%--<ul>--%>
-
-            <%--<form method="post" action="<c:url value='/delete'/>">--%>
-                <%--<input type="number" hidden name="id" value="${user.id}" />--%>
-                <%--<input type="submit" name="delete" value="Удалить"/>--%>
-            <%--</form>--%>
-
-            <%--<form method="get" action="<c:url value='/update'/>">--%>
-                <%--<input type="number" hidden name="id" value="${user.id}" />--%>
-                <%--<input type="submit" value="Редактировать"/>--%>
-            <%--</form>--%>
-        <%--</ul>--%>
-        <%--<hr />--%>
 
     </c:forEach>
     </table>

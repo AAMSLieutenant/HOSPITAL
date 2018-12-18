@@ -10,9 +10,6 @@
 </head>
 <body>
 
-
-<%--<div>Имя: <c:out value="${requestScope.user.name}"/> </div>--%>
-<%--<div>Возраст: <c:out value="${requestScope.user.age}"/> </div>--%>
 <div>pCardId: <c:out value="${requestScope.patient.pCardId}"/> </div>
 <div>Имя: <c:out value="${requestScope.patient.pName}"/> </div>
 <div>Фамилия: <c:out value="${requestScope.patient.pSurname}"/> </div>
