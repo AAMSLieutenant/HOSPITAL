@@ -21,7 +21,7 @@
             <td width="150">Удалить</td>
             <td width="150">CardId</td>
         </tr>
-    <c:forEach var="patient" items="${requestScope.patients}">
+    <c:forEach var="patient" items="${requestScope.patientsDb}">
 
 
             <tr align="center">

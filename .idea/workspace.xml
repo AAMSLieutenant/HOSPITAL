@@ -7,28 +7,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="79bd505c-a6d2-4dc7-929d-2e0028cdc15b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/epam_project_DB/temp.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/dao/OracleDaoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/dao/OracleDaoFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/dao/PatientDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/dao/PatientDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/interfaces/IPatientDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/interfaces/IPatientDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/model/Patient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/model/Patient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/servlet/ContextListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/servlet/ContextListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/servlet/DeleteUserServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/servlet/DeleteUserServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/servlet/GetIndexPageServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/servlet/GetIndexPageServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/servlet/UpdateUserServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/servlet/UpdateUserServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/update.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/update.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hospital/model/Patient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hospital/model/Patient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hospital/servlet/DeleteUserServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hospital/servlet/DeleteUserServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hospital/servlet/UpdateUserServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hospital/servlet/UpdateUserServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/classes/com/hospital/model/Patient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/classes/com/hospital/model/Patient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/classes/com/hospital/servlet/ContextListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/classes/com/hospital/servlet/ContextListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/classes/com/hospital/servlet/DeleteUserServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/classes/com/hospital/servlet/DeleteUserServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/classes/com/hospital/servlet/UpdateUserServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/classes/com/hospital/servlet/UpdateUserServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/view/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/view/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/view/update.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/view/update.jsp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -133,31 +118,31 @@
     <session id="1979475658">
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="17" />
+          <entry key="java" value="18" />
           <entry key="jsp" value="4" />
-          <entry key="txt" value="2" />
+          <entry key="txt" value="5" />
           <entry key="xml" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="17" />
+          <entry key="JAVA" value="18" />
           <entry key="JSP" value="4" />
-          <entry key="PLAIN_TEXT" value="2" />
+          <entry key="PLAIN_TEXT" value="5" />
           <entry key="XML" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="683" />
-          <entry key="jsp" value="417" />
+          <entry key="java" value="1226" />
+          <entry key="jsp" value="419" />
           <entry key="txt" value="27" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="683" />
-          <entry key="JSP" value="417" />
+          <entry key="JAVA" value="1226" />
+          <entry key="JSP" value="419" />
           <entry key="PLAIN_TEXT" value="27" />
         </counts>
       </usages-collector>
@@ -221,10 +206,13 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/index.jsp">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/servlet/GetIndexPageServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="56" column="11" lean-forward="true" selection-start-line="56" selection-start-column="11" selection-end-line="56" selection-end-column="11" />
+            <state relative-caret-position="274">
+              <caret line="53" column="60" lean-forward="true" selection-start-line="53" selection-start-column="60" selection-end-line="53" selection-end-column="60" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -232,29 +220,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/update.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="15" column="74" lean-forward="true" selection-start-line="15" selection-start-column="74" selection-end-line="15" selection-end-column="74" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/servlet/GetIndexPageServlet.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/servlet/AddUserServlet.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="31" column="66" lean-forward="true" selection-start-line="31" selection-start-column="66" selection-end-line="31" selection-end-column="66" />
+            <state relative-caret-position="418">
+              <caret line="19" column="45" selection-start-line="19" selection-start-column="45" selection-end-line="19" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -262,17 +229,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/servlet/DeleteUserServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/model/Patient.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="682">
-              <caret line="31" column="33" lean-forward="true" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
+            <state relative-caret-position="398">
+              <caret line="55" column="18" selection-start-line="55" selection-start-column="18" selection-end-line="55" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -281,10 +239,46 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/servlet/UpdateUserServlet.java">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/index.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="81" selection-start-line="81" selection-end-line="81" />
+            <state relative-caret-position="-2">
+              <caret line="23" column="45" lean-forward="true" selection-start-line="23" selection-start-column="45" selection-end-line="23" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/epam_project_DB/hospital_database_constraint.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="22">
+              <caret line="12" column="57" lean-forward="true" selection-start-line="12" selection-start-column="57" selection-end-line="12" selection-end-column="57" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/epam_project_DB/hospital_database.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="308">
+              <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/epam_project_DB/temp.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="245">
+              <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/servlet/ContextListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="260">
+              <caret line="67" column="56" lean-forward="true" selection-start-line="67" selection-start-column="56" selection-end-line="67" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -293,34 +287,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/epam_project_DB/temp.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="646">
-              <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/dao/PatientDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="430" column="49" lean-forward="true" selection-start-line="430" selection-start-column="49" selection-end-line="430" selection-end-column="49" />
+            <state relative-caret-position="311">
+              <caret line="379" column="42" lean-forward="true" selection-start-line="379" selection-start-column="42" selection-end-line="379" selection-end-column="42" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#create#0;class#PatientDao#0" />
                 <element signature="method#update#0;class#PatientDao#0" />
-                <element signature="method#delete#0;class#PatientDao#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/servlet/ContextListener.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/interfaces/IPatientDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="464">
-              <caret line="92" selection-start-line="92" selection-end-line="92" />
+            <state relative-caret-position="453">
+              <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -361,16 +343,16 @@
         <option value="$PROJECT_DIR$/src/main/java/com/hospital/servlet/AddUserServlet.java" />
         <option value="$PROJECT_DIR$/.idea/.name" />
         <option value="$PROJECT_DIR$/src/main/java/com/hospital/model/Patient.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/hospital/interfaces/IPatientDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hospital/dao/OracleDaoFactory.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/hospital/dao/PatientDao.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/index.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/update.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/com/hospital/servlet/ContextListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/hospital/servlet/DeleteUserServlet.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/hospital/servlet/GetIndexPageServlet.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hospital/servlet/UpdateUserServlet.java" />
         <option value="$PROJECT_DIR$/epam_project_DB/temp.txt" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hospital/interfaces/IPatientDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hospital/dao/PatientDao.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/index.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hospital/servlet/GetIndexPageServlet.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hospital/servlet/ContextListener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hospital/servlet/DeleteUserServlet.java" />
       </list>
     </option>
   </component>
@@ -416,6 +398,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -495,6 +478,15 @@
               <item name="HOSPITAL" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="hospital" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="servlet-tutorial" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HOSPITAL" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -518,7 +510,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -526,13 +517,144 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545140660366" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../lab_8/oracleDB" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../servlet-tutorial-lesson-06.filter_base" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="File.Encoding" />
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/.name</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/workspace.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/hospital/dao/OracleDaoFactory.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/hospital/dao/PatientDao.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/hospital/interfaces/IPatientDao.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/hospital/model/Patient.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/hospital/servlet/ContextListener.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/hospital/servlet/DeleteUserServlet.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/hospital/servlet/GetIndexPageServlet.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/com/hospital/servlet/UpdateUserServlet.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/view/index.jsp</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/webapp/WEB-INF/view/update.jsp</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/target/classes/com/hospital/model/Patient.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/target/classes/com/hospital/servlet/DeleteUserServlet.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/target/classes/com/hospital/servlet/UpdateUserServlet.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/classes/com/hospital/model/Patient.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/classes/com/hospital/servlet/ContextListener.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/classes/com/hospital/servlet/DeleteUserServlet.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/classes/com/hospital/servlet/UpdateUserServlet.class</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/view/index.jsp</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/view/update.jsp</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/epam_project_DB/temp.txt</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -547,7 +669,7 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="Unnamed" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.6" ALTERNATIVE_JRE_ENABLED="false">
+    <configuration name="Unnamed" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.35" ALTERNATIVE_JRE_ENABLED="false">
       <deployment>
         <artifact name="HOSPITAL:war exploded">
           <settings>
@@ -682,13 +804,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41110000" />
+    <option name="totallyTimeSpent" value="44920000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21052632" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22163388" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -698,7 +820,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.726638" visible="true" weight="0.15393655" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.726638" visible="true" weight="0.07540984" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -787,13 +909,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/epam_project_DB/hospital_database_constraint.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-176">
-          <caret line="12" column="57" lean-forward="true" selection-start-line="12" selection-start-column="57" selection-end-line="12" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/model/Address.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -810,22 +925,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/util/Utils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+        <state relative-caret-position="396">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/model/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="11" column="25" lean-forward="true" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+        <state relative-caret-position="242">
+          <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1100">
-          <caret line="50" column="56" selection-start-line="50" selection-start-column="56" selection-end-line="50" selection-end-column="56" />
+        <state relative-caret-position="836">
+          <caret line="38" column="51" selection-start-line="38" selection-start-column="51" selection-end-line="38" selection-end-column="51" />
         </state>
       </provider>
     </entry>
@@ -833,9 +948,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="10" selection-start-line="10" selection-end-line="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -871,23 +983,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/epam_project_DB/hospital_database.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="10" column="20" lean-forward="true" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/interfaces/IPatientDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="33" column="25" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/dao/OracleDaoFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
@@ -900,23 +995,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/model/Patient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="682">
-          <caret line="31" column="33" lean-forward="true" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
+        <state relative-caret-position="660">
+          <caret line="42" column="16" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/dao/PatientDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="430" column="49" lean-forward="true" selection-start-line="430" selection-start-column="49" selection-end-line="430" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#create#0;class#PatientDao#0" />
-            <element signature="method#update#0;class#PatientDao#0" />
-            <element signature="method#delete#0;class#PatientDao#0" />
           </folding>
         </state>
       </provider>
@@ -928,24 +1010,72 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/index.jsp">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/update.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="56" column="11" lean-forward="true" selection-start-line="56" selection-start-column="11" selection-end-line="56" selection-end-column="11" />
+        <state relative-caret-position="418">
+          <caret line="19" column="45" selection-start-line="19" selection-start-column="45" selection-end-line="19" selection-end-column="45" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/update.jsp">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/servlet/UpdateUserServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="15" column="74" lean-forward="true" selection-start-line="15" selection-start-column="74" selection-end-line="15" selection-end-column="74" />
+        <state relative-caret-position="398">
+          <caret line="81" selection-start-line="81" selection-end-line="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/interfaces/IPatientDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="453">
+          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/epam_project_DB/hospital_database_constraint.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="12" column="57" lean-forward="true" selection-start-line="12" selection-start-column="57" selection-end-line="12" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/epam_project_DB/hospital_database.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/epam_project_DB/temp.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/servlet/GetIndexPageServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="53" column="60" lean-forward="true" selection-start-line="53" selection-start-column="60" selection-end-line="53" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2">
+          <caret line="23" column="45" lean-forward="true" selection-start-line="23" selection-start-column="45" selection-end-line="23" selection-end-column="45" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/servlet/ContextListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="92" selection-start-line="92" selection-end-line="92" />
+        <state relative-caret-position="260">
+          <caret line="67" column="56" lean-forward="true" selection-start-line="67" selection-start-column="56" selection-end-line="67" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -954,35 +1084,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/servlet/DeleteUserServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/servlet/GetIndexPageServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="398">
-          <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
+          <caret line="55" column="18" selection-start-line="55" selection-start-column="18" selection-end-line="55" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/servlet/UpdateUserServlet.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/dao/PatientDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="81" selection-start-line="81" selection-end-line="81" />
+        <state relative-caret-position="311">
+          <caret line="379" column="42" lean-forward="true" selection-start-line="379" selection-start-column="42" selection-end-line="379" selection-end-column="42" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="method#update#0;class#PatientDao#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/epam_project_DB/temp.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
         </state>
       </provider>
     </entry>

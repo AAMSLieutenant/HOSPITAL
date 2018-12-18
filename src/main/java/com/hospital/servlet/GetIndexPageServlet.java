@@ -1,13 +1,16 @@
 package com.hospital.servlet;
 
+import com.hospital.dao.OracleDaoFactory;
+import com.hospital.interfaces.DaoFactory;
+import com.hospital.interfaces.IPatientDao;
 import com.hospital.model.Patient;
-import com.hospital.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 /*
@@ -15,8 +18,9 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class GetIndexPageServlet extends HttpServlet {
 
-    private Map<Integer, User> users;
+
     private Map<Integer, Patient> patients;
+    private Map<Integer, Patient> patientsDb;
 
     /*
     Метод запуска сервлета
@@ -26,15 +30,14 @@ public class GetIndexPageServlet extends HttpServlet {
 
        //Позволяет достать атрибут из ServletContext
 
-        final Object patients = getServletContext().getAttribute("patients");
+        final Object patientsDb = getServletContext().getAttribute("patientsDb");
 
-
-        if (patients == null || !(patients instanceof ConcurrentHashMap)) {
+        if (patientsDb == null || !(patientsDb instanceof ConcurrentHashMap)) {
 
             throw new IllegalStateException("You're repo does not initialize!");
         } else {
 
-            this.patients = (ConcurrentHashMap<Integer, Patient>) patients;
+            this.patientsDb = (ConcurrentHashMap<Integer, Patient>) patientsDb;
         }
 
     }
@@ -48,7 +51,7 @@ public class GetIndexPageServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
 
 
-        req.setAttribute("patients", patients.values());
+        req.setAttribute("patientsDb", patientsDb.values());
         //Пересылка на сервлет
         req.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(req, resp);
     }

@@ -28,7 +28,7 @@ public interface IPatientDao {
     public void update(long key, Patient employee) throws Exception;
 
     /** Удаляет запись об объекте из базы данных */
-    public void delete(long key) throws Exception;
+    public void delete(int key) throws Exception;
 
     /** Возвращает список объектов соответствующих всем записям в базе данных */
     public List<Patient> getAll() throws Exception;

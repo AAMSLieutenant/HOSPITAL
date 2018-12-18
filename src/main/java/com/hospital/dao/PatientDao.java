@@ -150,11 +150,7 @@ public class PatientDao implements IPatientDao {
         ResultSet rs=ps.executeQuery();
         Patient p=new Patient();
 
-//        System.out.println("PatientDao read()");
-//        String statement="SELECT * from PATIENT WHERE card_id=";
-//        Statement stmt=connection.createStatement();
-//        ResultSet rs=stmt.executeQuery(statement+key);
-//        Patient p=new Patient();
+
 
         while(rs.next()){
             p.setpCardId(rs.getInt("card_id"));
@@ -373,8 +369,25 @@ public class PatientDao implements IPatientDao {
     }
 
     /** Удаляет запись об объекте из базы данных */
-    public void delete(long key) throws Exception{
+    public void delete(int key) throws Exception{
 
+        boolean flag=false;
+        System.out.println("PatientDao delete()");
+        String statement="SELECT card_id from PATIENT";
+        PreparedStatement ps=connection.prepareStatement(statement);
+        ResultSet rs=ps.executeQuery();
+        while(rs.next()){
+            if(rs.getInt("card_id")==key){
+                flag=true;
+                System.out.println("MATCH: "+rs.getInt("card_id"));
+                break;
+            }
+        }
+        if(flag==true){
+            ps=connection.prepareStatement("DELETE FROM PATIENT WHERE card_id=?");
+            ps.setInt(1, key);
+            ps.executeUpdate();
+        }
 //        if((consider(getRole(), 'w', 15))==1){
 //
 //            log.info("EmployeeDao delete()");

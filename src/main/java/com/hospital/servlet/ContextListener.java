@@ -27,8 +27,9 @@ import java.util.concurrent.ConcurrentHashMap;
 @WebListener
 public class ContextListener implements ServletContextListener {
 
-    private Map<Integer, Patient> patients;
     private Map<Integer, Patient> patientsDb;
+    private DaoFactory factory;
+    private IPatientDao patientDao;
 
 
     /*
@@ -38,46 +39,45 @@ public class ContextListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent servletContextEvent) {
 
         Locale.setDefault(Locale.US);
-        patientsDb=new ConcurrentHashMap<>();
+        this.patientsDb=new ConcurrentHashMap<>();
         final ServletContext servletContext =
                 servletContextEvent.getServletContext();
 
-        DaoFactory factory=new OracleDaoFactory();
-        IPatientDao patientDao;
+
+
+        this.factory=new OracleDaoFactory();
         try {
-            patientDao = factory.getPatientDao();
-//            patientDao.read(1);
+            this.patientDao = factory.getPatientDao();
             List<Patient> pats=patientDao.getAll();
 
             for(int i=0;i<pats.size();i++){
-//                patientsDb.put(pats.get(i));
+                this.patientsDb.put(pats.get(i).getpCardId(),pats.get(i));
             }
         }
         catch(Exception e){
-//            e.printStackTrace();
+            e.printStackTrace();
         }
         /*
         Надо для многопоточности
          */
 
-        patients=new ConcurrentHashMap<>();
-
         /*
         Передача данных по ключу для остальных сервлетов
          */
 
-        servletContext.setAttribute("patients", patients);
+        servletContext.setAttribute("factory", factory);
+        servletContext.setAttribute("patientDao", patientDao);
         servletContext.setAttribute("patientsDb", patientsDb);
 
 
 
 
-        final Patient patient=new Patient(1,"Name1","Surname1","Patro1","Male");
-        final Patient patient2=new Patient(2,"Name2","Surname2","PAtro2","Male");
-        final Patient patient3=new Patient(3,"Name3","Surname3","Patro3","Male");
-        this.patients.put(patient.getpCardId(),patient);
-        this.patients.put(patient2.getpCardId(),patient2);
-        this.patients.put(patient3.getpCardId(),patient3);
+//        final Patient patient=new Patient(1,"Name1","Surname1","Patro1","Male");
+//        final Patient patient2=new Patient(2,"Name2","Surname2","PAtro2","Male");
+//        final Patient patient3=new Patient(3,"Name3","Surname3","Patro3","Male");
+//        this.patients.put(patient.getpCardId(),patient);
+//        this.patients.put(patient2.getpCardId(),patient2);
+//        this.patients.put(patient3.getpCardId(),patient3);
 //        System.out.println("PATIENTS "+this.patients.size());
 
 
@@ -90,7 +90,6 @@ public class ContextListener implements ServletContextListener {
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
         //Close recourse.
-
-        patients=null;
+        patientsDb=null;
     }
 }

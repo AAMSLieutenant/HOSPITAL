@@ -1,5 +1,6 @@
 package com.hospital.servlet;
 
+import com.hospital.interfaces.IPatientDao;
 import com.hospital.model.User;
 import com.hospital.util.Utils;
 import com.hospital.model.Patient;
@@ -9,29 +10,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class DeleteUserServlet extends HttpServlet {
 
 
-    private Map<Integer, Patient> patients;
+    private Map<Integer, Patient> patientsDb;
+    private IPatientDao patientDao;
 
     @Override
     public void init() throws ServletException {
 
 
-        final Object patients = getServletContext().getAttribute("patients");
+        final Object patientsDb = getServletContext().getAttribute("patientsDb");
+        final Object patientDao=getServletContext().getAttribute("patientDao");
 
 
 
-        if (patients == null || !(patients instanceof ConcurrentHashMap)) {
+        if (patientsDb == null || !(patientsDb instanceof ConcurrentHashMap)) {
 
             throw new IllegalStateException("You're repo does not initialize!");
         } else {
 
-            this.patients = (ConcurrentHashMap<Integer, Patient>) patients;
-            System.out.println("Patients size in delete:"+this.patients.size());
+            this.patientsDb = (ConcurrentHashMap<Integer, Patient>) patientsDb;
+            System.out.println("Patients size in delete:"+this.patientsDb.size());
+            this.patientDao=(IPatientDao)patientDao;
         }
     }
 
@@ -44,8 +49,13 @@ public class DeleteUserServlet extends HttpServlet {
 //            users.remove(Integer.valueOf(req.getParameter("id")));
 //        }
             System.out.println("Patient id in DELETE doPost():"+req.getParameter("pCardId"));
-            patients.remove(Integer.valueOf(req.getParameter("pCardId")));
-
+            this.patientsDb.remove(Integer.valueOf(req.getParameter("pCardId")));
+            try {
+                this.patientDao.delete(Integer.valueOf(req.getParameter("pCardId")));
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
 
         resp.sendRedirect(req.getContextPath() + "/");
     }
