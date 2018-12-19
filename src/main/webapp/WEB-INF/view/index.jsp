@@ -47,14 +47,19 @@
                 </table>
             </td>
         </tr>
+        <%--<tr>--%>
+            <%--<td>--%>
+                <%--<h2>Создание нового пользователя</h2><br />--%>
+                <%--<form method="post" action="<c:url value='/add_user'/>">--%>
+                    <%--<label><input type="text" name="name"></label>Имя<br>--%>
+                    <%--<label><input type="number" name="age"></label>Возраст<br>--%>
+                    <%--<input type="submit" value="Ok" name="Ok"><br>--%>
+                <%--</form>--%>
+            <%--</td>--%>
+        <%--</tr>--%>
         <tr>
             <td>
-                <h2>Создание нового пользователя</h2><br />
-                <form method="post" action="<c:url value='/add_user'/>">
-                    <label><input type="text" name="name"></label>Имя<br>
-                    <label><input type="number" name="age"></label>Возраст<br>
-                    <input type="submit" value="Ok" name="Ok"><br>
-                </form>
+                <a href="<c:url value="/logout"/>">Logout</a>
             </td>
         </tr>
     </table>

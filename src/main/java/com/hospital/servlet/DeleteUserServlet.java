@@ -57,6 +57,6 @@ public class DeleteUserServlet extends HttpServlet {
                 e.printStackTrace();
             }
 
-        resp.sendRedirect(req.getContextPath() + "/");
+        resp.sendRedirect(req.getContextPath() + "/read");
     }
 }

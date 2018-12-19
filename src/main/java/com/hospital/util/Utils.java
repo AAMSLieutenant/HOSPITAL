@@ -29,15 +29,6 @@ public class Utils {
                 age.matches("[+]?\\d+");
     }
 
-    public static User createStubUser(final int id,
-                                      final String name,
-                                      final int age) {
-        User user = new User();
-        user.setId(id);
-        user.setName(name);
-        user.setAge(age);
-        return user;
-    }
 
     public static boolean idIsInvalid(final String id, Map<Integer, User> repo) {
         return !(id != null &&

@@ -77,7 +77,7 @@ public class UpdateUserServlet extends HttpServlet {
         }
 
 
-        resp.sendRedirect(req.getContextPath() + "/");
+        resp.sendRedirect(req.getContextPath() + "/read");
     }
 
     @Override

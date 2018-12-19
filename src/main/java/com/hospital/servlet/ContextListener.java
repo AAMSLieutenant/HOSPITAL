@@ -1,5 +1,8 @@
 package com.hospital.servlet;
 
+
+import com.hospital.dao.UserDAO;
+import com.hospital.model.User;
 import com.hospital.dao.PatientDao;
 import com.hospital.interfaces.DaoFactory;
 import com.hospital.interfaces.IPatientDao;
@@ -12,10 +15,13 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import static com.hospital.model.User.ROLE.ADMIN;
+import static com.hospital.model.User.ROLE.USER;
 /*
 Эта сущность реализует область видимости всего приложения (максимум)
 Здесь лежат данные для всего приложения (видимые для всех сервлетов)
@@ -30,7 +36,7 @@ public class ContextListener implements ServletContextListener {
     private Map<Integer, Patient> patientsDb;
     private DaoFactory factory;
     private IPatientDao patientDao;
-
+    private AtomicReference<UserDAO> dao;
 
     /*
     Когда приложение запускается
@@ -39,12 +45,20 @@ public class ContextListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent servletContextEvent) {
 
         Locale.setDefault(Locale.US);
+
+        dao = new AtomicReference<>(new UserDAO());
+
+        dao.get().add(new User(1, "Pavel", "1", ADMIN));
+        dao.get().add(new User(2, "Egor", "1", USER));
+
+
+
         this.patientsDb=new ConcurrentHashMap<>();
         final ServletContext servletContext =
                 servletContextEvent.getServletContext();
 
 
-
+        servletContext.setAttribute("dao", dao);
         this.factory=new OracleDaoFactory();
         try {
             this.patientDao = factory.getPatientDao();
@@ -91,5 +105,6 @@ public class ContextListener implements ServletContextListener {
     public void contextDestroyed(ServletContextEvent sce) {
         //Close recourse.
         patientsDb=null;
+        dao=null;
     }
 }

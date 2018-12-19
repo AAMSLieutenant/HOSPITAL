@@ -1,7 +1,3 @@
-<%--
-  Author: Pavel Ravvich.
-  Date: 15.10.17.
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -10,9 +6,6 @@
 </head>
 <body>
 
-
-<%--<div>Имя: <c:out value="${requestScope.user.name}"/> </div>--%>
-<%--<div>Возраст: <c:out value="${requestScope.user.age}"/> </div>--%>
 <div>pCardId: <c:out value="${requestScope.patient.pCardId}"/> </div>
 <div>Имя: <c:out value="${requestScope.patient.pName}"/> </div>
 <div>Фамилия: <c:out value="${requestScope.patient.pSurname}"/> </div>
