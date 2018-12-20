@@ -59,7 +59,11 @@
         <%--</tr>--%>
         <tr>
             <td>
-                <a href="<c:url value="/logout"/>">Logout</a>
+                <%--<a href="<c:url value="/logout"/>">Logout</a>--%>
+                <form method="get" action="<c:url value='/logout'/>">
+                    <%--<input type="number" hidden name="pCardId" value="${patient.pCardId}" />--%>
+                    <input type="submit" value="Выйти"/>
+                </form>
             </td>
         </tr>
     </table>

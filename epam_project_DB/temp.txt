@@ -33,3 +33,4 @@ values(2,'secondName', 'secondSurame', 'secondPatronymic', 'male');
 insert into patient(card_id, p_name, p_surname, p_patronymic, p_sex)
 values(3,'thirdName', 'thirdSurame', 'thirdPatronymic', 'male');
 
+https://www.journaldev.com/2509/java-datasource-jdbc-datasource-example

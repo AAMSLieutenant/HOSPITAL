@@ -13,12 +13,12 @@ import java.sql.SQLException;
 /** Фабрика объектов для работы с базой данных */
 public interface DaoFactory
 {
-
-    /** Возвращает подключение к базе данных */
-    public Connection getConnection() throws SQLException;
-
-    /** Возвращает объект для управления персистентным состоянием объекта Employee */
-    public IPatientDao getPatientDao() throws Exception;
+//
+//    /** Возвращает подключение к базе данных */
+//    public Connection getConnection() throws SQLException;
+//
+//    /** Возвращает объект для управления персистентным состоянием объекта Employee */
+//    public IPatientDao getPatientDao() throws Exception;
 
 }/*
  * To change this license header, choose License Headers in Project Properties.

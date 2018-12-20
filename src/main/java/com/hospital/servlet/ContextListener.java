@@ -34,7 +34,7 @@ import static com.hospital.model.User.ROLE.USER;
 public class ContextListener implements ServletContextListener {
 
     private Map<Integer, Patient> patientsDb;
-    private DaoFactory factory;
+    private OracleDaoFactory factory;
     private IPatientDao patientDao;
     private AtomicReference<UserDAO> dao;
 
@@ -48,8 +48,8 @@ public class ContextListener implements ServletContextListener {
 
         dao = new AtomicReference<>(new UserDAO());
 
-        dao.get().add(new User(1, "Pavel", "1", ADMIN));
-        dao.get().add(new User(2, "Egor", "1", USER));
+        dao.get().add(new User(1, "admin", "admin", ADMIN));
+        dao.get().add(new User(2, "user", "user", USER));
 
 
 
@@ -60,17 +60,21 @@ public class ContextListener implements ServletContextListener {
 
         servletContext.setAttribute("dao", dao);
         this.factory=new OracleDaoFactory();
-        try {
-            this.patientDao = factory.getPatientDao();
-            List<Patient> pats=patientDao.getAll();
+        factory.getOracleDataSource();
 
-            for(int i=0;i<pats.size();i++){
-                this.patientsDb.put(pats.get(i).getpCardId(),pats.get(i));
-            }
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
+
+//        this.factory=new OracleDaoFactory();
+//        try {
+//            this.patientDao = factory.getPatientDao();
+//            List<Patient> pats=patientDao.getAll();
+//
+//            for(int i=0;i<pats.size();i++){
+//                this.patientsDb.put(pats.get(i).getpCardId(),pats.get(i));
+//            }
+//        }
+//        catch(Exception e){
+//            e.printStackTrace();
+//        }
         /*
         Надо для многопоточности
          */

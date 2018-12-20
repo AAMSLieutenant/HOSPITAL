@@ -5,12 +5,6 @@ import com.hospital.model.User;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Author : Pavel Ravvich.
- * Created : 29/10/2017.
- * <p>
- * UserDAO
- */
 public class UserDAO {
 
     private final List<User> store = new ArrayList<>();
