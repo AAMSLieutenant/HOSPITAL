@@ -34,3 +34,11 @@ insert into patient(card_id, p_name, p_surname, p_patronymic, p_sex)
 values(3,'thirdName', 'thirdSurame', 'thirdPatronymic', 'male');
 
 https://www.journaldev.com/2509/java-datasource-jdbc-datasource-example
+
+
+insert into position
+values(1, 'MD', 4000, 1);
+
+insert into employee
+values(1,'Petro', 'Petrovich', 'Petrov', '18-06-12', 1);
+

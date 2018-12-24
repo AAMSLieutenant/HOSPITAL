@@ -10,6 +10,7 @@ public class Patient {
     private String pName;
     private String pSurname;
     private String pPatronymic;
+    private String pSex;
 
     public Patient(){
 
@@ -19,21 +20,27 @@ public class Patient {
                    String pName,
                    String pSurname,
                    String pPatronymic,
-                   String pSex) {
+                   String pSex,
+                   Date pBirthDate,
+                   Date pArrivalDate) {
         this.pCardId = pCardId;
         this.pName = pName;
         this.pSurname = pSurname;
         this.pPatronymic = pPatronymic;
         this.pSex = pSex;
+        this.pBirthDate=pBirthDate;
+        this.pArrivalDate=pArrivalDate;
     }
     public Patient(Patient p){
         this.pCardId=p.pCardId;
         this.pName=p.pName;
         this.pSurname=p.pSurname;
+        this.pSex=p.pSex;
+        this.pBirthDate=p.pBirthDate;
+        this.pArrivalDate=p.pArrivalDate;
     }
 
     private Date pBirthDate;
-    private String pSex;
     private Date pArrivalDate;
     private Date pDischargeDate;
     private Address pAddress;

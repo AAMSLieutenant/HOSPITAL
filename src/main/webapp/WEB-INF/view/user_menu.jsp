@@ -7,7 +7,16 @@
 </head>
 <body>
 
-<h1>Hello USER!</h1>
-<a href="<c:url value="/logout"/>">Logout</a>
+<h1>Добро пожаловать, пользователь</h1>
+<%--<a href="<c:url value='/logout' />">Logout</a>--%>
+<%--<a href="<c:url value='/read' />">Получить список пациентов</a>--%>
+<form method="get" action="<c:url value='/logout'/>">
+    <%--<input type="number" hidden name="pCardId" value="${patient.pCardId}" />--%>
+    <input type="submit" value="Выйти"/>
+</form>
+<form method="get" action="<c:url value='/read'/>">
+    <%--<input type="number" hidden name="pCardId" value="${patient.pCardId}" />--%>
+    <input type="submit" value="Получить список пациентов"/>
+</form>
 </body>
 </html>

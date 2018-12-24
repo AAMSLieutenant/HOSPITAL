@@ -34,21 +34,48 @@ public class OracleDaoFactory implements DaoFactory{
     private String password = "admin";//Пароль пользователя
     private String url = "jdbc:oracle:thin:@localhost:1521:xe";//URL адрес
     private String driver = "oracle.jdbc.driver.OracleDriver";//Имя драйвера
+    private OracleDataSource oracleDS = null;
+    private Connection connection = null;
 
-    public DataSource getOracleDataSource(){
-        OracleDataSource oracleDS = null;
-        try {
+
+    public OracleDaoFactory()
+    {
+        try
+        {
+//            log.info("-------- Oracle JDBC Connection Testing ------");
+            Class.forName(driver);//Регистрируем драйвер
+//            connection=DriverManager.getConnection(url, user, password);
+            connection=getOracleConnection();
+        }
+
+        catch (ClassNotFoundException e)
+        {
+//            log.error("JDBC Driver class load failture");
+            e.printStackTrace();
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+//        log.info("Oracle JDBC Driver Registered!");
+
+    }
+
+
+    public Connection getOracleConnection() throws SQLException{
+
             oracleDS = new OracleDataSource();
-            oracleDS.setURL("jdbc:oracle:thin:@localhost:1521:xe");
-            oracleDS.setUser("admin");
-            oracleDS.setPassword("admin");
-            Connection con = null;
+            oracleDS.setURL(url);
+            oracleDS.setUser(user);
+            oracleDS.setPassword(password);
+            connection = oracleDS.getConnection();
+
+
+
             Statement stmt = null;
             ResultSet rs = null;
-
-            con = oracleDS.getConnection();
-            stmt = con.createStatement();
+            stmt = connection.createStatement();
             rs = stmt.executeQuery("SELECT card_id, p_name, p_surname, p_patronymic, p_sex FROM patient");
+
             while(rs.next()){
                 System.out.println("card_id="
                         +rs.getInt("card_id")
@@ -61,100 +88,41 @@ public class OracleDaoFactory implements DaoFactory{
                 +", p_sex="
                         +rs.getString("p_sex"));
             }
-        }  catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return oracleDS;
+
+        return connection;
     }
 
 
-//    private static void testDataSource(String dbType) {
-//        DataSource ds = null;
-//        if("mysql".equals(dbType)){
-//            ds = MyDataSourceFactory.getMySQLDataSource();
-//        }else if("oracle".equals(dbType)){
-//            ds = MyDataSourceFactory.getOracleDataSource();
-//        }else{
-//            System.out.println("invalid db type");
-//            return;
-//        }
-
-//        Connection con = null;
-//        Statement stmt = null;
-//        ResultSet rs = null;
-//        try {
-//            con = ds.getConnection();
-//            stmt = con.createStatement();
-//            rs = stmt.executeQuery("select empid, name from Employee");
-//            while(rs.next()){
-//                System.out.println("Employee ID="+rs.getInt("empid")+", Name="+rs.getString("name"));
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }finally{
-//            try {
-//                if(rs != null) rs.close();
-//                if(stmt != null) stmt.close();
-//                if(con != null) con.close();
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
-
 //
-//    private String user = "admin";//Логин пользователя
-//    private String password = "admin";//Пароль пользователя
-//    private String url = "jdbc:oracle:thin:@localhost:1521:xe";//URL адрес
-//    private String driver = "oracle.jdbc.driver.OracleDriver";//Имя драйвера
-//    private Connection connection;
 //
 ////    private static final Logger log=Logger.getLogger(OracleDaoFactory.class);
 ////    static {
 ////        PropertyConfigurator.configure("log4j.properties");
 ////    }
 //
-//    public OracleDaoFactory()
-//    {
-//        try
-//        {
-////            log.info("-------- Oracle JDBC Connection Testing ------");
-//            Class.forName(driver);//Регистрируем драйвер
-//            connection=DriverManager.getConnection(url, user, password);
-//        }
-//        catch (ClassNotFoundException e)
-//        {
-////            log.error("JDBC Driver class load failture");
-//            e.printStackTrace();
-//        }
-//        catch(SQLException e){
-//            e.printStackTrace();
-//        }
-////        log.info("Oracle JDBC Driver Registered!");
-//
-//    }
-//
-//
-//    public Connection getConnection() throws SQLException
-//    {
-////        log.info("DB Connection returned");
-////        return DriverManager.getConnection(url, user, password);
-//        return this.connection;
-//
-//        //return null;
-//    }
-//
-//    public IPatientDao getPatientDao() throws Exception
-//    {
-//            System.out.println("getPatientDao() returned connection");
-////            return new PatientDao(DriverManager.getConnection(url, user, password));
-//            return new PatientDao(this.getConnection());
-//
-////            log.info("Employee class connection returned");
 //
 //
 //
+    public Connection getConnection() throws SQLException
+    {
+//        log.info("DB Connection returned");
+//        return DriverManager.getConnection(url, user, password);
+        return this.connection;
+
+        //return null;
+    }
 //
-//    }
+    public IPatientDao getPatientDao() throws Exception
+    {
+            System.out.println("getPatientDao() returned connection");
+//            return new PatientDao(DriverManager.getConnection(url, user, password));
+            return new PatientDao(this.getConnection());
+
+//            log.info("Employee class connection returned");
+
+
+
+
+    }
 
     }

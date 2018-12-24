@@ -1,4 +1,5 @@
 DROP TABLE patient;
+DROP TABLE address;
 DROP TABLE appointment;
 DROP TABLE doc_app;
 DROP TABLE diagnosis;
@@ -10,6 +11,7 @@ DROP TABLE position;
 DROP TABLE diag_oper;
 DROP TABLE diag_med;
 DROP TABLE diag_proc;
+DROP TABLE uuser;
 
 CREATE TABLE patient(
 	card_id number(11) NOT NULL PRIMARY KEY,
@@ -17,16 +19,24 @@ CREATE TABLE patient(
 	p_surname varchar(30) NOT NULL,
 	p_patronymic varchar(30) NOT NULL,
 	p_birth_date Date NOT NULL,
-	p_address varchar(30) NOT NULL,
 	p_sex varchar(6) NOT NULL,
 	p_arrival_date Date NOT NULL,
 	p_discharge_date Date
+);
+
+CREATE TABLE address(
+	card_id number(11),
+	city varchar(30) NOT NULL,
+	street varchar(30) NOT NULL,
+	house_number number(4) NOT NULL,
+	flat_number number(4) NOT NULL
 );
 
 CREATE TABLE appointment(
 	app_id number(11) NOT NULL PRIMARY KEY,
 	app_date Date NOT NULL,
 	app_value number(10,4) NOT NULL,
+	app_complaint varchar(300) NOT NULL,
 	card_id number(11) NOT NULL,
 	diag_id number(11)
 );
@@ -44,25 +54,23 @@ CREATE TABLE diagnosis(
 
 CREATE TABLE operation(
 	oper_id number(11) NOT NULL PRIMARY KEY,
-	oper_name varchar(30) NOT NULL,
+	oper_name varchar(130) NOT NULL,
 	oper_value number(10,4) NOT NULL,
-	oper_length Date NOT NULL,
+	oper_length number(4) NOT NULL,
 	doctor_id number(11)
 );
 
 CREATE TABLE medicine(
 	med_id number(11) NOT NULL PRIMARY KEY,
-	med_name varchar(30) NOT NULL,
+	med_name varchar(130) NOT NULL,
 	med_value number(10,4) NOT NULL,
-	med_course Date NOT NULL,
 	emp_id number(11)
 );
 
 CREATE TABLE proced(
 	proc_id number(11) NOT NULL PRIMARY KEY,
-	proc_name varchar(30) NOT NULL,
+	proc_name varchar(130) NOT NULL,
 	proc_value number(10,4) NOT NULL,
-	proc_course Date NOT NULL,
 	emp_id number(11)
 );
 
@@ -73,6 +81,12 @@ CREATE TABLE employee(
 	emp_patronymic varchar(30) NOT NULL,
 	emp_hire_date Date NOT NULL,
 	emp_pos_id number(11) NOT NULL
+);
+
+CREATE TABLE uuser(
+	user_id number(11) UNIQUE,
+	login varchar(30) NOT NULL,
+	password varchar(30) NOT NULL
 );
 
 CREATE TABLE position(
@@ -91,7 +105,8 @@ CREATE TABLE diag_oper(
 
 CREATE TABLE diag_med(
 	diag_id number(11),
-	med_date Date NOT NULL,
+	med_start Date NOT NULL,
+	med_end Date NOT NULL,
 	med_done number(1) NOT NULL,
 	med_id number(11) NOT NULL
 );

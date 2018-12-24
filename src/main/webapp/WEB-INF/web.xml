@@ -38,6 +38,16 @@
         <servlet-class>com.hospital.servlet.GetIndexPageServlet</servlet-class>
     </servlet>
 
+    <!--Patient profile servlet-->
+    <servlet-mapping>
+        <servlet-name>PatientServlet</servlet-name>
+        <url-pattern>/patient</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>PatientServlet</servlet-name>
+        <servlet-class>com.hospital.servlet.PatientServlet</servlet-class>
+    </servlet>
+
 
     <!--Addition user-->
     <servlet-mapping>
@@ -65,12 +75,12 @@
 
     <!--Update user-->
     <servlet-mapping>
-        <servlet-name>UpdateUserServlet</servlet-name>
-        <url-pattern>/update</url-pattern>
+        <servlet-name>CreatePatientServlet</servlet-name>
+        <url-pattern>/create</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>UpdateUserServlet</servlet-name>
-        <servlet-class>com.hospital.servlet.UpdateUserServlet</servlet-class>
+        <servlet-name>CreatePatientServlet</servlet-name>
+        <servlet-class>com.hospital.servlet.CreatePatientServlet</servlet-class>
     </servlet>
 </web-app>

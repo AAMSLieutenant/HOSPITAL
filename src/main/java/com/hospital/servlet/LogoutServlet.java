@@ -25,7 +25,7 @@ public class LogoutServlet extends HttpServlet {
         System.out.println("CURRENT PATH: "+req.getContextPath() + "/");
 //        resp.sendRedirect(super.getServletContext().getContextPath());
         resp.sendRedirect(req.getContextPath() + "/");
-//        req.getRequestDispatcher("/WEB-INF/view/update.jsp").forward(req, resp);
+//        req.getRequestDispatcher("/WEB-INF/view/createPatient.jsp").forward(req, resp);
     }
 
 }

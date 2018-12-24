@@ -35,8 +35,9 @@ public class ContextListener implements ServletContextListener {
 
     private Map<Integer, Patient> patientsDb;
     private OracleDaoFactory factory;
-    private IPatientDao patientDao;
+//    private IPatientDao patientDao;
     private AtomicReference<UserDAO> dao;
+    private AtomicReference<IPatientDao> patientDao;
 
     /*
     Когда приложение запускается
@@ -47,10 +48,16 @@ public class ContextListener implements ServletContextListener {
         Locale.setDefault(Locale.US);
 
         dao = new AtomicReference<>(new UserDAO());
-
+        patientDao=null;
+        try {
+            patientDao = new AtomicReference<>();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
         dao.get().add(new User(1, "admin", "admin", ADMIN));
         dao.get().add(new User(2, "user", "user", USER));
-
+//        dao.get().getRoleByLoginPassword("admin","user").toString().equals("ADMIN");
 
 
         this.patientsDb=new ConcurrentHashMap<>();
@@ -60,21 +67,21 @@ public class ContextListener implements ServletContextListener {
 
         servletContext.setAttribute("dao", dao);
         this.factory=new OracleDaoFactory();
-        factory.getOracleDataSource();
-
-
-//        this.factory=new OracleDaoFactory();
-//        try {
+//        factory.getOracleConnection();
+        try {
 //            this.patientDao = factory.getPatientDao();
 //            List<Patient> pats=patientDao.getAll();
-//
-//            for(int i=0;i<pats.size();i++){
-//                this.patientsDb.put(pats.get(i).getpCardId(),pats.get(i));
-//            }
-//        }
-//        catch(Exception e){
-//            e.printStackTrace();
-//        }
+
+            this.patientDao.set(factory.getPatientDao());
+            List<Patient> pats=patientDao.get().getAll();
+
+            for(int i=0;i<pats.size();i++){
+                this.patientsDb.put(pats.get(i).getpCardId(),pats.get(i));
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
         /*
         Надо для многопоточности
          */

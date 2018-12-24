@@ -9,6 +9,7 @@ package com.hospital.dao;
 import com.hospital.interfaces.IPatientDao;
 
 import java.sql.*;
+import java.text.DateFormat;
 import java.util.List;
 import com.hospital.model.Patient;
 import org.apache.log4j.Logger;
@@ -150,14 +151,18 @@ public class PatientDao implements IPatientDao {
         ResultSet rs=ps.executeQuery();
         Patient p=new Patient();
 
-
+        String dateTemp=null;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
         while(rs.next()){
+
             p.setpCardId(rs.getInt("card_id"));
             p.setpName(rs.getString("p_name"));
             p.setpSurname(rs.getString("p_surname"));
             p.setpPatronymic(rs.getString("p_patronymic"));
             p.setpSex(rs.getString("p_sex"));
+            p.setpBirthDate(rs.getDate("p_birth_date"));
+            p.setpArrivalDate(rs.getDate("p_arrival_date"));
 
         }
 
@@ -169,6 +174,8 @@ public class PatientDao implements IPatientDao {
         System.out.println("p_surname:"+p.getpSurname());
         System.out.println("p_patronymic:"+p.getpPatronymic());
         System.out.println("p_sex:"+p.getpSex());
+        System.out.println("p_birth_date:"+p.getpBirthDate());
+        System.out.println("p_arrival_date:"+p.getpArrivalDate());
         try{
             ps.close();
         }

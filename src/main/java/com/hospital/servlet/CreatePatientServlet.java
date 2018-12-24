@@ -12,20 +12,21 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicReference;
 
-public class UpdateUserServlet extends HttpServlet {
+public class CreatePatientServlet extends HttpServlet {
 
 
     private Map<Integer, Patient> patients;
     private Map<Integer, Patient> patientsDb;
-    private IPatientDao patientDao;
+//    private IPatientDao patientDao;
+    private AtomicReference<IPatientDao> patientDao;
     private Integer currentId=0;
 
     @Override
     public void init() throws ServletException {
 
-//        final Object users = getServletContext().getAttribute("users");
-        final Object patients = getServletContext().getAttribute("patients");
+
         final Object patientsDb = getServletContext().getAttribute("patientsDb");
         final Object patientDao = getServletContext().getAttribute("patientDao");
 
@@ -44,7 +45,7 @@ public class UpdateUserServlet extends HttpServlet {
         } else {
 
             this.patientsDb = (ConcurrentHashMap<Integer, Patient>) patientsDb;
-            this.patientDao=(IPatientDao) patientDao;
+            this.patientDao=(AtomicReference<IPatientDao>) patientDao;
 
         }
     }
@@ -55,26 +56,33 @@ public class UpdateUserServlet extends HttpServlet {
 
         req.setCharacterEncoding("UTF-8");
 
+
+
         final String pCardId = req.getParameter("pCardId");
         final String pName = req.getParameter("pName");
         final String pSurname = req.getParameter("pSurname");
         final String pPatronymic = req.getParameter("pPatronymic");
-
-        System.out.println("Update doPost() Chosen STRING pName:"+pName);
-        System.out.println("Update doPost() Chosen STRING pSurname:"+pSurname);
-        System.out.println("Update doPost() Chosen STRING pPatronymic:"+pPatronymic);
-        System.out.println("Update doPost() Chosen STRING cardId:"+pCardId);
-        Patient patient = patientsDb.get(Integer.parseInt(pCardId));
-
-        patient.setpName(pName);
-        patient.setpSurname(pSurname);
-        patient.setpPatronymic(pPatronymic);
-        try {
-            patientDao.update(Integer.parseInt(pCardId), patient);
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
+        final String pSex = req.getParameter("pSex");
+        final String pBirthDate = req.getParameter("pBirthDate");
+        final String pArrivalDate = req.getParameter("pArrivalDate");
+//
+        System.out.println("CreatePatient doPost() Chosen STRING pName:"+pName);
+        System.out.println("CreatePatient doPost() Chosen STRING pSurname:"+pSurname);
+        System.out.println("CreatePatient doPost() Chosen STRING pPatronymic:"+pPatronymic);
+        System.out.println("CreatePatient doPost() Chosen STRING pSex:"+pSex);
+        System.out.println("CreatePatient doPost() Chosen STRING pBirthDate:"+pBirthDate);
+        System.out.println("CreatePatient doPost() Chosen STRING pArrivalDate:"+pArrivalDate);
+//        Patient patient = patientsDb.get(Integer.parseInt(pCardId));
+//
+//        patient.setpName(pName);
+//        patient.setpSurname(pSurname);
+//        patient.setpPatronymic(pPatronymic);
+//        try {
+//            patientDao.update(Integer.parseInt(pCardId), patient);
+//        }
+//        catch(Exception e){
+//            e.printStackTrace();
+//        }
 
 
         resp.sendRedirect(req.getContextPath() + "/read");
@@ -85,16 +93,16 @@ public class UpdateUserServlet extends HttpServlet {
             throws ServletException, IOException {
 
 //        final String id = req.getParameter("id");
-        final String pCardId=req.getParameter("pCardId");
+//        final String pCardId=req.getParameter("pCardId");
 //        if (Utils.idIsInvalid(id, users)) {
 //            resp.sendRedirect(req.getContextPath() + "/");
 //            return;
 //        }
 
 
-        final Patient patient=patientsDb.get(Integer.parseInt(pCardId));
-        req.setAttribute("patient", patient);
-        req.getRequestDispatcher("/WEB-INF/view/update.jsp")
+//        final Patient patient=patientsDb.get(Integer.parseInt(pCardId));
+//        req.setAttribute("patient", patient);
+        req.getRequestDispatcher("/WEB-INF/view/createPatient.jsp")
                 .forward(req, resp);
     }
 }
