@@ -46,6 +46,34 @@ public class PatientDao implements IPatientDao {
     /** Создает новую запись и соответствующий ей объект */
     public void create(Patient patient) throws Exception{
 
+        java.sql.Date d;
+        int nextId=0;
+        System.out.println("PatientDao create()");
+        String statement="SELECT card_id FROM patient";
+        PreparedStatement ps=connection.prepareStatement(statement);
+        ResultSet rs=ps.executeQuery();
+        while(rs.next()){
+            nextId=rs.getInt("card_id");
+        }
+        nextId++;
+        System.out.println("nextId: "+nextId);
+        statement="INSERT INTO patient(card_id, p_name, p_surname, p_patronymic, p_birth_date, p_sex, p_arrival_date) " +
+                "VALUES(?, ?, ?, ?, ?, ?, ?)";
+        ps=connection.prepareStatement(statement);
+        ps.setInt(1, nextId);
+        ps.setString(2, patient.getpName());
+        ps.setString(3, patient.getpSurname());
+        ps.setString(4, patient.getpPatronymic());
+        d=new java.sql.Date(patient.getpBirthDate().getTime());
+        ps.setDate(5, d);
+//        System.out.println("pBirthDate: "+d);
+        ps.setString(6, patient.getpSex());
+        d=new java.sql.Date(patient.getpArrivalDate().getTime());
+//        System.out.println("pArrivalDate: "+d);
+        ps.setDate(7, d);
+        ps.executeUpdate();
+
+
 //        if((consider(getRole(), 'w', 15))==1){
 //            log.info("Employee create()");
 //
@@ -145,14 +173,11 @@ public class PatientDao implements IPatientDao {
     public Patient read(int key) throws Exception{
 
         System.out.println("PatientDao read()");
-        String statement="SELECT * from PATIENT WHERE card_id=?";
+        String statement="SELECT * from patient WHERE card_id=?";
         PreparedStatement ps=connection.prepareStatement(statement);
         ps.setInt(1, key);
         ResultSet rs=ps.executeQuery();
         Patient p=new Patient();
-
-        String dateTemp=null;
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
         while(rs.next()){
 
@@ -163,11 +188,7 @@ public class PatientDao implements IPatientDao {
             p.setpSex(rs.getString("p_sex"));
             p.setpBirthDate(rs.getDate("p_birth_date"));
             p.setpArrivalDate(rs.getDate("p_arrival_date"));
-
         }
-
-
-
 
         System.out.println("card_id:"+p.getpCardId());
         System.out.println("p_name:"+p.getpName());

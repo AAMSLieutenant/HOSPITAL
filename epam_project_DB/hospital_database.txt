@@ -19,7 +19,7 @@ CREATE TABLE patient(
 	p_surname varchar(30) NOT NULL,
 	p_patronymic varchar(30) NOT NULL,
 	p_birth_date Date NOT NULL,
-	p_sex varchar(6) NOT NULL,
+	p_sex varchar(10) NOT NULL,
 	p_arrival_date Date NOT NULL,
 	p_discharge_date Date
 );

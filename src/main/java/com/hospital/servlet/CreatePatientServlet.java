@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
@@ -56,9 +59,9 @@ public class CreatePatientServlet extends HttpServlet {
 
         req.setCharacterEncoding("UTF-8");
 
+        Date birthDate=null;
+        Date arrivalDate=null;
 
-
-        final String pCardId = req.getParameter("pCardId");
         final String pName = req.getParameter("pName");
         final String pSurname = req.getParameter("pSurname");
         final String pPatronymic = req.getParameter("pPatronymic");
@@ -72,6 +75,29 @@ public class CreatePatientServlet extends HttpServlet {
         System.out.println("CreatePatient doPost() Chosen STRING pSex:"+pSex);
         System.out.println("CreatePatient doPost() Chosen STRING pBirthDate:"+pBirthDate);
         System.out.println("CreatePatient doPost() Chosen STRING pArrivalDate:"+pArrivalDate);
+
+        Patient patient=new Patient();
+        patient.setpName(pName);
+        patient.setpSurname(pSurname);
+        patient.setpPatronymic(pPatronymic);
+        patient.setpSex(pSex);
+        SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            birthDate=sdf.parse(pBirthDate);
+            arrivalDate=sdf.parse(pArrivalDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        patient.setpBirthDate(birthDate);
+        patient.setpArrivalDate(arrivalDate);
+        try{
+            patientDao.get().create(patient);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+
 //        Patient patient = patientsDb.get(Integer.parseInt(pCardId));
 //
 //        patient.setpName(pName);
@@ -79,6 +105,13 @@ public class CreatePatientServlet extends HttpServlet {
 //        patient.setpPatronymic(pPatronymic);
 //        try {
 //            patientDao.update(Integer.parseInt(pCardId), patient);
+//        }
+//        catch(Exception e){
+//            e.printStackTrace();
+//        }
+//        this.patientsDb.remove(Integer.valueOf(req.getParameter("pCardId")));
+//        try {
+//            this.patientDao.get().delete(Integer.valueOf(req.getParameter("pCardId")));
 //        }
 //        catch(Exception e){
 //            e.printStackTrace();

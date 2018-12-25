@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class DeleteUserServlet extends HttpServlet {
+public class DeletePatientServlet extends HttpServlet {
 
 
     private Map<Integer, Patient> patientsDb;

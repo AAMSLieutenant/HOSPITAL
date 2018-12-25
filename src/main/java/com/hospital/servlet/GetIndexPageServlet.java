@@ -23,7 +23,6 @@ import java.util.concurrent.atomic.AtomicReference;
 public class GetIndexPageServlet extends HttpServlet {
 
 
-    private Map<Integer, Patient> patients;
     private Map<Integer, Patient> patientsDb;
     private AtomicReference<UserDAO> dao;
     private AtomicReference<PatientDao> patientDao;
@@ -46,6 +45,7 @@ public class GetIndexPageServlet extends HttpServlet {
 
             this.patientsDb = (ConcurrentHashMap<Integer, Patient>) patientsDb;
             this.dao=(AtomicReference<UserDAO>)dao;
+            this.patientDao=(AtomicReference<PatientDao>)patientDao;
         }
 
     }
@@ -57,6 +57,15 @@ public class GetIndexPageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
+        try {
+            List<Patient> pats=patientDao.get().getAll();
+            patientsDb.clear();
+            for(int i=0;i<pats.size();i++){
+                this.patientsDb.put(pats.get(i).getpCardId(),pats.get(i));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 //        try {
 //            List<Patient> pats=patientDao.get

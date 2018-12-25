@@ -14,11 +14,13 @@ import java.sql.SQLException;
 public interface DaoFactory
 {
 //
-//    /** Возвращает подключение к базе данных */
-//    public Connection getConnection() throws SQLException;
+    /** Возвращает подключение к базе данных */
+    public Connection getConnection() throws SQLException;
 //
-//    /** Возвращает объект для управления персистентным состоянием объекта Employee */
-//    public IPatientDao getPatientDao() throws Exception;
+    /** Возвращает объект для управления персистентным состоянием объекта Employee */
+    public IPatientDao getPatientDao() throws Exception;
+
+    public IAppointmentDao getAppointmentDao() throws Exception;
 
 }/*
  * To change this license header, choose License Headers in Project Properties.

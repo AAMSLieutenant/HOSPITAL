@@ -11,33 +11,33 @@
 <div>Фамилия: <c:out value="${requestScope.patient.pSurname}"/> </div>
 <div>Отчество: <c:out value="${requestScope.patient.pPatronymic}"/> </div>
 <div>Пол: <c:out value="${requestScope.patient.pSex}"/> </div>
-
+<div>Дата рождения: <c:out value="${requestScope.patient.pBirthDate}"/> </div>
+<div>Дата поступления: <c:out value="${requestScope.patient.pArrivalDate}"/> </div>
 <br />
 
+<%--<div>--%>
+    <%--<form method="post" action="<c:url value='/appointment'/>">--%>
+        <%--<input type="number" hidden name="pCardId" value="${patient.pCardId}" />--%>
+        <%--<input type="submit" value="Приемы"/>--%>
+    <%--</form>--%>
+<%--</div>--%>
+<br />
 <div>
-    <form method="post" action="<c:url value='/patient'/>">
-        <input type="number" hidden name="pCardId" value="${patient.pCardId}" />
-        <input type="submit" value="Приемы"/>
-    </form>
+    <div><h3>Приемы</h3></div>
 </div>
-<div>
-    <form method="post" action="<c:url value='/patient'/>">
-        <input type="number" hidden name="pCardId" value="${patient.pCardId}" />
-        <input type="submit" value="Операции"/>
-    </form>
-</div>
-<div>
-    <form method="post" action="<c:url value='/patient'/>">
-        <input type="number" hidden name="pCardId" value="${patient.pCardId}" />
-        <input type="submit" value="Медикаменты"/>
-    </form>
-</div>
-<div>
-    <form method="post" action="<c:url value='/patient'/>">
-        <input type="number" hidden name="pCardId" value="${patient.pCardId}" />
-        <input type="submit" value="Процедуры"/>
-    </form>
-</div>
+
+
+<c:set var="appointments" value="${requestScope.isApp}"/>
+<c:choose>
+    <c:when test="${appointments==false}">
+        NO APPOINTMENTS FOR THIS PATIENT
+    </c:when>
+    <c:when test="${appointments==true}">
+        THERE IS AN APPOINTMENT
+    </c:when>
+</c:choose>
+
+
 
 <%--<form method="post" action="<c:url value='/update'/>">--%>
 

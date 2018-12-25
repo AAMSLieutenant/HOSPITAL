@@ -6,9 +6,11 @@ import com.hospital.model.User;
 import com.hospital.dao.PatientDao;
 import com.hospital.interfaces.DaoFactory;
 import com.hospital.interfaces.IPatientDao;
+import com.hospital.interfaces.IAppointmentDao;
 import com.hospital.model.User;
 import com.hospital.util.Utils;
 import com.hospital.model.Patient;
+import com.hospital.model.Appointment;
 import com.hospital.dao.OracleDaoFactory;
 
 import javax.servlet.ServletContext;
@@ -38,6 +40,7 @@ public class ContextListener implements ServletContextListener {
 //    private IPatientDao patientDao;
     private AtomicReference<UserDAO> dao;
     private AtomicReference<IPatientDao> patientDao;
+    private AtomicReference<IAppointmentDao> appointmentDao;
 
     /*
     Когда приложение запускается
@@ -49,8 +52,10 @@ public class ContextListener implements ServletContextListener {
 
         dao = new AtomicReference<>(new UserDAO());
         patientDao=null;
+        appointmentDao=null;
         try {
             patientDao = new AtomicReference<>();
+            appointmentDao=new AtomicReference<>();
         }
         catch(Exception e){
             e.printStackTrace();
@@ -72,6 +77,7 @@ public class ContextListener implements ServletContextListener {
 //            this.patientDao = factory.getPatientDao();
 //            List<Patient> pats=patientDao.getAll();
 
+            this.appointmentDao.set(factory.getAppointmentDao());
             this.patientDao.set(factory.getPatientDao());
             List<Patient> pats=patientDao.get().getAll();
 
@@ -92,6 +98,7 @@ public class ContextListener implements ServletContextListener {
 
         servletContext.setAttribute("factory", factory);
         servletContext.setAttribute("patientDao", patientDao);
+        servletContext.setAttribute("appointmentDao", appointmentDao);
         servletContext.setAttribute("patientsDb", patientsDb);
 
 

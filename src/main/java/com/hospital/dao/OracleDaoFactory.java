@@ -8,6 +8,7 @@ package com.hospital.dao;
 
 
 import com.hospital.interfaces.DaoFactory;
+import com.hospital.interfaces.IAppointmentDao;
 import com.hospital.interfaces.IPatientDao;
 
 import oracle.jdbc.pool.OracleDataSource;
@@ -71,23 +72,23 @@ public class OracleDaoFactory implements DaoFactory{
 
 
 
-            Statement stmt = null;
-            ResultSet rs = null;
-            stmt = connection.createStatement();
-            rs = stmt.executeQuery("SELECT card_id, p_name, p_surname, p_patronymic, p_sex FROM patient");
-
-            while(rs.next()){
-                System.out.println("card_id="
-                        +rs.getInt("card_id")
-                        +", p_name="
-                        +rs.getString("p_name")
-                        +", p_surname="
-                        +rs.getString("p_surname")
-                +", p_patronymic="
-                        +rs.getString("p_patronymic")
-                +", p_sex="
-                        +rs.getString("p_sex"));
-            }
+//            Statement stmt = null;
+//            ResultSet rs = null;
+//            stmt = connection.createStatement();
+//            rs = stmt.executeQuery("SELECT card_id, p_name, p_surname, p_patronymic, p_sex FROM patient");
+//
+//            while(rs.next()){
+//                System.out.println("card_id="
+//                        +rs.getInt("card_id")
+//                        +", p_name="
+//                        +rs.getString("p_name")
+//                        +", p_surname="
+//                        +rs.getString("p_surname")
+//                +", p_patronymic="
+//                        +rs.getString("p_patronymic")
+//                +", p_sex="
+//                        +rs.getString("p_sex"));
+//            }
 
         return connection;
     }
@@ -116,13 +117,20 @@ public class OracleDaoFactory implements DaoFactory{
     {
             System.out.println("getPatientDao() returned connection");
 //            return new PatientDao(DriverManager.getConnection(url, user, password));
-            return new PatientDao(this.getConnection());
+            return new PatientDao(getOracleConnection());
+
+//            return new PatientDao(this.getConnection());
 
 //            log.info("Employee class connection returned");
 
 
-
-
     }
 
+    public IAppointmentDao getAppointmentDao() throws Exception{
+        System.out.println("getAppointmentDao() returned connection");
+
+        return new AppointmentDao(getOracleConnection());
     }
+
+
+}
