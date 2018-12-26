@@ -20,13 +20,12 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class PatientServlet extends HttpServlet {
 
-    private Integer currentId=0;
-    private Map<Integer, Patient> patientsDb;
-    private Map<Integer, Appointment> appointmentsDb;
-    private AtomicReference<IAppointmentDao> appointmentDao;
-//    private IPatientDao patientDao;
-    private AtomicReference<IPatientDao> patientDao;
-    private boolean isApp=false;
+    private Integer currentId=0;//Айди выбранного пациента
+    private Map<Integer, Patient> patientsDb;//Массив с пациентами
+    private Map<Integer, Appointment> appointmentsDb;//Массив с приемами у врача данного пациента
+    private AtomicReference<IAppointmentDao> appointmentDao;//ДАО для работы с приемами
+    private AtomicReference<IPatientDao> patientDao;//ДАО для работы с пациентом
+    private boolean isApp=false;//Поле для проверки наличия приемов конкретного пациента
 
 
     @Override
@@ -36,6 +35,7 @@ public class PatientServlet extends HttpServlet {
         final Object patientDao = getServletContext().getAttribute("patientDao");
         final Object appointmentDao = getServletContext().getAttribute("appointmentDao");
 
+        //Получаем из контекста и берем копии
         if (patientsDb == null || !(patientsDb instanceof ConcurrentHashMap)) {
 
             throw new IllegalStateException("You're repo does not initialize!");
@@ -43,6 +43,7 @@ public class PatientServlet extends HttpServlet {
 
             this.patientsDb = (ConcurrentHashMap<Integer, Patient>) patientsDb;
             this.patientDao=(AtomicReference<IPatientDao>) patientDao;
+            this.appointmentsDb=new ConcurrentHashMap<>();
             this.appointmentDao=(AtomicReference<IAppointmentDao>) appointmentDao;
 
         }
@@ -59,23 +60,31 @@ public class PatientServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+
         req.setCharacterEncoding("UTF-8");
 
+        String[] arr={"one", "two", "three"};
+        req.setAttribute("arr", arr);
+
         final String pCardId=req.getParameter("pCardId");
-//        if (Utils.idIsInvalid(id, users)) {
-//            resp.sendRedirect(req.getContextPath() + "/");
-//            return;
-//        }
-
-
         final Patient patient=patientsDb.get(Integer.parseInt(pCardId));
+        req.setAttribute("pCardId", pCardId);
         req.setAttribute("patient", patient);
         this.currentId=Integer.parseInt(pCardId);
+
+
+
         try {
             List<Appointment> apps = appointmentDao.get().getAllById(this.currentId);
             if(apps.size()!=0){
                 System.out.println("PatientServlet appointmentDao.getAllById() has info");
+                System.out.println("apps.size(): "+apps.size());
                 isApp=true;
+                for(int i=0;i<apps.size();i++){
+
+                    this.appointmentsDb.put(apps.get(i).getAppId(), apps.get(i));
+                }
+                req.setAttribute("appointmentsDb", appointmentsDb.values());
             }
             else{
                 isApp=false;

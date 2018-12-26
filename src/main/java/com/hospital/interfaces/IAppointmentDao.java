@@ -1,6 +1,7 @@
 package com.hospital.interfaces;
 
 import com.hospital.model.Appointment;
+import com.hospital.model.Employee;
 
 import java.util.List;
 
@@ -25,6 +26,8 @@ public interface IAppointmentDao {
     public List<Appointment> getAll() throws Exception;
 
     public List<Appointment> getAllById(int id) throws Exception;
+
+    public List<Employee> getDoctors() throws Exception;
 
     public void quit();
 }

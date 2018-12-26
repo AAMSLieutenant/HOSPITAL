@@ -1,7 +1,6 @@
 DROP TABLE patient;
 DROP TABLE address;
 DROP TABLE appointment;
-DROP TABLE doc_app;
 DROP TABLE diagnosis;
 DROP TABLE operation;
 DROP TABLE medicine;
@@ -37,19 +36,14 @@ CREATE TABLE appointment(
 	app_date Date NOT NULL,
 	app_value number(10,4) NOT NULL,
 	app_complaint varchar(300) NOT NULL,
-	card_id number(11) NOT NULL,
-	diag_id number(11)
-);
-
-CREATE TABLE doc_app(
-	doctor_id number(11) NOT NULL UNIQUE,
-	app_id number(11) NOT NULL UNIQUE,
-	UNIQUE (doctor_id, app_id)
+	doc_id number(11) NOT NULL,
+	card_id number(11) NOT NULL
 );
 
 CREATE TABLE diagnosis(
 	diag_id number(11) NOT NULL PRIMARY KEY,
-	diag_name varchar(30) NOT NULL
+	diag_name varchar(30) NOT NULL,
+	card_id number(11)
 );
 
 CREATE TABLE operation(

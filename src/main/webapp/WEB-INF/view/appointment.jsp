@@ -6,20 +6,25 @@
 </head>
 <body>
 
-<div>pCardId: <c:out value="${requestScope.patient.pCardId}"/> </div>
-<div>Имя: <c:out value="${requestScope.patient.pName}"/> </div>
-<div>Фамилия: <c:out value="${requestScope.patient.pSurname}"/> </div>
-<div>Отчество: <c:out value="${requestScope.patient.pPatronymic}"/> </div>
-<div>Пол: <c:out value="${requestScope.patient.pSex}"/> </div>
-
+<h2>Введите данные приема</h2>
 <br />
 
-<div>
-    <form method="post" action="<c:url value='/patient'/>">
-        <input type="number" hidden name="pCardId" value="${patient.pCardId}" />
-        <input type="submit" value="Приемы"/>
-    </form>
-</div>
+<form method="post" action="<c:url value='/appointment'/>">
+
+    <label>Дата приема: <input type="text" name="appDate" /></label><br>
+    <label>Стоимость приема: <input type="text" name="appValue" /></label><br>
+    <label>Жалоба пациента: <textarea style="resize:none" name="appComplaint" cols="30" rows="10"></textarea></label><br>
+    <label>Врач:
+    <select name="menu" size="1">
+        <c:forEach var="doctor" items="${requestScope.doctorsDb}">
+        <option value="${doctor.empId}">${doctor.empSurname} ${doctor.empName}, ${doctor.posName}</option>
+    <%--<option selected="selected" value="second"><c:out value="${requestScope.arr[1]}"/></option>--%>
+    <%--<option value="third"><c:out value="${requestScope.arr[2]}"/></option>--%>
+        </c:forEach>
+    </select>
+    <input type="submit" value="Зарегистрировать"><br>
+</form>
+
 
 <%--<form method="post" action="<c:url value='/update'/>">--%>
 

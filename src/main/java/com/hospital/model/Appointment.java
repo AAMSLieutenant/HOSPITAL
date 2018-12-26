@@ -8,11 +8,8 @@ public class Appointment {
     private Date appDate;
     private int appValue;
     private String appCompliant;
+    private int docId;
     private int cardId;
-
-
-
-    private int diagId;
 
     public Appointment(){
 
@@ -23,16 +20,15 @@ public class Appointment {
             Date appDate,
             int appValue,
             String appCompliant,
-            int cardId,
-            int diagId){
+            int docId,
+            int cardId){
 
         this.appId=appId;
         this.appDate=appDate;
         this.appValue=appValue;
         this.appCompliant=appCompliant;
+        this.docId=docId;
         this.cardId=cardId;
-        this.diagId=diagId;
-
     }
 
     public Appointment(Appointment a){
@@ -40,8 +36,8 @@ public class Appointment {
         this.appDate=a.appDate;
         this.appValue=a.appValue;
         this.appCompliant=a.appCompliant;
+        this.docId=a.docId;
         this.cardId=a.cardId;
-        this.diagId=a.diagId;
     }
 
     public int getAppId() {
@@ -76,20 +72,16 @@ public class Appointment {
         this.appCompliant = appCompliant;
     }
 
+    public int getDocId() { return docId; }
+
+    public void setDocId(int docId) { this.docId = docId; }
+
     public int getCardId() {
         return cardId;
     }
 
     public void setCardId(int cardId) {
         this.cardId = cardId;
-    }
-
-    public int getDiagId() {
-        return diagId;
-    }
-
-    public void setDiagId(int diagId) {
-        this.diagId = diagId;
     }
 
 }

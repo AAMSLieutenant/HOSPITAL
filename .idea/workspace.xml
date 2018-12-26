@@ -7,33 +7,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="79bd505c-a6d2-4dc7-929d-2e0028cdc15b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hospital/dao/AppointmentDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hospital/interfaces/IAppointmentDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hospital/servlet/AppointmentServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/appointment.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/epam_project_DB/hospital_database.txt" beforeDir="false" afterPath="$PROJECT_DIR$/epam_project_DB/hospital_database.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/dao/OracleDaoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/dao/OracleDaoFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/dao/PatientDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/dao/PatientDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/interfaces/DaoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/interfaces/DaoFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/epam_project_DB/hospital_database_constraint.txt" beforeDir="false" afterPath="$PROJECT_DIR$/epam_project_DB/hospital_database_constraint.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/dao/AppointmentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/dao/AppointmentDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/interfaces/IAppointmentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/interfaces/IAppointmentDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/model/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/model/Appointment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/servlet/ContextListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/servlet/ContextListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/servlet/CreatePatientServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/servlet/CreatePatientServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/servlet/DeleteUserServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/servlet/DeletePatientServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/servlet/GetIndexPageServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/servlet/GetIndexPageServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/model/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/model/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/servlet/AppointmentServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/servlet/AppointmentServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hospital/servlet/PatientServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hospital/servlet/PatientServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/appointment.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/appointment.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/patient.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/patient.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hospital/dao/PatientDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hospital/dao/PatientDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hospital/servlet/DeleteUserServlet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hospital/servlet/GetIndexPageServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hospital/servlet/GetIndexPageServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hospital/servlet/UpdateUserServlet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/classes/com/hospital/dao/PatientDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/classes/com/hospital/dao/PatientDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/classes/com/hospital/servlet/DeleteUserServlet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/classes/com/hospital/servlet/GetIndexPageServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/classes/com/hospital/servlet/GetIndexPageServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/classes/com/hospital/servlet/UpdateUserServlet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/view/update.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hospital/dao/OracleDaoFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hospital/dao/OracleDaoFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hospital/interfaces/DaoFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hospital/interfaces/DaoFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hospital/model/Appointment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hospital/model/Appointment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hospital/servlet/ContextListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hospital/servlet/ContextListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/classes/com/hospital/dao/OracleDaoFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/classes/com/hospital/dao/OracleDaoFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/classes/com/hospital/interfaces/DaoFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/classes/com/hospital/interfaces/DaoFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/classes/com/hospital/model/Appointment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/classes/com/hospital/model/Appointment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/classes/com/hospital/servlet/ContextListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/hospital-assistant-1.0-SNAPSHOT/WEB-INF/classes/com/hospital/servlet/ContextListener.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -179,52 +171,55 @@
     <session id="-1308671127">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
+          <entry key="project.closed" value="6" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.64" value="1" />
+          <entry key="project.open.time.68" value="1" />
           <entry key="project.open.time.69" value="1" />
           <entry key="project.open.time.70" value="1" />
           <entry key="project.open.time.75" value="1" />
-          <entry key="project.opened" value="6" />
+          <entry key="project.opened" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
+          <entry key="class" value="1" />
           <entry key="iml" value="2" />
-          <entry key="java" value="60" />
-          <entry key="jsp" value="17" />
+          <entry key="java" value="73" />
+          <entry key="jsp" value="23" />
           <entry key="md" value="1" />
           <entry key="name" value="1" />
           <entry key="txt" value="2" />
-          <entry key="xml" value="8" />
+          <entry key="xml" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
+          <entry key="CLASS" value="1" />
           <entry key="IDEA_MODULE" value="2" />
-          <entry key="JAVA" value="60" />
-          <entry key="JSP" value="17" />
+          <entry key="JAVA" value="73" />
+          <entry key="JSP" value="23" />
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="3" />
-          <entry key="XML" value="8" />
+          <entry key="XML" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="27" />
-          <entry key="java" value="7359" />
-          <entry key="jsp" value="842" />
+          <entry key="java" value="9259" />
+          <entry key="jsp" value="1410" />
           <entry key="name" value="8" />
-          <entry key="txt" value="74" />
+          <entry key="txt" value="155" />
           <entry key="xml" value="92" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="7357" />
-          <entry key="JSP" value="842" />
-          <entry key="PLAIN_TEXT" value="109" />
+          <entry key="JAVA" value="9257" />
+          <entry key="JSP" value="1410" />
+          <entry key="PLAIN_TEXT" value="190" />
           <entry key="SQL" value="2" />
           <entry key="XML" value="92" />
         </counts>
@@ -234,10 +229,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/servlet/GetIndexPageServlet.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/servlet/AppointmentServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="59" column="13" lean-forward="true" selection-start-line="59" selection-start-column="13" selection-end-line="59" selection-end-column="13" />
+            <state relative-caret-position="286">
+              <caret line="53" column="62" lean-forward="true" selection-start-line="53" selection-start-column="62" selection-end-line="53" selection-end-column="62" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -248,8 +243,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/servlet/PatientServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-136">
-              <caret line="77" column="27" lean-forward="true" selection-start-line="77" selection-start-column="27" selection-end-line="77" selection-end-column="27" />
+            <state relative-caret-position="-420">
+              <caret line="50" column="5" lean-forward="true" selection-start-line="50" selection-start-column="5" selection-end-line="50" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -258,73 +253,24 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/servlet/AppointmentServlet.java">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/patient.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="458">
-              <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+            <state relative-caret-position="242">
+              <caret line="41" column="76" lean-forward="true" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="76" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <marker date="1545844056910" expanded="true" signature="1720:2036" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/patient.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="30" column="10" lean-forward="true" selection-start-line="30" selection-start-column="10" selection-end-line="30" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/appointment.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="12" column="62" lean-forward="true" selection-start-line="12" selection-start-column="62" selection-end-line="12" selection-end-column="62" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/index.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="41" column="79" selection-start-line="41" selection-start-column="79" selection-end-line="41" selection-end-column="79" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="41" column="4" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/dao/PatientDao.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2521">
-              <caret line="190" column="9" lean-forward="true" selection-start-line="190" selection-start-column="9" selection-end-line="190" selection-end-column="9" />
+            <state relative-caret-position="418">
+              <caret line="19" column="96" selection-start-line="19" selection-start-column="96" selection-end-line="19" selection-end-column="96" />
               <folding>
-                <element signature="method#update#0;class#PatientDao#0" />
-                <element signature="method#delete#0;class#PatientDao#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/dao/AppointmentDao.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="141" lean-forward="true" selection-start-line="141" selection-end-line="141" />
-              <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="n#style#0;n#textarea#0;n#label#2;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -333,11 +279,88 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/interfaces/IAppointmentDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="310">
-              <caret line="26" column="65" lean-forward="true" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="65" />
+            <state relative-caret-position="348">
+              <caret line="29" column="56" lean-forward="true" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/index.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="418">
+              <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/interfaces/DaoFactory.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="308">
+              <caret line="23" selection-start-line="23" selection-end-line="23" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/dao/AppointmentDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="326">
+              <caret line="182" column="31" lean-forward="true" selection-start-line="182" selection-start-column="31" selection-end-line="182" selection-end-column="31" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#update#0;class#AppointmentDao#0" />
+                <element signature="method#delete#0;class#AppointmentDao#0" />
+                <element signature="method#getAll#0;class#AppointmentDao#0" />
+                <element signature="method#getAllById#0;class#AppointmentDao#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/model/Employee.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1210">
+              <caret line="59" column="5" lean-forward="true" selection-start-line="59" selection-start-column="5" selection-end-line="59" selection-end-column="5" />
+              <folding>
+                <element signature="e#288#289#0" expanded="true" />
+                <element signature="e#316#317#0" expanded="true" />
+                <element signature="e#355#356#0" expanded="true" />
+                <element signature="e#389#390#0" expanded="true" />
+                <element signature="e#423#424#0" expanded="true" />
+                <element signature="e#453#454#0" expanded="true" />
+                <element signature="e#499#500#0" expanded="true" />
+                <element signature="e#537#538#0" expanded="true" />
+                <element signature="e#574#575#0" expanded="true" />
+                <element signature="e#607#608#0" expanded="true" />
+                <element signature="e#659#660#0" expanded="true" />
+                <element signature="e#703#704#0" expanded="true" />
+                <element signature="e#743#744#0" expanded="true" />
+                <element signature="e#779#780#0" expanded="true" />
+                <element signature="e#837#838#0" expanded="true" />
+                <element signature="e#887#888#0" expanded="true" />
+                <element signature="e#924#925#0" expanded="true" />
+                <element signature="e#957#958#0" expanded="true" />
+                <element signature="e#1009#1010#0" expanded="true" />
+                <element signature="e#1053#1054#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/model/Appointment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="948">
+              <caret line="60" column="5" lean-forward="true" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -349,8 +372,8 @@
       <list>
         <option value="jsf" />
         <option value="Jsp File" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -384,19 +407,21 @@
         <option value="$PROJECT_DIR$/src/main/java/com/hospital/servlet/DeletePatientServlet.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hospital/model/Patient.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hospital/servlet/CreatePatientServlet.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/hospital/servlet/GetIndexPageServlet.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/appointment.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/com/hospital/servlet/AppointmentServlet.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/hospital/model/Appointment.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/hospital/interfaces/DaoFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hospital/dao/OracleDaoFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hospital/dao/PatientDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hospital/servlet/ContextListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/hospital/interfaces/IAppointmentDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/hospital/dao/AppointmentDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hospital/servlet/GetIndexPageServlet.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hospital/model/Appointment.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hospital/servlet/PatientServlet.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/patient.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hospital/interfaces/IEmpDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hospital/interfaces/DaoFactory.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hospital/interfaces/IAppointmentDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hospital/model/Employee.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hospital/dao/AppointmentDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hospital/servlet/AppointmentServlet.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/appointment.jsp" />
       </list>
     </option>
   </component>
@@ -442,22 +467,13 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="HOSPITAL" type="b2602c69:ProjectViewProjectNode" />
               <item name="HOSPITAL" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HOSPITAL" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HOSPITAL" type="462c0819:PsiDirectoryNode" />
-              <item name=".idea" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HOSPITAL" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HOSPITAL" type="462c0819:PsiDirectoryNode" />
-              <item name="epam_project_DB" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="HOSPITAL" type="b2602c69:ProjectViewProjectNode" />
@@ -559,13 +575,12 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545767367061" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545848566625" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -687,7 +702,8 @@
       <workItem from="1545320204749" duration="1733000" />
       <workItem from="1545664303144" duration="10341000" />
       <workItem from="1545732714474" duration="5177000" />
-      <workItem from="1545754463589" duration="9334000" />
+      <workItem from="1545754463589" duration="9785000" />
+      <workItem from="1545824452782" duration="10700000" />
     </task>
     <task id="LOCAL-00001" summary="working with model">
       <created>1544530409378</created>
@@ -738,17 +754,24 @@
       <option name="project" value="LOCAL" />
       <updated>1545677775898</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Added connection to database for the Patient and appointment">
+      <created>1545770595465</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1545770595465</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80175000" />
+    <option name="totallyTimeSpent" value="91326000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23630504" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23952739" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -758,7 +781,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32902467" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.726638" visible="true" weight="0.39365453" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.726638" visible="true" weight="0.3772033" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -832,7 +855,8 @@
     <MESSAGE value="Edited UPDATE from lesson 3" />
     <MESSAGE value="made DELETE operation" />
     <MESSAGE value="Added some of the project structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added some of the project structure" />
+    <MESSAGE value="Added connection to database for the Patient and appointment" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added connection to database for the Patient and appointment" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/model/Diagnosis.java">
@@ -1003,24 +1027,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/createPatient.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="10" column="54" selection-start-line="10" selection-start-column="54" selection-end-line="10" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/servlet/DeletePatientServlet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="990">
           <caret line="58" column="13" selection-start-line="51" selection-start-column="11" selection-end-line="58" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/servlet/AddUserServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="858">
-          <caret line="49" column="55" selection-start-line="49" selection-start-column="55" selection-end-line="49" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -1041,13 +1051,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/model/Employee.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="13" column="1" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/model/Patient.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="178">
@@ -1060,53 +1063,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/model/Appointment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1690">
-          <caret line="84" column="5" lean-forward="true" selection-start-line="84" selection-start-column="5" selection-end-line="84" selection-end-column="5" />
-          <folding>
-            <element signature="e#925#926#0" expanded="true" />
-            <element signature="e#953#954#0" expanded="true" />
-            <element signature="e#992#993#0" expanded="true" />
-            <element signature="e#1026#1027#0" expanded="true" />
-            <element signature="e#1058#1059#0" expanded="true" />
-            <element signature="e#1088#1089#0" expanded="true" />
-            <element signature="e#1132#1133#0" expanded="true" />
-            <element signature="e#1170#1171#0" expanded="true" />
-            <element signature="e#1202#1203#0" expanded="true" />
-            <element signature="e#1233#1234#0" expanded="true" />
-            <element signature="e#1278#1279#0" expanded="true" />
-            <element signature="e#1318#1319#0" expanded="true" />
-            <element signature="e#1357#1358#0" expanded="true" />
-            <element signature="e#1392#1393#0" expanded="true" />
-            <element signature="e#1448#1449#0" expanded="true" />
-            <element signature="e#1496#1497#0" expanded="true" />
-            <element signature="e#1526#1527#0" expanded="true" />
-            <element signature="e#1555#1556#0" expanded="true" />
-            <element signature="e#1596#1597#0" expanded="true" />
-            <element signature="e#1632#1633#0" expanded="true" />
-            <element signature="e#1662#1663#0" expanded="true" />
-            <element signature="e#1691#1692#0" expanded="true" />
-            <element signature="e#1732#1733#0" expanded="true" />
-            <element signature="e#1768#1769#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/interfaces/IPatientDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="502">
           <caret line="35" column="23" lean-forward="true" selection-start-line="17" selection-start-column="4" selection-end-line="35" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/interfaces/DaoFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="15" column="2" lean-forward="true" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1120,54 +1080,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="41" column="79" selection-start-line="41" selection-start-column="79" selection-end-line="41" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="41" column="4" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/interfaces/IAppointmentDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="26" column="65" lean-forward="true" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="65" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/servlet/GetIndexPageServlet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="59" column="13" lean-forward="true" selection-start-line="59" selection-start-column="13" selection-end-line="59" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/servlet/ContextListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-334">
-          <caret line="79" column="65" lean-forward="true" selection-start-line="79" selection-start-column="65" selection-end-line="79" selection-end-column="65" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/dao/PatientDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2521">
-          <caret line="190" column="9" lean-forward="true" selection-start-line="190" selection-start-column="9" selection-end-line="190" selection-end-column="9" />
+        <state relative-caret-position="22">
+          <caret line="190" column="9" selection-start-line="190" selection-start-column="9" selection-end-line="190" selection-end-column="9" />
           <folding>
             <element signature="method#update#0;class#PatientDao#0" />
             <element signature="method#delete#0;class#PatientDao#0" />
@@ -1175,27 +1091,106 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/dao/AppointmentDao.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/com/oracle/ojdbc6/11.2.0/ojdbc6-11.2.0.jar!/oracle/jdbc/driver/OracleStatement.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="141" lean-forward="true" selection-start-line="141" selection-end-line="141" />
+        <state relative-caret-position="162">
+          <caret line="1768" selection-start-line="1768" selection-end-line="1768" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="53" column="47" lean-forward="true" selection-start-line="53" selection-start-column="47" selection-end-line="53" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/servlet/ContextListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="836">
+          <caret line="80" column="57" lean-forward="true" selection-start-line="80" selection-start-column="57" selection-end-line="80" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/appointment.jsp">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/createPatient.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="12" column="62" lean-forward="true" selection-start-line="12" selection-start-column="62" selection-end-line="12" selection-end-column="62" />
+        <state relative-caret-position="374">
+          <caret line="20" column="7" lean-forward="true" selection-start-line="10" selection-end-line="20" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/servlet/AddUserServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-510">
+          <caret line="18" column="2" lean-forward="true" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/servlet/GetIndexPageServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="48" column="9" lean-forward="true" selection-start-line="36" selection-start-column="11" selection-end-line="48" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/interfaces/IEmpDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/interfaces/DaoFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/interfaces/IAppointmentDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="29" column="56" lean-forward="true" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/model/Appointment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="948">
+          <caret line="60" column="5" lean-forward="true" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/dao/AppointmentDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="182" column="31" lean-forward="true" selection-start-line="182" selection-start-column="31" selection-end-line="182" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#update#0;class#AppointmentDao#0" />
+            <element signature="method#delete#0;class#AppointmentDao#0" />
+            <element signature="method#getAll#0;class#AppointmentDao#0" />
+            <element signature="method#getAllById#0;class#AppointmentDao#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/servlet/AppointmentServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="458">
-          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+        <state relative-caret-position="286">
+          <caret line="53" column="62" lean-forward="true" selection-start-line="53" selection-start-column="62" selection-end-line="53" selection-end-column="62" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1204,18 +1199,67 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/servlet/PatientServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-136">
-          <caret line="77" column="27" lean-forward="true" selection-start-line="77" selection-start-column="27" selection-end-line="77" selection-end-column="27" />
+        <state relative-caret-position="-420">
+          <caret line="50" column="5" lean-forward="true" selection-start-line="50" selection-start-column="5" selection-end-line="50" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/patient.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="30" column="10" lean-forward="true" selection-start-line="30" selection-start-column="10" selection-end-line="30" selection-end-column="10" />
+        <state relative-caret-position="242">
+          <caret line="41" column="76" lean-forward="true" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="76" />
+          <folding>
+            <marker date="1545844056910" expanded="true" signature="1720:2036" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hospital/model/Employee.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1210">
+          <caret line="59" column="5" lean-forward="true" selection-start-line="59" selection-start-column="5" selection-end-line="59" selection-end-column="5" />
+          <folding>
+            <element signature="e#288#289#0" expanded="true" />
+            <element signature="e#316#317#0" expanded="true" />
+            <element signature="e#355#356#0" expanded="true" />
+            <element signature="e#389#390#0" expanded="true" />
+            <element signature="e#423#424#0" expanded="true" />
+            <element signature="e#453#454#0" expanded="true" />
+            <element signature="e#499#500#0" expanded="true" />
+            <element signature="e#537#538#0" expanded="true" />
+            <element signature="e#574#575#0" expanded="true" />
+            <element signature="e#607#608#0" expanded="true" />
+            <element signature="e#659#660#0" expanded="true" />
+            <element signature="e#703#704#0" expanded="true" />
+            <element signature="e#743#744#0" expanded="true" />
+            <element signature="e#779#780#0" expanded="true" />
+            <element signature="e#837#838#0" expanded="true" />
+            <element signature="e#887#888#0" expanded="true" />
+            <element signature="e#924#925#0" expanded="true" />
+            <element signature="e#957#958#0" expanded="true" />
+            <element signature="e#1009#1010#0" expanded="true" />
+            <element signature="e#1053#1054#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/appointment.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="19" column="96" selection-start-line="19" selection-start-column="96" selection-end-line="19" selection-end-column="96" />
+          <folding>
+            <element signature="n#style#0;n#textarea#0;n#label#2;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

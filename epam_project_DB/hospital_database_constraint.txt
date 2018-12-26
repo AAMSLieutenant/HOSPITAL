@@ -1,8 +1,7 @@
-ALTER TABLE appointment DROP CONSTRAINT app_fk_patient;
 ALTER TABLE address DROP CONSTRAINT add_fk_pat;
-ALTER TABLE appointment DROP CONSTRAINT app_fk_diagnosis;
-ALTER TABLE doc_app DROP CONSTRAINT doc_app_fk_emp;
-ALTER TABLE doc_app DROP CONSTRAINT doc_app_fk_app;
+ALTER TABLE appointment DROP CONSTRAINT app_fk_pat;
+ALTER TABLE appointment DROP CONSTRAINT app_fk_emp;
+ALTER TABLE diagnosis DROP CONSTRAINT diag_fk_pat;
 ALTER TABLE employee DROP CONSTRAINT emp_fk_pos;
 ALTER TABLE uuser DROP CONSTRAINT uuser_fk_emp;
 ALTER TABLE operation DROP CONSTRAINT oper_fk_emp;
@@ -15,13 +14,14 @@ ALTER TABLE diag_med DROP CONSTRAINT diag_med_fk_med;
 ALTER TABLE diag_proc DROP CONSTRAINT diag_proc_fk_diag; 
 ALTER TABLE diag_proc DROP CONSTRAINT diag_proc_fk_proc; 
 
+
+
 ALTER TABLE address ADD CONSTRAINT add_fk_pat FOREIGN KEY(card_id) REFERENCES patient(card_id) ON DELETE CASCADE;
 
-ALTER TABLE appointment ADD CONSTRAINT app_fk_patient FOREIGN KEY(card_id) REFERENCES patient(card_id) ON DELETE CASCADE;
-ALTER TABLE appointment ADD CONSTRAINT app_fk_diagnosis FOREIGN KEY(diag_id) REFERENCES diagnosis(diag_id) ON DELETE CASCADE;
+ALTER TABLE appointment ADD CONSTRAINT app_fk_pat FOREIGN KEY(card_id) REFERENCES patient(card_id) ON DELETE CASCADE;
+ALTER TABLE appointment ADD CONSTRAINT app_fk_emp FOREIGN KEY(doc_id) REFERENCES employee(emp_id) ON DELETE CASCADE;
 
-ALTER TABLE doc_app ADD CONSTRAINT doc_app_fk_emp FOREIGN KEY(doctor_id) REFERENCES employee(emp_id) ON DELETE CASCADE;
-ALTER TABLE doc_app ADD CONSTRAINT doc_app_fk_app FOREIGN KEY(app_id) REFERENCES appointment(app_id) ON DELETE CASCADE;
+ALTER TABLE diagnosis ADD CONSTRAINT diag_fk_pat FOREIGN KEY(card_id) REFERENCES patient(card_id) ON DELETE CASCADE;
 
 ALTER TABLE employee ADD CONSTRAINT emp_fk_pos FOREIGN KEY(emp_pos_id) REFERENCES position(pos_id) ON DELETE CASCADE;
 
@@ -32,6 +32,7 @@ ALTER TABLE operation ADD CONSTRAINT oper_fk_emp FOREIGN KEY(doctor_id) REFERENC
 ALTER TABLE medicine ADD CONSTRAINT med_fk_emp FOREIGN KEY(emp_id) REFERENCES employee(emp_id) ON DELETE CASCADE;
 
 ALTER TABLE proced ADD CONSTRAINT proc_fk_emp FOREIGN KEY(emp_id) REFERENCES employee(emp_id) ON DELETE CASCADE;
+
 
 ALTER TABLE diag_oper ADD CONSTRAINT diag_oper_fk_diag FOREIGN KEY(diag_id) REFERENCES diagnosis(diag_id) ON DELETE CASCADE;
 ALTER TABLE diag_oper ADD CONSTRAINT diag_oper_fk_oper FOREIGN KEY(oper_id) REFERENCES operation(oper_id) ON DELETE CASCADE;
