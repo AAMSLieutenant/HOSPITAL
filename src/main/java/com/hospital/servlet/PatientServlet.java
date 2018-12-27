@@ -80,6 +80,7 @@ public class PatientServlet extends HttpServlet {
                 System.out.println("PatientServlet appointmentDao.getAllById() has info");
                 System.out.println("apps.size(): "+apps.size());
                 isApp=true;
+                this.appointmentsDb.clear();
                 for(int i=0;i<apps.size();i++){
 
                     this.appointmentsDb.put(apps.get(i).getAppId(), apps.get(i));
