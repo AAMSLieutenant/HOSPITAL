@@ -39,15 +39,7 @@
     </c:when>
     <c:when test="${appointments==true}">
         THERE IS AN APPOINTMENT
-        <c:forEach var="appointment" items="${requestScope.appointmentsDb}">
-            <table align="left" border="1">
-                <%--this.appId=a.appId;--%>
-                <%--this.appDate=a.appDate;--%>
-                <%--this.appValue=a.appValue;--%>
-                <%--this.appCompliant=a.appCompliant;--%>
-                <%--this.docId=a.docId;--%>
-                <%--this.cardId=a.cardId;--%>
-                <%--this.diagId=a.diagId;--%>
+        <table align="left" border="1">
             <tr align="center">
                 <td>номер приема</td>
                 <td>дата приема</td>
@@ -56,21 +48,32 @@
                 <td>доктор</td>
                 <td>карта</td>
             </tr>
+        <c:forEach var="appointment" items="${requestScope.appointmentsDb}">
+
+                <%--this.appId=a.appId;--%>
+                <%--this.appDate=a.appDate;--%>
+                <%--this.appValue=a.appValue;--%>
+                <%--this.appCompliant=a.appCompliant;--%>
+                <%--this.docId=a.docId;--%>
+                <%--this.cardId=a.cardId;--%>
+                <%--this.diagId=a.diagId;--%>
+
             <tr align="center">
                 <td ><c:out value="${appointment.appId}"/></td>
                 <td ><c:out value="${appointment.appDate}"/></td>
                 <td ><c:out value="${appointment.appValue}"/></td>
-                <td ><c:out value="${appointment.appCompliant}"/></td>
+                <td ><c:out value="${appointment.appComplaint}"/></td>
                 <td ><c:out value="${appointment.docId}"/></td>
                 <td ><c:out value="${appointment.cardId}"/></td>
             </tr>
-            </table>
+
         </c:forEach>
+        </table>
     </c:when>
 </c:choose>
 <div>
 
-    <form method="post" action="<c:url value='/appointment'/>">
+    <form method="get" action="<c:url value='/appointment'/>">
         <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
         <input type="submit" value="Зарегистрировать прием"/>
     </form>

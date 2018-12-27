@@ -1,0 +1,2 @@
+insert into diagnosis
+values(1, 'דאילמנטע');

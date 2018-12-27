@@ -15,13 +15,14 @@
     <label>Стоимость приема: <input type="text" name="appValue" /></label><br>
     <label>Жалоба пациента: <textarea style="resize:none" name="appComplaint" cols="30" rows="10"></textarea></label><br>
     <label>Врач:
-    <select name="menu" size="1">
+    <select name="docId" size="1">
         <c:forEach var="doctor" items="${requestScope.doctorsDb}">
         <option value="${doctor.empId}">${doctor.empSurname} ${doctor.empName}, ${doctor.posName}</option>
     <%--<option selected="selected" value="second"><c:out value="${requestScope.arr[1]}"/></option>--%>
     <%--<option value="third"><c:out value="${requestScope.arr[2]}"/></option>--%>
         </c:forEach>
-    </select>
+    </select></label>
+    <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
     <input type="submit" value="Зарегистрировать"><br>
 </form>
 

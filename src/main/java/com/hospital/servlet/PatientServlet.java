@@ -31,6 +31,8 @@ public class PatientServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
 
+
+
         final Object patientsDb = getServletContext().getAttribute("patientsDb");
         final Object patientDao = getServletContext().getAttribute("patientDao");
         final Object appointmentDao = getServletContext().getAttribute("appointmentDao");
@@ -60,7 +62,7 @@ public class PatientServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-
+        System.out.println("PatientServlet doGet()");
         req.setCharacterEncoding("UTF-8");
 
         String[] arr={"one", "two", "three"};
@@ -71,9 +73,7 @@ public class PatientServlet extends HttpServlet {
         req.setAttribute("pCardId", pCardId);
         req.setAttribute("patient", patient);
         this.currentId=Integer.parseInt(pCardId);
-
-
-
+        System.out.println("pCardId: "+pCardId);
         try {
             List<Appointment> apps = appointmentDao.get().getAllById(this.currentId);
             if(apps.size()!=0){

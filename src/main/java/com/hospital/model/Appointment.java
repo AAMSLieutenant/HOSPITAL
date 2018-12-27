@@ -7,7 +7,7 @@ public class Appointment {
     private int appId;
     private Date appDate;
     private int appValue;
-    private String appCompliant;
+    private String appComplaint;
     private int docId;
     private int cardId;
 
@@ -19,14 +19,14 @@ public class Appointment {
             int appId,
             Date appDate,
             int appValue,
-            String appCompliant,
+            String appComplaint,
             int docId,
             int cardId){
 
         this.appId=appId;
         this.appDate=appDate;
         this.appValue=appValue;
-        this.appCompliant=appCompliant;
+        this.appComplaint=appComplaint;
         this.docId=docId;
         this.cardId=cardId;
     }
@@ -35,7 +35,7 @@ public class Appointment {
         this.appId=a.appId;
         this.appDate=a.appDate;
         this.appValue=a.appValue;
-        this.appCompliant=a.appCompliant;
+        this.appComplaint=a.appComplaint;
         this.docId=a.docId;
         this.cardId=a.cardId;
     }
@@ -64,12 +64,12 @@ public class Appointment {
         this.appValue = appValue;
     }
 
-    public String getAppCompliant() {
-        return appCompliant;
+    public String getAppComplaint() {
+        return appComplaint;
     }
 
-    public void setAppCompliant(String appCompliant) {
-        this.appCompliant = appCompliant;
+    public void setAppComplaint(String appComplaint) {
+        this.appComplaint = appComplaint;
     }
 
     public int getDocId() { return docId; }

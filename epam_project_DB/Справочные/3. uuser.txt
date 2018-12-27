@@ -1,0 +1,8 @@
+insert into uuser
+values(1, 'admin1', 'admin1');
+
+insert into uuser
+values(2, 'admin2', 'admin2');
+
+insert into uuser
+values(3, 'admin3', 'admin3');

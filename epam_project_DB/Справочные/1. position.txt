@@ -1,0 +1,8 @@
+insert into position
+values(1, 'doctor', 15000, 1);
+
+insert into position
+values(2, 'surgeon', 35000, 1);
+
+insert into position
+values(3, 'nurse', 10000, 0);

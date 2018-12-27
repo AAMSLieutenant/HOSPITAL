@@ -24,8 +24,30 @@ public class AppointmentDao implements IAppointmentDao {
     }
 
     public void create(Appointment appointment) throws Exception {
+        System.out.println("AppointmentDao create()");
+        int nextId=0;
+        String statement="SELECT app_id FROM appointment";
+        PreparedStatement ps=connection.prepareStatement(statement);
+        ResultSet rs=ps.executeQuery();
+        while(rs.next()){
+            nextId=rs.getInt("app_id");
+        }
+        nextId++;
 
+        statement="INSERT INTO appointment(app_id, app_date, app_value, app_complaint, doc_id, card_id)" +
+                "VALUES(?,?,?,?,?,?)";
+        System.out.println(statement);
+        ps=connection.prepareStatement(statement);
+        ps.setInt(1, nextId);
+        java.sql.Date d=new java.sql.Date(appointment.getAppDate().getTime());
+        ps.setDate(2, d);
+        ps.setInt(3, appointment.getAppValue());
+        ps.setString(4, appointment.getAppComplaint());
+        ps.setInt(5, appointment.getDocId());
+        ps.setInt(6, appointment.getCardId());
+        ps.executeUpdate();
     }
+
 
     public Appointment read(int key) throws Exception{
 
@@ -43,7 +65,7 @@ public class AppointmentDao implements IAppointmentDao {
                 a.setAppId(rs.getInt("app_id"));
                 a.setAppDate(rs.getDate("app_date"));
                 a.setAppValue(rs.getInt("app_value"));
-                a.setAppCompliant(rs.getString("app_complaint"));
+                a.setAppComplaint(rs.getString("app_complaint"));
                 a.setDocId(rs.getInt("doc_id"));
                 a.setCardId(rs.getInt("card_id"));
 
@@ -56,7 +78,7 @@ public class AppointmentDao implements IAppointmentDao {
         System.out.println("app_id:"+a.getAppId());
         System.out.println("app_date:"+a.getAppDate());
         System.out.println("app_value:"+a.getAppValue());
-        System.out.println("app_compliant:"+a.getAppCompliant());
+        System.out.println("app_compliant:"+a.getAppComplaint());
         System.out.println("doc_id:"+a.getDocId());
         System.out.println("card_id:"+a.getCardId());
 //        System.out.println("diag_id:"+p.getpArrivalDate());
