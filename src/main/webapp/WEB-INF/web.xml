@@ -48,7 +48,17 @@
         <servlet-class>com.hospital.servlet.PatientServlet</servlet-class>
     </servlet>
 
-    <!--Patient profile servlet-->
+    <!--Diagnosis profile servlet-->
+    <servlet-mapping>
+        <servlet-name>DiagServlet</servlet-name>
+        <url-pattern>/diagnosis</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>DiagServlet</servlet-name>
+        <servlet-class>com.hospital.servlet.DiagnosisServlet</servlet-class>
+    </servlet>
+
+    <!--Appointment profile servlet-->
     <servlet-mapping>
         <servlet-name>AppointmentServlet</servlet-name>
         <url-pattern>/appointment</url-pattern>

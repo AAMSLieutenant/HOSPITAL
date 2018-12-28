@@ -1,6 +1,7 @@
 package com.hospital.servlet;
 
 
+import com.hospital.dao.DiagDao;
 import com.hospital.dao.UserDAO;
 import com.hospital.model.User;
 import com.hospital.dao.PatientDao;
@@ -41,7 +42,7 @@ public class ContextListener implements ServletContextListener {
     private AtomicReference<UserDAO> dao;
     private AtomicReference<IPatientDao> patientDao;
     private AtomicReference<IAppointmentDao> appointmentDao;
-
+    private AtomicReference<DiagDao> diagDao;
     /*
     Когда приложение запускается
      */
@@ -53,9 +54,11 @@ public class ContextListener implements ServletContextListener {
         dao = new AtomicReference<>(new UserDAO());
         patientDao=null;
         appointmentDao=null;
+        diagDao=null;
         try {
             patientDao = new AtomicReference<>();
             appointmentDao=new AtomicReference<>();
+            diagDao=new AtomicReference<>();
         }
         catch(Exception e){
             e.printStackTrace();
@@ -78,6 +81,7 @@ public class ContextListener implements ServletContextListener {
 //            List<Patient> pats=patientDao.getAll();
 
             this.appointmentDao.set(factory.getAppointmentDao());
+            this.diagDao.set(factory.getDiagDao());
             this.patientDao.set(factory.getPatientDao());
             List<Patient> pats=patientDao.get().getAll();
 
@@ -99,6 +103,7 @@ public class ContextListener implements ServletContextListener {
         servletContext.setAttribute("factory", factory);
         servletContext.setAttribute("patientDao", patientDao);
         servletContext.setAttribute("appointmentDao", appointmentDao);
+        servletContext.setAttribute("diagDao", diagDao);
         servletContext.setAttribute("patientsDb", patientsDb);
 
 

@@ -2,6 +2,7 @@ ALTER TABLE address DROP CONSTRAINT add_fk_pat;
 ALTER TABLE appointment DROP CONSTRAINT app_fk_pat;
 ALTER TABLE appointment DROP CONSTRAINT app_fk_emp;
 ALTER TABLE diagnosis DROP CONSTRAINT diag_fk_pat;
+ALTER TABLE diagnosis DROP CONSTRAINT diag_fk_emp;
 ALTER TABLE employee DROP CONSTRAINT emp_fk_pos;
 ALTER TABLE uuser DROP CONSTRAINT uuser_fk_emp;
 ALTER TABLE operation DROP CONSTRAINT oper_fk_emp;
@@ -22,6 +23,7 @@ ALTER TABLE appointment ADD CONSTRAINT app_fk_pat FOREIGN KEY(card_id) REFERENCE
 ALTER TABLE appointment ADD CONSTRAINT app_fk_emp FOREIGN KEY(doc_id) REFERENCES employee(emp_id) ON DELETE CASCADE;
 
 ALTER TABLE diagnosis ADD CONSTRAINT diag_fk_pat FOREIGN KEY(card_id) REFERENCES patient(card_id) ON DELETE CASCADE;
+ALTER TABLE diagnosis ADD CONSTRAINT diag_fk_emp FOREIGN KEY(doc_id) REFERENCES employee(emp_id) ON DELETE CASCADE;
 
 ALTER TABLE employee ADD CONSTRAINT emp_fk_pos FOREIGN KEY(emp_pos_id) REFERENCES position(pos_id) ON DELETE CASCADE;
 

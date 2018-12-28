@@ -1,9 +1,11 @@
 package com.hospital.servlet;
 
 import com.hospital.dao.AppointmentDao;
+import com.hospital.dao.DiagDao;
 import com.hospital.interfaces.IAppointmentDao;
 import com.hospital.interfaces.IPatientDao;
 import com.hospital.model.Appointment;
+import com.hospital.model.Diagnosis;
 import com.hospital.model.Patient;
 import com.sun.net.httpserver.HttpServer;
 
@@ -24,9 +26,11 @@ public class PatientServlet extends HttpServlet {
     private Map<Integer, Patient> patientsDb;//Массив с пациентами
     private Map<Integer, Appointment> appointmentsDb;//Массив с приемами у врача данного пациента
     private AtomicReference<IAppointmentDao> appointmentDao;//ДАО для работы с приемами
+    private Map<Integer, Diagnosis> diagnosesDb;
+    private AtomicReference<DiagDao> diagDao;
     private AtomicReference<IPatientDao> patientDao;//ДАО для работы с пациентом
     private boolean isApp=false;//Поле для проверки наличия приемов конкретного пациента
-
+    private boolean isDiag=false;
 
     @Override
     public void init() throws ServletException {
@@ -36,6 +40,7 @@ public class PatientServlet extends HttpServlet {
         final Object patientsDb = getServletContext().getAttribute("patientsDb");
         final Object patientDao = getServletContext().getAttribute("patientDao");
         final Object appointmentDao = getServletContext().getAttribute("appointmentDao");
+        final Object diagDao = getServletContext().getAttribute("diagDao");
 
         //Получаем из контекста и берем копии
         if (patientsDb == null || !(patientsDb instanceof ConcurrentHashMap)) {
@@ -47,6 +52,8 @@ public class PatientServlet extends HttpServlet {
             this.patientDao=(AtomicReference<IPatientDao>) patientDao;
             this.appointmentsDb=new ConcurrentHashMap<>();
             this.appointmentDao=(AtomicReference<IAppointmentDao>) appointmentDao;
+            this.diagDao=(AtomicReference<DiagDao>) diagDao;
+            this.diagnosesDb=new ConcurrentHashMap<>();
 
         }
 
@@ -64,9 +71,6 @@ public class PatientServlet extends HttpServlet {
             throws ServletException, IOException {
         System.out.println("PatientServlet doGet()");
         req.setCharacterEncoding("UTF-8");
-
-        String[] arr={"one", "two", "three"};
-        req.setAttribute("arr", arr);
 
         final String pCardId=req.getParameter("pCardId");
         final Patient patient=patientsDb.get(Integer.parseInt(pCardId));
@@ -86,10 +90,31 @@ public class PatientServlet extends HttpServlet {
                     this.appointmentsDb.put(apps.get(i).getAppId(), apps.get(i));
                 }
                 req.setAttribute("appointmentsDb", appointmentsDb.values());
+
+
             }
             else{
                 isApp=false;
                 System.out.println("PatientServlet appointmentDao.getAllById() IS NULL");
+            }
+
+            List<Diagnosis> diags =diagDao.get().getAllById(this.currentId);
+            if(diags.size()!=0){
+                System.out.println("PatientServlet diagDao.getAllById() has info");
+                System.out.println("diags.size(): "+diags.size());
+                isDiag=true;
+                this.diagnosesDb.clear();
+                for(int i=0;i<diags.size();i++){
+
+                    this.diagnosesDb.put(diags.get(i).getDiagId(), diags.get(i));
+                }
+                req.setAttribute("diagnosesDb", diagnosesDb.values());
+
+
+            }
+            else{
+                isDiag=false;
+                System.out.println("PatientServlet diagDao.getAllById() IS NULL");
             }
         }
         catch(Exception e){
@@ -98,6 +123,7 @@ public class PatientServlet extends HttpServlet {
 
 
         req.setAttribute("isApp", isApp);
+        req.setAttribute("isDiag", isDiag);
 
 
         req.getRequestDispatcher("/WEB-INF/view/patient.jsp")

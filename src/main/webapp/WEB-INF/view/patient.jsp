@@ -38,7 +38,6 @@
         NO APPOINTMENTS FOR THIS PATIENT
     </c:when>
     <c:when test="${appointments==true}">
-        THERE IS AN APPOINTMENT
         <table align="left" border="1">
             <tr align="center">
                 <td>номер приема</td>
@@ -78,6 +77,38 @@
         <input type="submit" value="Зарегистрировать прием"/>
     </form>
 
+</div>
+<br/>
+<c:set var="diagnoses" value="${requestScope.isDiag}"/>
+<c:choose>
+    <c:when test="${diagnoses==false}">
+        NO DIAGNOSES FOR THIS PATIENT
+    </c:when>
+    <c:when test="${diagnoses==true}">
+        <table align="left" border="1">
+            <tr align="center">
+                <td>номер диагноза</td>
+                <td>дата диагноза</td>
+                <td>карта</td>
+            </tr>
+            <c:forEach var="diagnosis" items="${requestScope.diagnosesDb}">
+
+                <tr align="center">
+                    <td ><c:out value="${diagnosis.diagId}"/></td>
+                    <td ><c:out value="${diagnosis.diagName}"/></td>
+                    <td ><c:out value="${diagnosis.cardId}"/></td>
+                </tr>
+
+            </c:forEach>
+        </table>
+    </c:when>
+</c:choose>
+<div>
+    <div><h3>Диагнозы</h3></div>
+    <form method="get" action="<c:url value='/diagnosis'/>">
+        <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
+        <input type="submit" value="Поставить дагноз"/>
+    </form>
 </div>
 
 

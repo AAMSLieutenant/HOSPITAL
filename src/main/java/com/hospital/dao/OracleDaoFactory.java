@@ -132,5 +132,11 @@ public class OracleDaoFactory implements DaoFactory{
         return new AppointmentDao(getOracleConnection());
     }
 
+    public DiagDao getDiagDao() throws Exception{
+        System.out.println("getDiagDao() returned connection");
+
+        return new DiagDao(getOracleConnection());
+    }
+
 
 }
