@@ -12,8 +12,7 @@ import com.hospital.interfaces.IAppointmentDao;
 import com.hospital.interfaces.IPatientDao;
 
 import oracle.jdbc.pool.OracleDataSource;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+
 
 import javax.sql.DataSource;
 import java.io.FileInputStream;

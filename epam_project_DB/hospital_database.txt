@@ -43,7 +43,6 @@ CREATE TABLE appointment(
 CREATE TABLE diagnosis(
 	diag_id number(11) NOT NULL PRIMARY KEY,
 	diag_name varchar(30) NOT NULL,
-	doc_id number(11),
 	card_id number(11)
 );
 

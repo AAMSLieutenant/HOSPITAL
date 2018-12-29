@@ -12,8 +12,6 @@ import java.sql.*;
 import java.text.DateFormat;
 import java.util.List;
 import com.hospital.model.Patient;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
