@@ -22,9 +22,32 @@ public class AppointmentServlet extends HttpServlet {
     private Integer pCardId=0;
     private AtomicReference<IAppointmentDao> appointmentDao;
     private Map<Integer, Employee> doctorsDb;
+    private Date curDate;
+    private String year;
+    private String month;
+    private String date;
+    private String fin;
 
     @Override
     public void init() throws ServletException {
+
+        curDate=new Date();
+        year=String.valueOf(curDate.getYear()+1900);
+        int m=(curDate.getMonth());
+        if(m<10){
+            month="0"+String.valueOf(m+1);
+        }
+        else{
+            month=String.valueOf(m+1);
+        }
+        int d=(curDate.getDate());
+        if(d<10){
+            date="0"+String.valueOf(d);
+        }
+        else{
+            date=String.valueOf(d);
+        }
+        fin=year+"-"+month+"-"+date;
 
 
         final Object appointmentDao=getServletContext().getAttribute("appointmentDao");
@@ -60,7 +83,7 @@ public class AppointmentServlet extends HttpServlet {
         appointment.setAppValue(Integer.parseInt(appValue));
         appointment.setAppComplaint(appComplaint);
         Date d=null;
-        SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat sdf=new SimpleDateFormat("YYYY-MM-dd");
         try {
             d=sdf.parse(appDate);
         } catch (ParseException e) {
@@ -105,6 +128,8 @@ public class AppointmentServlet extends HttpServlet {
         System.out.println("-----------------------------------------");
         System.out.println("AppointmentServlet doGet() is finished;");
         System.out.println("-----------------------------------------");
+
+        req.setAttribute("fin", fin);
         req.getRequestDispatcher("/WEB-INF/view/appointment.jsp").forward(req, resp);
 
     }

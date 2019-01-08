@@ -10,10 +10,10 @@
 <br />
 
 <form method="post" action="<c:url value='/appointment'/>">
-
-    <label>Дата приема: <input type="text" name="appDate" /></label><br>
-    <label>Стоимость приема: <input type="text" name="appValue" /></label><br>
-    <label>Жалоба пациента: <textarea style="resize:none" name="appComplaint" cols="30" rows="10"></textarea></label><br>
+    <c:set var="fin" value="${requestScope.fin}"/>
+    <label>Дата приема: <input type="date" name="appDate" value="${fin}" readonly /></label><br>
+    <label>Стоимость приема: <input type="text" min="1" name="appValue" value="250" readonly /></label><br>
+    <label>Жалоба пациента: <textarea style="resize:none" name="appComplaint" cols="30" rows="10" minlength="10" required></textarea></label><br>
     <label>Врач:
     <select name="docId" size="1">
         <c:forEach var="doctor" items="${requestScope.doctorsDb}">
@@ -23,7 +23,7 @@
         </c:forEach>
     </select></label>
     <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
-    <input type="submit" value="Зарегистрировать"><br>
+    <input type="submit" value="Зарегистрировать"> <input type="reset" name="сброс"><br>
 </form>
 
 

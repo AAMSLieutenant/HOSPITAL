@@ -1,14 +1,14 @@
-insert into employee
-values(1, 'Petro', 'Petrenko', 'Petrrovich', 28, '07-09-2003', 1);
+insert into employee(emp_id, emp_name, emp_surname, emp_patronymic, emp_age, emp_hire_date, emp_pos_id)
+values(1, 'Петр', 'Петренко', 'Петрович', 28, '07-09-2003', 1);
 
-insert into employee
-values(2, 'Vasiliy', 'Vasiliev', 'Vasilievich', 30, '03-05-2006', 1);
+insert into employee(emp_id, emp_name, emp_surname, emp_patronymic, emp_age, emp_hire_date, emp_pos_id)
+values(2, 'Василий', 'Васильев', 'Васильевич', 30, '03-05-2006', 1);
 
-insert into employee
-values(3, 'Sentsov', 'Oleg', 'Igorevich', 42, '22-04-2000', 2);
+insert into employee(emp_id, emp_name, emp_surname, emp_patronymic, emp_age, emp_hire_date, emp_pos_id)
+values(3, 'Андрей', 'Реван', 'Игоревич', 42, '22-04-2000', 2);
 
-insert into employee
-values(4, 'Amosova', 'Alina', 'Dmitrievna', 22, '05-11-2010', 3);
+insert into employee(emp_id, emp_name, emp_surname, emp_patronymic, emp_age, emp_hire_date, emp_pos_id)
+values(4, 'Алина', 'Амосова', 'Дмитриевна', 22, '05-11-2010', 3);
 
-insert into employee
-values(5, 'Andreeva', 'Irina', 'Maxsimovna', 24, '10-02-2014', 3);
+insert into employee(emp_id, emp_name, emp_surname, emp_patronymic, emp_age, emp_hire_date, emp_pos_id)
+values(5, 'Анастасия', 'Барна', 'Максимовна', 24, '10-02-2014', 3);

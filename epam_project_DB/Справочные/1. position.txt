@@ -1,8 +1,8 @@
 insert into position
-values(1, 'doctor', 15000, 1);
+values(1, 'врач', 15000, 1);
 
 insert into position
-values(2, 'surgeon', 35000, 1);
+values(2, 'хирург', 35000, 1);
 
 insert into position
-values(3, 'nurse', 10000, 0);
+values(3, 'медперсонал', 10000, 0);

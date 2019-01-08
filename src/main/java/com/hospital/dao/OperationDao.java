@@ -85,15 +85,18 @@ public class OperationDao {
 
     public List<OperInfo> getAllDiagOper(int pCardId) throws Exception{
 
-        List<Integer> ids;
+        List<Integer> ids=new ArrayList<>();
         List<OperInfo> operInfos=new ArrayList<>();
         List<OperInfo> temp=new ArrayList<>();
         ids=getOperationIds(pCardId);
-        for (int i = 0; i < ids.size(); i++) {
-            temp=getOperations(ids.get(i));
-            System.out.println("temp size: "+temp.size());;
-            for(int j=0;j<temp.size();j++){
-                operInfos.add(temp.get(j));
+        if(ids.size()>0) {
+            for (int i = 0; i < ids.size(); i++) {
+                temp = getOperations(ids.get(i));
+                System.out.println("temp size: " + temp.size());
+                ;
+                for (int j = 0; j < temp.size(); j++) {
+                    operInfos.add(temp.get(j));
+                }
             }
         }
         System.out.println("final count of the operations: "+operInfos.size());

@@ -13,7 +13,7 @@
             <br/>
             <div>
                 <label>Выберите диагноз:
-                    <select name="diagId" size="1">
+                    <select name="diagId" size="1" required>
                         <c:forEach var="diagnose" items="${requestScope.diagnosesDb}">
                             <option value="${diagnose.diagId}">${diagnose.diagId} ${diagnose.diagName}</option>
                             </c:forEach>
@@ -25,7 +25,7 @@
 
             <div>
                 <label>Выберите операцию:
-                    <select name="operId" size="1">
+                    <select name="operId" size="1" required>
                         <c:forEach var="operation" items="${requestScope.operationsDb}">
                             <option value="${operation.operId}">${operation.operId} ${operation.operName} ${operation.operValue} ${operation.operLength}
                                     ${operation.surname} ${operation.name} ${operation.patronymic} ${operation.posName}</option>
@@ -37,11 +37,12 @@
             <br/>
 
             <div>
+                <c:set var="fin" value="${requestScope.fin}"/>
                 <label>Дата проведения операции:
-                    <input type="date" name="operDate" />
+                    <input type="date" name="operDate" min="${fin}" required/>
                 </label>
                 <br>
-                <input type="submit" value="Назначить операцию"><br>
+                <input type="submit" value="Назначить операцию"> <input type="reset" name="сброс"><br>
             </div>
         </form>
     </body>

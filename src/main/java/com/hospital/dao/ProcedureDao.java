@@ -84,15 +84,18 @@ public class ProcedureDao {
 
     public List<ProcInfo> getAllDiagProc(int pCardId) throws Exception{
 
-        List<Integer> ids;
+        List<Integer> ids=new ArrayList<>();;
         List<ProcInfo> procInfos=new ArrayList<>();
         List<ProcInfo> temp=new ArrayList<>();
         ids=getProcedureIds(pCardId);
-        for (int i = 0; i < ids.size(); i++) {
-            temp=getProcedures(ids.get(i));
-            System.out.println("temp size: "+temp.size());;
-            for(int j=0;j<temp.size();j++){
-                procInfos.add(temp.get(j));
+        if(ids.size()>0) {
+            for (int i = 0; i < ids.size(); i++) {
+                temp = getProcedures(ids.get(i));
+                System.out.println("temp size: " + temp.size());
+                ;
+                for (int j = 0; j < temp.size(); j++) {
+                    procInfos.add(temp.get(j));
+                }
             }
         }
         System.out.println("final count of the procedures: "+procInfos.size());

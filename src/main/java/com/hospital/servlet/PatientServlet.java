@@ -35,7 +35,10 @@ public class PatientServlet extends HttpServlet {
     private AtomicReference<IPatientDao> patientDao;//ДАО для работы с пациентом
     private boolean isApp=false;//Поле для проверки наличия приемов конкретного пациента
     private boolean isDiag=false;
-    private boolean operMedPro=true;
+    private boolean operMedPro=false;
+    private int operSize=0;
+    private int medSize=0;
+    private int procSize=0;
 
     @Override
     public void init() throws ServletException {
@@ -85,6 +88,9 @@ public class PatientServlet extends HttpServlet {
             throws ServletException, IOException {
         System.out.println("PatientServlet doGet()");
         req.setCharacterEncoding("UTF-8");
+       operSize=0;
+       medSize=0;
+       procSize=0;
 
         final String pCardId=req.getParameter("pCardId");
         final Patient patient=patientsDb.get(Integer.parseInt(pCardId));
@@ -131,38 +137,60 @@ public class PatientServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-            if((isDiag==false)||(isApp==false))
-            {
-                operMedPro=false;
-            }
-
+        if((isDiag==true)&&(isApp==true))
+        {
+            operMedPro=true;
+        }
+        else{
+            operMedPro=false;
+        }
+        System.out.println("-------------------------PatientServlet isApp=="+isApp+"---------------------------");
+        System.out.println("-------------------------PatientServlet isDiag=="+isDiag+"---------------------------");
+        System.out.println("-------------------------PatientServlet OperMEdPro=="+operMedPro+"---------------------------");
             if(operMedPro==true) {
+
                 try {
                     List<OperInfo> operInfos = this.operationDao.get().getAllDiagOper(this.currentId);
-                    for (int i = 0; i < operInfos.size(); i++) {
-                        this.operInfosDb.put(i, operInfos.get(i));
+                    operSize=operInfos.size();
+                    if(operSize>0) {
+//                    req.setAttribute("operSize",operSize);
+
+                        for (int i = 0; i < operInfos.size(); i++) {
+                            this.operInfosDb.put(i, operInfos.get(i));
+                        }
+                        req.setAttribute("operInfosDb", operInfosDb.values());
                     }
-                    req.setAttribute("operInfosDb", operInfosDb.values());
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
                 try {
                     List<MedInfo> medInfos = this.medicineDao.get().getAllDiagMed(this.currentId);
-                    for (int i = 0; i < medInfos.size(); i++) {
-                        this.medInfosDb.put(i, medInfos.get(i));
+                    medSize=medInfos.size();
+//                    req.setAttribute("medSize",medSize);
+                    if(medSize>0) {
+                        for (int i = 0; i < medInfos.size(); i++) {
+                            this.medInfosDb.put(i, medInfos.get(i));
+                        }
+                        req.setAttribute("medInfosDb", medInfosDb.values());
+
                     }
-                    req.setAttribute("medInfosDb", medInfosDb.values());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
                 try {
                     List<ProcInfo> procInfos = this.procedureDao.get().getAllDiagProc(this.currentId);
-                    for (int i = 0; i < procInfos.size(); i++) {
-                        this.procInfosDb.put(i, procInfos.get(i));
+                    procSize=procInfos.size();
+//                    req.setAttribute("procSize",procSize);
+                    if(procSize>0) {
+                        for (int i = 0; i < procInfos.size(); i++) {
+                            this.procInfosDb.put(i, procInfos.get(i));
+                        }
+                        req.setAttribute("procInfosDb", procInfosDb.values());
+
                     }
-                    req.setAttribute("procInfosDb", procInfosDb.values());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -173,6 +201,9 @@ public class PatientServlet extends HttpServlet {
         req.setAttribute("isApp", isApp);
         req.setAttribute("isDiag", isDiag);
         req.setAttribute("operMedPro", operMedPro);
+        req.setAttribute("operSize",operSize);
+        req.setAttribute("medSize",medSize);
+        req.setAttribute("procSize",procSize);
 
 
         req.getRequestDispatcher("/WEB-INF/view/patient.jsp")

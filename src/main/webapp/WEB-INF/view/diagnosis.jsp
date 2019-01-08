@@ -11,8 +11,8 @@
 
 <form method="post" action="<c:url value='/diagnosis'/>">
 
-    <label>Диагноз: <textarea style="resize:none" name="diagName" cols="30" rows="10"></textarea></label><br>
-    <input type="submit" value="Зарегистрировать"><br>
+    <label>Диагноз: <textarea style="resize:none" name="diagName" cols="30" rows="10" minlength="10" required></textarea></label><br>
+    <input type="submit" value="Зарегистрировать">  <input type="reset" name="сброс"><br>
 </form>
 </body>
 </html>

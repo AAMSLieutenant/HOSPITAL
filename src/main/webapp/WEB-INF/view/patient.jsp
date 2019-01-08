@@ -113,16 +113,20 @@
                 </td>
             </tr>
         </table>
-        <br/>
 
 
     <%----------------------------ОПЕРАЦИИ--------------------------------------%>
         <table>
+            <c:set var="operMedPro" value="${requestScope.operMedPro}"/>
+            <c:choose>
+            <c:when test="${operMedPro==true}">
             <tr>
+                <c:set var="operSize" value="${requestScope.operSize}"/>
+                <c:choose>
+                <c:when test="${operSize gt 0}">
+                    ${operSize}
                 <td>
-                    <c:set var="operMedPro" value="${requestScope.operMedPro}"/>
-                    <c:choose>
-                    <c:when test="${operMedPro==true}">
+
                     <div>
                         <h3>Операции</h3>
                     </div>
@@ -160,6 +164,8 @@
                             </table>
 
                 </td>
+                </c:when>
+                </c:choose>
             </tr>
             <tr>
                 <td>
@@ -167,22 +173,28 @@
                         <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
                         <input type="submit" value="Назначить операцию"/>
                     </form>
-                    </c:when>
-                    </c:choose>
+
                 </td>
             </tr>
+            </c:when>
+            </c:choose>
         </table>
-        <br/>
 
 
-        <%----------------------------МЕДИКАМЕНТЫ--------------------------------------%>
+
+    <%----------------------------МЕДИКАМЕНТЫ--------------------------------------%>
 
         <table>
+            <c:set var="operMedPro" value="${requestScope.operMedPro}"/>
+            <c:choose>
+            <c:when test="${operMedPro==true}">
             <tr>
+                <c:set var="medSize" value="${requestScope.medSize}"/>
+                <c:choose>
+                <c:when test="${medSize gt 0}">
+                    ${medSize}
                 <td>
-                    <c:set var="operMedPro" value="${requestScope.operMedPro}"/>
-                    <c:choose>
-                    <c:when test="${operMedPro==true}">
+
                     <div>
                         <h3>Лекарства</h3>
                     </div>
@@ -222,6 +234,8 @@
                     </table>
 
                 </td>
+                </c:when>
+                </c:choose>
             </tr>
             <tr>
                 <td>
@@ -229,22 +243,33 @@
                         <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
                         <input type="submit" value="Назначить лекарства"/>
                     </form>
-                    </c:when>
-                    </c:choose>
+
                 </td>
             </tr>
+            </c:when>
+            </c:choose>
         </table>
-        <br/>
-        <%----------------------------ПРОЦЕДУРЫ--------------------------------------%>
+
+
+    <%----------------------------ПРОЦЕДУРЫ--------------------------------------%>
+
+
         <table>
+            <c:set var="operMedPro" value="${requestScope.operMedPro}"/>
+            <c:choose>
+            <c:when test="${operMedPro==true}">
             <tr>
+                <c:set var="procSize" value="${requestScope.procSize}"/>
+                <c:choose>
+                <c:when test="${procSize gt 0}">
+                    ${procSize}
                 <td>
-                    <c:set var="operMedPro" value="${requestScope.operMedPro}"/>
-                    <c:choose>
-                    <c:when test="${operMedPro==true}">
+
                     <div>
                         <h3>Процедуры</h3>
                     </div>
+
+                    <c:set var="operMedPro" value="${requestScope.operMedPro}"/>
                     <table align="left" border="1">
                         <tr align="center">
                             <td>diag_id</td>
@@ -279,6 +304,8 @@
                     </table>
 
                 </td>
+                </c:when>
+                </c:choose>
             </tr>
             <tr>
                 <td>
@@ -286,41 +313,22 @@
                         <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
                         <input type="submit" value="Назначить процедуры"/>
                     </form>
-                    </c:when>
-                    </c:choose>
+
                 </td>
             </tr>
+            </c:when>
+            </c:choose>
         </table>
+
+
+
+
         <br/>
-
-
-
-
-        <div>
-            <form method="get" action="<c:url value='/procedure'/>">
-                <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
-                <input type="submit" value="Назначить процедуру"/>
-            </form>
-    <br/>
-    <br/>
-    <div>
         <form method="get" action="<c:url value='/read'/>">
             <%--<input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />--%>
             <input type="submit" value="К списку пациентов"/>
         </form>
     </div>
 
-
-
-    <%--<form method="post" action="<c:url value='/update'/>">--%>
-
-        <%--<label>Новое имя: <input type="text" name="pName" /></label><br>--%>
-        <%--<label>Новая фамилия: <input type="text" name="pSurname" /></label><br>--%>
-        <%--<label>Новое отчество: <input type="text" name="pPatronymic" /></label><br>--%>
-
-        <%--<input type="number" hidden name="pCardId" value="${requestScope.patient.pCardId}"/>--%>
-
-        <%--<input type="submit" value="Ok" name="Ok"><br>--%>
-    <%--</form>--%>
     </body>
 </html>

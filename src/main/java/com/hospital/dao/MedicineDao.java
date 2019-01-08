@@ -69,15 +69,18 @@ public class MedicineDao {
 
     public List<MedInfo> getAllDiagMed(int pCardId) throws Exception{
 
-        List<Integer> ids;
+        List<Integer> ids=new ArrayList<>();;
         List<MedInfo> medInfos=new ArrayList<>();
         List<MedInfo> temp=new ArrayList<>();
         ids=getMedicineIds(pCardId);
-        for (int i = 0; i < ids.size(); i++) {
-            temp=getMedicine(ids.get(i));
-            System.out.println("temp size: "+temp.size());;
-            for(int j=0;j<temp.size();j++){
-                medInfos.add(temp.get(j));
+        if(ids.size()>0) {
+            for (int i = 0; i < ids.size(); i++) {
+                temp = getMedicine(ids.get(i));
+                System.out.println("temp size: " + temp.size());
+                ;
+                for (int j = 0; j < temp.size(); j++) {
+                    medInfos.add(temp.get(j));
+                }
             }
         }
         System.out.println("final count of the medicine: "+medInfos.size());

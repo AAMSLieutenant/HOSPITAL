@@ -1,8 +1,8 @@
 insert into patient(card_id, p_name, p_surname, p_patronymic, p_age, p_birth_date, p_sex, p_arrival_date)
-values(1, 'name1', 'surname1', 'patro1', 34, '10-07-1976', 'male', '20-12-2018');
+values(1, 'Имя1', 'Фамилия1', 'Отчество1', 34, '10-07-1976', 'муж', '20-12-2018');
 
 insert into patient(card_id, p_name, p_surname, p_patronymic, p_age, p_birth_date, p_sex, p_arrival_date)
-values(2, 'name2', 'surname2', 'patro2', 45, '11-05-1990', 'female', '22-12-2018');
+values(2, 'Имя2', 'Фамилия2', 'Отчество2', 45, '11-05-1990', 'жен', '22-12-2018');
 
 insert into patient(card_id, p_name, p_surname, p_patronymic, p_age, p_birth_date, p_sex, p_arrival_date)
-values(3, 'name3', 'surname3', 'patro3', 40, '22-05-1988', 'male', '23-11-2018');
+values(3, 'Имя3', 'Фамилия3', 'Отчество3', 40, '22-05-1988', 'муж', '23-11-2018');

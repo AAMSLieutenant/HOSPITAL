@@ -19,14 +19,38 @@ public class CreatePatientServlet extends HttpServlet {
 
     private AtomicReference<IPatientDao> patientDao;
     private Integer currentId=0;
+    private String year;
+    private String month;
+    private String date;
+    private String fin;
+    private Date curDate;
+    private Date arrDate;
 
     @Override
     public void init() throws ServletException {
 
 
+
+        curDate=new Date();
+        year=String.valueOf(curDate.getYear()+1900);
+        int m=(curDate.getMonth());
+        if(m<10){
+            month="0"+String.valueOf(m+1);
+        }
+        else{
+            month=String.valueOf(m+1);
+        }
+        int d=(curDate.getDate());
+        if(d<10){
+            date="0"+String.valueOf(d);
+        }
+        else{
+            date=String.valueOf(d);
+        }
+        fin=year+"-"+month+"-"+date;
+
         final Object patientsDb = getServletContext().getAttribute("patientsDb");
         final Object patientDao = getServletContext().getAttribute("patientDao");
-
 
 //        if (users == null || !(users instanceof ConcurrentHashMap)) {
 //
@@ -56,7 +80,6 @@ public class CreatePatientServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
 
         Date birthDate=null;
-        Date arrivalDate=null;
 
         final String pName = req.getParameter("pName");
         final String pSurname = req.getParameter("pSurname");
@@ -76,7 +99,6 @@ public class CreatePatientServlet extends HttpServlet {
         System.out.println("CreatePatient doPost() Chosen STRING pAge:"+pAge);
         System.out.println("CreatePatient doPost() Chosen STRING pSex:"+pSex);
         System.out.println("CreatePatient doPost() Chosen STRING pBirthDate:"+pBirthDate);
-        System.out.println("CreatePatient doPost() Chosen STRING pArrivalDate:"+pArrivalDate);
         System.out.println("ADDRESS:");
         System.out.println("CreatePatient doPost() Chosen STRING city:"+city);
         System.out.println("CreatePatient doPost() Chosen STRING street:"+street);
@@ -89,15 +111,18 @@ public class CreatePatientServlet extends HttpServlet {
         patient.setpPatronymic(pPatronymic);
         patient.setpAge(Integer.parseInt(pAge));
         patient.setpSex(pSex);
-        SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
+
+
+
+
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
         try {
             birthDate=sdf.parse(pBirthDate);
-            arrivalDate=sdf.parse(pArrivalDate);
         } catch (ParseException e) {
             e.printStackTrace();
         }
         patient.setpBirthDate(birthDate);
-        patient.setpArrivalDate(arrivalDate);
+        patient.setpArrivalDate(new Date());
         patient.getpAddress().setCity(city);
         patient.getpAddress().setStreet(street);
         patient.getpAddress().setHouseNumber(Integer.parseInt(houseNumber));
@@ -129,6 +154,7 @@ public class CreatePatientServlet extends HttpServlet {
 
 //        final Patient patient=patientsDb.get(Integer.parseInt(pCardId));
 //        req.setAttribute("patient", patient);
+        req.setAttribute("fin", this.fin);
         req.getRequestDispatcher("/WEB-INF/view/createPatient.jsp")
                 .forward(req, resp);
     }

@@ -1,5 +1,5 @@
 insert into uuser
-values(1, 'admin1', 'admin1');
+values(1, 'admin', 'admin');
 
 insert into uuser
 values(2, 'admin2', 'admin2');
