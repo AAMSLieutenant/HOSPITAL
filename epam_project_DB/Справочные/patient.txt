@@ -1,8 +1,0 @@
-insert into patient(card_id, p_name, p_surname, p_patronymic, p_birth_date, p_sex, p_arrival_date)
-values(1, 'name1', 'surname1', 'patro1', '10-07-1976', 'male', '20-12-2018');
-
-insert into patient(card_id, p_name, p_surname, p_patronymic, p_birth_date, p_sex, p_arrival_date)
-values(2, 'name2', 'surname2', 'patro2', '11-05-1990', 'female', '22-12-2018');
-
-insert into patient(card_id, p_name, p_surname, p_patronymic, p_birth_date, p_sex, p_arrival_date)
-values(3, 'name3', 'surname3', 'patro3', '22-05-1988', 'male', '23-11-2018');

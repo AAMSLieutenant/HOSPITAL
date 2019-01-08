@@ -1,6 +1,8 @@
 package com.hospital.filter;
 
 import com.hospital.dao.UserDAO;
+import com.hospital.dao.UuserDao;
+import com.hospital.interfaces.IAppointmentDao;
 import com.hospital.model.User;
 
 import javax.servlet.*;
@@ -30,6 +32,8 @@ public class AuthFilter implements Filter {
 
     private static final Logger logger=LoggerFactory.getLogger(AuthFilter.class);
 
+    private AtomicReference<UuserDao> userDao;
+    private String result;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -49,41 +53,82 @@ public class AuthFilter implements Filter {
                          final FilterChain filterChain)
 
             throws IOException, ServletException {
+
+
+        request.setCharacterEncoding("UTF-8");
         final HttpServletRequest req = (HttpServletRequest) request;
         final HttpServletResponse res = (HttpServletResponse) response;
 
-        final String login = req.getParameter("login");
-        final String password = req.getParameter("password");
+        String login = req.getParameter("login");
+        String password = req.getParameter("password");
+//--------------------------------------
+        this.userDao=new AtomicReference<>();
+        final Object userDao=req.getServletContext().getAttribute("userDao");
+        this.userDao=(AtomicReference<UuserDao>)userDao;
+        final HttpSession session =req.getSession();
 
-        @SuppressWarnings("unchecked")
-        final AtomicReference<UserDAO> dao = (AtomicReference<UserDAO>) req.getServletContext().getAttribute("dao");
+        if((login!=null)&&(password!=null)){
+            req.getSession().setAttribute("login", login);
+            req.getSession().setAttribute("password", password);
+        }
 
-        final HttpSession session = req.getSession();
-
-        //Logged user.
+//        System.out.println("current login:"+login);
+//        System.out.println("current password:"+password);
         if (nonNull(session) &&
                 nonNull(session.getAttribute("login")) &&
                 nonNull(session.getAttribute("password"))) {
+            System.out.println("NONNULL");
 
-            final User.ROLE role = (User.ROLE) session.getAttribute("role");
-
-            moveToMenu(req, res, role);
-
-
-        } else if (dao.get().userIsExist(login, password)) {
-
-            final User.ROLE role = dao.get().getRoleByLoginPassword(login, password);
-
-            req.getSession().setAttribute("password", password);
-            req.getSession().setAttribute("login", login);
-            req.getSession().setAttribute("role", role);
-
-            moveToMenu(req, res, role);
-
-        } else {
-
-            moveToMenu(req, res, User.ROLE.UNKNOWN);
+            try {
+                result = this.userDao.get().authorize(login, password);
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+            if(result.equals("-1")){
+                req.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(req, res);
+            }
+            else{
+//                System.out.println("SUCCESS");
+                req.getRequestDispatcher("/WEB-INF/view/admin_menu.jsp").forward(req, res);
+            }
         }
+        else{
+            req.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(req, res);
+        }
+
+
+//--------------------------------------
+
+//        @SuppressWarnings("unchecked")
+//        final AtomicReference<UserDAO> dao = (AtomicReference<UserDAO>) req.getServletContext().getAttribute("dao");
+//
+//        final HttpSession session = req.getSession();
+//
+//        //Logged user.
+//        if (nonNull(session) &&
+//                nonNull(session.getAttribute("login")) &&
+//                nonNull(session.getAttribute("password"))) {
+//
+//            final User.ROLE role = (User.ROLE) session.getAttribute("role");
+//
+//            moveToMenu(req, res, role);
+//
+//
+//        } else if (dao.get().userIsExist(login, password)) {
+//
+//            final User.ROLE role = dao.get().getRoleByLoginPassword(login, password);
+//
+//            req.getSession().setAttribute("password", password);
+//            req.getSession().setAttribute("login", login);
+//            req.getSession().setAttribute("role", role);
+//
+//            moveToMenu(req, res, role);
+//
+//        } else {
+//
+//            moveToMenu(req, res, User.ROLE.UNKNOWN);
+//        }
     }
 
     /**

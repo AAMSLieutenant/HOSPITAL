@@ -1,42 +1,45 @@
 package com.hospital.model;
 
-public class Procedure {
+import java.util.Date;
 
-    private int procId;
-    private String procName;
-    private int procValue;
+public class Medicine {
+
+
+    private int medId;
+    private String medName;
+    private int medValue;
     private int empId;
     private String name;
     private String surname;
     private String patronymic;
     private String posName;
 
-    public Procedure(){
+    public Medicine(){
 
     }
 
-    public int getProcId() {
-        return procId;
+    public int getMedId() {
+        return medId;
     }
 
-    public void setProcId(int procId) {
-        this.procId = procId;
+    public void setMedId(int medId) {
+        this.medId = medId;
     }
 
-    public String getProcName() {
-        return procName;
+    public String getMedName() {
+        return medName;
     }
 
-    public void setProcName(String procName) {
-        this.procName = procName;
+    public void setMedName(String medName) {
+        this.medName = medName;
     }
 
-    public int getProcValue() {
-        return procValue;
+    public int getMedValue() {
+        return medValue;
     }
 
-    public void setProcValue(int procValue) {
-        this.procValue = procValue;
+    public void setMedValue(int medValue) {
+        this.medValue = medValue;
     }
 
     public int getEmpId() {

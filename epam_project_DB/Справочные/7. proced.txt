@@ -1,0 +1,40 @@
+insert into proced
+values(1, 'укол от бешенства', 1000, 4);
+insert into proced
+values(2, 'укол от бешенства', 1000, 5);
+
+insert into proced
+values(3, 'укол от столбняка', 800, 4);
+insert into proced
+values(4, 'укол от столбняка', 800, 5);
+
+insert into proced
+values(5, 'флюорография', 150, 1);
+insert into proced
+values(6, 'флюорография', 150, 2);
+insert into proced
+values(7, 'флюорография', 150, 3);
+insert into proced
+values(8, 'флюорография', 150, 4);
+insert into proced
+values(9, 'флюорография', 150, 5);
+
+insert into proced
+values(10, 'послеоперационное восстановление', 2000, 1);
+insert into proced
+values(11, 'послеоперационное восстановление', 2000, 2);
+insert into proced
+values(12, 'послеоперационное восстановление', 2000, 3);
+
+insert into proced
+values(13, 'МРТ', 2000, 1);
+insert into proced
+values(14, 'МРТ', 2000, 2);
+insert into proced
+values(15, 'МРТ', 2000, 3);
+
+insert into proced
+values(16, 'Биопсия', 2000, 4);
+insert into proced
+values(17, 'Биопсия', 2000, 5);
+

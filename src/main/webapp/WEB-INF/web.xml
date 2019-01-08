@@ -27,6 +27,39 @@
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
 
+    <!--Operation create servlet-->
+    <servlet>
+        <servlet-name>OperationServlet</servlet-name>
+        <servlet-class>com.hospital.servlet.OperationServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>OperationServlet</servlet-name>
+        <url-pattern>/operation</url-pattern>
+    </servlet-mapping>
+
+    <!--Medicine create servlet-->
+    <servlet>
+        <servlet-name>MedicineServlet</servlet-name>
+        <servlet-class>com.hospital.servlet.MedicineServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MedicineServlet</servlet-name>
+        <url-pattern>/medicine</url-pattern>
+    </servlet-mapping>
+
+    <!--Procedure create servlet-->
+    <servlet>
+        <servlet-name>ProcedureServlet</servlet-name>
+        <servlet-class>com.hospital.servlet.ProcedureServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ProcedureServlet</servlet-name>
+        <url-pattern>/procedure</url-pattern>
+    </servlet-mapping>
+
 
     <!--Index page for app-->
     <servlet-mapping>

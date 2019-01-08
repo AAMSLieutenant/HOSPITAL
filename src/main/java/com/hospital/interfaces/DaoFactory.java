@@ -1,6 +1,9 @@
 package com.hospital.interfaces;
 
 import com.hospital.dao.DiagDao;
+import com.hospital.dao.MedicineDao;
+import com.hospital.dao.OperationDao;
+import com.hospital.dao.ProcedureDao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -25,6 +28,12 @@ public interface DaoFactory
     public IAppointmentDao getAppointmentDao() throws Exception;
 
     public DiagDao getDiagDao() throws Exception;
+
+    public OperationDao getOperationDao() throws Exception;
+
+    public MedicineDao getMedicineDao() throws Exception;
+
+    public ProcedureDao getProcedureDao() throws Exception;
 
 }/*
  * To change this license header, choose License Headers in Project Properties.

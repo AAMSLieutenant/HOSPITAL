@@ -1,0 +1,8 @@
+insert into address(card_id, city, street, house_number, flat_number)
+values(1, 'Kiev', 'Khreshatyk', '22', 32);
+
+insert into address(card_id, city, street, house_number, flat_number)
+values(2, 'Kiev', 'Hramatnaya', '13', 156);
+
+insert into address(card_id, city, street, house_number, flat_number)
+values(3, 'Kiev', 'Bohomoltsa', '6', 90);

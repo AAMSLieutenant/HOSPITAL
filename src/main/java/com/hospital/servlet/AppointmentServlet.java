@@ -1,12 +1,8 @@
 package com.hospital.servlet;
 
-import com.hospital.dao.PatientDao;
-import com.hospital.dao.UserDAO;
 import com.hospital.interfaces.IAppointmentDao;
 import com.hospital.model.Appointment;
 import com.hospital.model.Employee;
-import com.hospital.model.Patient;
-import com.hospital.dao.AppointmentDao;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,16 +23,9 @@ public class AppointmentServlet extends HttpServlet {
     private AtomicReference<IAppointmentDao> appointmentDao;
     private Map<Integer, Employee> doctorsDb;
 
-
-
-
-
-
-
-
-
     @Override
     public void init() throws ServletException {
+
 
         final Object appointmentDao=getServletContext().getAttribute("appointmentDao");
         this.appointmentDao=(AtomicReference<IAppointmentDao>)appointmentDao;
@@ -47,7 +36,11 @@ public class AppointmentServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException
     {
-        System.out.println("AppointmentServlet doPost()");
+
+        System.out.println("-----------------------------------------");
+        System.out.println("AppointmentServlet doPost() is started;");
+        System.out.println("-----------------------------------------");
+
         req.setCharacterEncoding("UTF-8");
 
         final String appDate=req.getParameter("appDate");
@@ -81,28 +74,20 @@ public class AppointmentServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-//        pCardId=Integer.parseInt(req.getParameter("pCardId"));
-//        System.out.println("CURRENT PATIENT ID:"+pCardId);
-//        try {
-//            List<Employee> emps = this.appointmentDao.get().getDoctors();
-//            for(int i=0;i<emps.size();i++){
-//                this.doctorsDb.put(emps.get(i).getEmpId(), emps.get(i));
-//            }
-//            req.setAttribute("doctorsDb", doctorsDb.values());
-//        }
-//        catch(Exception e){
-//            e.printStackTrace();
-//        }
-
         req.setAttribute("pCardId", pCardId);
-      resp.sendRedirect(req.getContextPath() + "/patient?pCardId="+pCardId);
-//        req.getRequestDispatcher("/WEB-INF/view/patient.jsp").forward(req, resp);
+        System.out.println("-----------------------------------------");
+        System.out.println("AppointmentServlet doPost() is finished;");
+        System.out.println("-----------------------------------------");
+        resp.sendRedirect(req.getContextPath() + "/patient?pCardId="+pCardId);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        System.out.println("AppointmentServlet doGet()");
+
+        System.out.println("-----------------------------------------");
+        System.out.println("AppointmentServlet doGet() is started;");
+        System.out.println("-----------------------------------------");
         pCardId=Integer.parseInt(req.getParameter("pCardId"));
         System.out.println("CURRENT PATIENT ID:"+pCardId);
         try {
@@ -117,6 +102,9 @@ public class AppointmentServlet extends HttpServlet {
         }
 
 //        resp.sendRedirect(req.getContextPath() + "/appointment");
+        System.out.println("-----------------------------------------");
+        System.out.println("AppointmentServlet doGet() is finished;");
+        System.out.println("-----------------------------------------");
         req.getRequestDispatcher("/WEB-INF/view/appointment.jsp").forward(req, resp);
 
     }

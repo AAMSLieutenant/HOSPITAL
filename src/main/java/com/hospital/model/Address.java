@@ -8,11 +8,23 @@ public class Address {
     private int houseNumber;
     private int flatNumber;
 
+    public Address(){
+
+    }
+
     public Address(String city, String street, int houseNumber, int flatNumber){
         this.city=city;
         this.street=street;
         this.houseNumber=houseNumber;
         this.flatNumber=flatNumber;
+
+    }
+
+    public Address(Address a){
+        this.city=a.city;
+        this.street=a.street;
+        this.houseNumber=a.houseNumber;
+        this.flatNumber=a.flatNumber;
 
     }
 

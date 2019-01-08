@@ -137,5 +137,29 @@ public class OracleDaoFactory implements DaoFactory{
         return new DiagDao(getOracleConnection());
     }
 
+    public UuserDao getUuserDao() throws Exception{
+        System.out.println("getUuserDao() returned connection");
+
+        return new UuserDao(getOracleConnection());
+    }
+
+    public OperationDao getOperationDao() throws Exception{
+        System.out.println("getOperationDao() returned connection");
+
+        return new OperationDao(getOracleConnection());
+    }
+
+    public MedicineDao getMedicineDao() throws Exception{
+        System.out.println("getMedicineDao() returned connection");
+
+        return new MedicineDao(getOracleConnection());
+    }
+
+    public ProcedureDao getProcedureDao() throws Exception{
+
+        System.out.println("getProcedureDao() returned connection");
+        return new ProcedureDao(getOracleConnection());
+    }
+
 
 }

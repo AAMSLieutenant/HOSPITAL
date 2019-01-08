@@ -1,12 +1,9 @@
 package com.hospital.servlet;
 
-import com.hospital.dao.AppointmentDao;
-import com.hospital.dao.DiagDao;
+import com.hospital.dao.*;
 import com.hospital.interfaces.IAppointmentDao;
 import com.hospital.interfaces.IPatientDao;
-import com.hospital.model.Appointment;
-import com.hospital.model.Diagnosis;
-import com.hospital.model.Patient;
+import com.hospital.model.*;
 import com.sun.net.httpserver.HttpServer;
 
 import javax.servlet.ServletException;
@@ -14,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -28,9 +26,16 @@ public class PatientServlet extends HttpServlet {
     private AtomicReference<IAppointmentDao> appointmentDao;//ДАО для работы с приемами
     private Map<Integer, Diagnosis> diagnosesDb;
     private AtomicReference<DiagDao> diagDao;
+    private Map<Integer, OperInfo> operInfosDb;
+    private Map<Integer, MedInfo> medInfosDb;
+    private Map<Integer, ProcInfo> procInfosDb;
+    private AtomicReference<OperationDao> operationDao;
+    private AtomicReference<MedicineDao> medicineDao;
+    private AtomicReference<ProcedureDao> procedureDao;
     private AtomicReference<IPatientDao> patientDao;//ДАО для работы с пациентом
     private boolean isApp=false;//Поле для проверки наличия приемов конкретного пациента
     private boolean isDiag=false;
+    private boolean operMedPro=true;
 
     @Override
     public void init() throws ServletException {
@@ -41,6 +46,9 @@ public class PatientServlet extends HttpServlet {
         final Object patientDao = getServletContext().getAttribute("patientDao");
         final Object appointmentDao = getServletContext().getAttribute("appointmentDao");
         final Object diagDao = getServletContext().getAttribute("diagDao");
+        final Object operationDao=getServletContext().getAttribute("operationDao");
+        final Object medicineDao=getServletContext().getAttribute("medicineDao");
+        final Object procedureDao=getServletContext().getAttribute("procedureDao");
 
         //Получаем из контекста и берем копии
         if (patientsDb == null || !(patientsDb instanceof ConcurrentHashMap)) {
@@ -54,6 +62,12 @@ public class PatientServlet extends HttpServlet {
             this.appointmentDao=(AtomicReference<IAppointmentDao>) appointmentDao;
             this.diagDao=(AtomicReference<DiagDao>) diagDao;
             this.diagnosesDb=new ConcurrentHashMap<>();
+            this.operationDao=(AtomicReference<OperationDao>) operationDao;
+            this.medicineDao=(AtomicReference<MedicineDao>)medicineDao;
+            this.procedureDao=(AtomicReference<ProcedureDao>)procedureDao;
+            this.operInfosDb=new ConcurrentHashMap<>();
+            this.medInfosDb=new ConcurrentHashMap<>();
+            this.procInfosDb=new ConcurrentHashMap<>();
 
         }
 
@@ -78,52 +92,87 @@ public class PatientServlet extends HttpServlet {
         req.setAttribute("patient", patient);
         this.currentId=Integer.parseInt(pCardId);
         System.out.println("pCardId: "+pCardId);
+
         try {
             List<Appointment> apps = appointmentDao.get().getAllById(this.currentId);
-            if(apps.size()!=0){
+            if (apps.size() != 0) {
                 System.out.println("PatientServlet appointmentDao.getAllById() has info");
-                System.out.println("apps.size(): "+apps.size());
-                isApp=true;
+                System.out.println("apps.size(): " + apps.size());
+                isApp = true;
                 this.appointmentsDb.clear();
-                for(int i=0;i<apps.size();i++){
+                for (int i = 0; i < apps.size(); i++) {
 
                     this.appointmentsDb.put(apps.get(i).getAppId(), apps.get(i));
                 }
                 req.setAttribute("appointmentsDb", appointmentsDb.values());
 
 
-            }
-            else{
-                isApp=false;
+            } else {
+                isApp = false;
                 System.out.println("PatientServlet appointmentDao.getAllById() IS NULL");
             }
 
-            List<Diagnosis> diags =diagDao.get().getAllById(this.currentId);
-            if(diags.size()!=0){
+            List<Diagnosis> diags = diagDao.get().getAllById(this.currentId);
+            if (diags.size() != 0) {
                 System.out.println("PatientServlet diagDao.getAllById() has info");
-                System.out.println("diags.size(): "+diags.size());
-                isDiag=true;
+                System.out.println("diags.size(): " + diags.size());
+                isDiag = true;
                 this.diagnosesDb.clear();
-                for(int i=0;i<diags.size();i++){
+                for (int i = 0; i < diags.size(); i++) {
 
                     this.diagnosesDb.put(diags.get(i).getDiagId(), diags.get(i));
                 }
                 req.setAttribute("diagnosesDb", diagnosesDb.values());
-
-
-            }
-            else{
-                isDiag=false;
+            } else {
+                isDiag = false;
                 System.out.println("PatientServlet diagDao.getAllById() IS NULL");
             }
-        }
-        catch(Exception e){
+        }catch(Exception e) {
             e.printStackTrace();
         }
+
+            if((isDiag==false)||(isApp==false))
+            {
+                operMedPro=false;
+            }
+
+            if(operMedPro==true) {
+                try {
+                    List<OperInfo> operInfos = this.operationDao.get().getAllDiagOper(this.currentId);
+                    for (int i = 0; i < operInfos.size(); i++) {
+                        this.operInfosDb.put(i, operInfos.get(i));
+                    }
+                    req.setAttribute("operInfosDb", operInfosDb.values());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    List<MedInfo> medInfos = this.medicineDao.get().getAllDiagMed(this.currentId);
+                    for (int i = 0; i < medInfos.size(); i++) {
+                        this.medInfosDb.put(i, medInfos.get(i));
+                    }
+                    req.setAttribute("medInfosDb", medInfosDb.values());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    List<ProcInfo> procInfos = this.procedureDao.get().getAllDiagProc(this.currentId);
+                    for (int i = 0; i < procInfos.size(); i++) {
+                        this.procInfosDb.put(i, procInfos.get(i));
+                    }
+                    req.setAttribute("procInfosDb", procInfosDb.values());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
 
 
         req.setAttribute("isApp", isApp);
         req.setAttribute("isDiag", isDiag);
+        req.setAttribute("operMedPro", operMedPro);
 
 
         req.getRequestDispatcher("/WEB-INF/view/patient.jsp")

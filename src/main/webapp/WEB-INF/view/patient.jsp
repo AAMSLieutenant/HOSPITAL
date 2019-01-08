@@ -4,124 +4,323 @@
 <head>
     <title>Title</title>
 </head>
-<body>
+    <body>
 
-<div>pCardId: <c:out value="${requestScope.patient.pCardId}"/> </div>
-<div>Имя: <c:out value="${requestScope.patient.pName}"/> </div>
-<div>Фамилия: <c:out value="${requestScope.patient.pSurname}"/> </div>
-<div>Отчество: <c:out value="${requestScope.patient.pPatronymic}"/> </div>
-<div>Пол: <c:out value="${requestScope.patient.pSex}"/> </div>
-<div>Дата рождения: <c:out value="${requestScope.patient.pBirthDate}"/> </div>
-<div>Дата поступления: <c:out value="${requestScope.patient.pArrivalDate}"/> </div>
-<br />
-<%--<select name="menu" size="1">--%>
-    <%--<option value="first"><c:out value="${requestScope.arr[0]}"/></option>--%>
-    <%--<option selected="selected" value="second"><c:out value="${requestScope.arr[1]}"/></option>--%>
-    <%--<option value="third"><c:out value="${requestScope.arr[2]}"/></option>--%>
-<%--</select>--%>
+        <div>pCardId: <c:out value="${requestScope.patient.pCardId}"/> </div>
+        <div>Имя: <c:out value="${requestScope.patient.pName}"/> </div>
+        <div>Фамилия: <c:out value="${requestScope.patient.pSurname}"/> </div>
+        <div>Отчество: <c:out value="${requestScope.patient.pPatronymic}"/> </div>
+        <div>Возраст: <c:out value="${requestScope.patient.pAge}"/> </div>
+        <div>Пол: <c:out value="${requestScope.patient.pSex}"/> </div>
+        <div>Дата рождения: <c:out value="${requestScope.patient.pBirthDate}"/> </div>
+        <div>Дата поступления: <c:out value="${requestScope.patient.pArrivalDate}"/> </div>
+        <br />
+        <div>АДРЕС</div>
+        <br />
+        <div>Город: <c:out value="${requestScope.patient.pAddress.city}"/> </div>
+        <div>Улица: <c:out value="${requestScope.patient.pAddress.street}"/> </div>
+        <div>Дом: <c:out value="${requestScope.patient.pAddress.houseNumber}"/> </div>
+        <div>Квартира: <c:out value="${requestScope.patient.pAddress.flatNumber}"/> </div>
+        <br />
 
-<%--<div>--%>
-    <%--<form method="post" action="<c:url value='/appointment'/>">--%>
-        <%--<input type="number" hidden name="pCardId" value="${patient.pCardId}" />--%>
-        <%--<input type="submit" value="Приемы"/>--%>
-    <%--</form>--%>
-<%--</div>--%>
-<br />
-<div>
-    <div><h3>Приемы</h3></div>
-</div>
-
-
-<c:set var="appointments" value="${requestScope.isApp}"/>
-<c:choose>
-    <c:when test="${appointments==false}">
-        NO APPOINTMENTS FOR THIS PATIENT
-    </c:when>
-    <c:when test="${appointments==true}">
-        <table align="left" border="1">
-            <tr align="center">
-                <td>номер приема</td>
-                <td>дата приема</td>
-                <td>стоимость приема</td>
-                <td>жалоба</td>
-                <td>доктор</td>
-                <td>карта</td>
-            </tr>
-        <c:forEach var="appointment" items="${requestScope.appointmentsDb}">
-
-                <%--this.appId=a.appId;--%>
-                <%--this.appDate=a.appDate;--%>
-                <%--this.appValue=a.appValue;--%>
-                <%--this.appCompliant=a.appCompliant;--%>
-                <%--this.docId=a.docId;--%>
-                <%--this.cardId=a.cardId;--%>
-                <%--this.diagId=a.diagId;--%>
-
-            <tr align="center">
-                <td ><c:out value="${appointment.appId}"/></td>
-                <td ><c:out value="${appointment.appDate}"/></td>
-                <td ><c:out value="${appointment.appValue}"/></td>
-                <td ><c:out value="${appointment.appComplaint}"/></td>
-                <td ><c:out value="${appointment.docId}"/></td>
-                <td ><c:out value="${appointment.cardId}"/></td>
-            </tr>
-
-        </c:forEach>
-        </table>
-    </c:when>
-</c:choose>
-<div>
-
-    <form method="get" action="<c:url value='/appointment'/>">
-        <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
-        <input type="submit" value="Зарегистрировать прием"/>
-    </form>
-
-</div>
-<br/>
-<c:set var="diagnoses" value="${requestScope.isDiag}"/>
-<c:choose>
-    <c:when test="${diagnoses==false}">
-        NO DIAGNOSES FOR THIS PATIENT
-    </c:when>
-    <c:when test="${diagnoses==true}">
-        <table align="left" border="1">
-            <tr align="center">
-                <td>номер диагноза</td>
-                <td>дата диагноза</td>
-                <td>карта</td>
-            </tr>
-            <c:forEach var="diagnosis" items="${requestScope.diagnosesDb}">
-
-                <tr align="center">
-                    <td ><c:out value="${diagnosis.diagId}"/></td>
-                    <td ><c:out value="${diagnosis.diagName}"/></td>
-                    <td ><c:out value="${diagnosis.cardId}"/></td>
+        <div>
+            <div><h3>Приемы</h3></div>
+        </div>
+    <%----------------------------ПРИЕМЫ--------------------------------------%>
+        <table>
+                <tr>
+                    <td>
+                    <c:set var="appointments" value="${requestScope.isApp}"/>
+                    <c:choose>
+                        <c:when test="${appointments==true}">
+                            <table align="left" border="1">
+                                <tr align="center">
+                                    <td>номер приема</td>
+                                    <td>дата приема</td>
+                                    <td>стоимость приема</td>
+                                    <td width="300">жалоба</td>
+                                    <td>доктор</td>
+                                    <td>карта</td>
+                                </tr>
+                                <c:forEach var="appointment" items="${requestScope.appointmentsDb}">
+                                    <tr align="center">
+                                        <td ><c:out value="${appointment.appId}"/></td>
+                                        <td ><c:out value="${appointment.appDate}"/></td>
+                                        <td ><c:out value="${appointment.appValue}"/></td>
+                                        <td ><c:out value="${appointment.appComplaint}"/></td>
+                                        <td ><c:out value="${appointment.docId}"/></td>
+                                        <td ><c:out value="${appointment.cardId}"/></td>
+                                    </tr>
+                                </c:forEach>
+                            </table>
+                        </c:when>
+                    </c:choose>
+                    </td>
                 </tr>
+                <tr>
+                    <td>
+                    <form method="get" action="<c:url value='/appointment'/>">
+                        <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
+                        <input type="submit" value="Зарегистрировать прием"/>
+                    </form>
+                    </td>
+                </tr>
+            </table>
 
-            </c:forEach>
+
+    <%----------------------------ДИАГНОЗЫ--------------------------------------%>
+
+        <table>
+            <tr>
+                <td>
+                    <c:set var="appointments" value="${requestScope.isApp}"/>
+                    <c:choose>
+                        <c:when test="${appointments==true}">
+                            <div>
+                                <h3>Диагнозы</h3>
+                            </div>
+                    <c:set var="diagnoses" value="${requestScope.isDiag}"/>
+                    <c:choose>
+                    <c:when test="${diagnoses==true}">
+                        <table align="left" border="1">
+                            <tr align="center">
+                                <td>номер диагноза</td>
+                                <td width="300">диагноз</td>
+                                <td>карта</td>
+                            </tr>
+                            <c:forEach var="diagnosis" items="${requestScope.diagnosesDb}">
+
+                                <tr align="center">
+                                    <td ><c:out value="${diagnosis.diagId}"/></td>
+                                    <td ><c:out value="${diagnosis.diagName}"/></td>
+                                    <td ><c:out value="${diagnosis.cardId}"/></td>
+                                </tr>
+
+                            </c:forEach>
+                            </table>
+                        </c:when>
+                    </c:choose>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                        <form method="get" action="<c:url value='/diagnosis'/>">
+                            <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
+                            <input type="submit" value="Поставить дагноз"/>
+                        </form>
+                    </c:when>
+                </c:choose>
+                </td>
+            </tr>
         </table>
-    </c:when>
-</c:choose>
-<div>
-    <div><h3>Диагнозы</h3></div>
-    <form method="get" action="<c:url value='/diagnosis'/>">
-        <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
-        <input type="submit" value="Поставить дагноз"/>
-    </form>
-</div>
+        <br/>
+
+
+    <%----------------------------ОПЕРАЦИИ--------------------------------------%>
+        <table>
+            <tr>
+                <td>
+                    <c:set var="operMedPro" value="${requestScope.operMedPro}"/>
+                    <c:choose>
+                    <c:when test="${operMedPro==true}">
+                    <div>
+                        <h3>Операции</h3>
+                    </div>
+                            <table align="left" border="1">
+                                <tr align="center">
+                                    <td>diag_id</td>
+                                    <td>diag_name</td>
+                                    <td>oper_id</td>
+                                    <td>oper_name</td>
+                                    <td>oper_date</td>
+                                    <td>oper_done</td>
+                                    <td>doctor_id</td>
+                                    <td>emp_surname</td>
+                                    <td>pos_name</td>
+                                </tr>
+                                <c:forEach var="operInfo" items="${requestScope.operInfosDb}">
+                                    <tr align="center">
+                                        <td ><c:out value="${operInfo.diagId}"/></td>
+                                        <td ><c:out value="${operInfo.diagName}"/></td>
+                                        <td ><c:out value="${operInfo.operId}"/></td>
+                                        <td ><c:out value="${operInfo.operName}"/></td>
+                                        <td ><c:out value="${operInfo.operDate}"/></td>
+                                        <td >
+                                            <c:out value="${operInfo.operDone}"/>
+                                            <form method="get" action="<c:url value='/operation'/>">
+                                                <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
+                                                <input type="submit" value="Отметка"/>
+                                            </form>
+                                        </td>
+                                        <td ><c:out value="${operInfo.doctorId}"/></td>
+                                        <td ><c:out value="${operInfo.empSurname}"/></td>
+                                        <td ><c:out value="${operInfo.posName}"/></td>
+                                    </tr>
+                                </c:forEach>
+                            </table>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form method="get" action="<c:url value='/operation'/>">
+                        <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
+                        <input type="submit" value="Назначить операцию"/>
+                    </form>
+                    </c:when>
+                    </c:choose>
+                </td>
+            </tr>
+        </table>
+        <br/>
+
+
+        <%----------------------------МЕДИКАМЕНТЫ--------------------------------------%>
+
+        <table>
+            <tr>
+                <td>
+                    <c:set var="operMedPro" value="${requestScope.operMedPro}"/>
+                    <c:choose>
+                    <c:when test="${operMedPro==true}">
+                    <div>
+                        <h3>Лекарства</h3>
+                    </div>
+                    <table align="left" border="1">
+                        <tr align="center">
+                            <td>diag_id</td>
+                            <td>diag_name</td>
+                            <td>med_id</td>
+                            <td>med_name</td>
+                            <td>med_start</td>
+                            <td>med_end</td>
+                            <td>med_done</td>
+                            <td>emp_id</td>
+                            <td>emp_surname</td>
+                            <td>pos_name</td>
+                        </tr>
+                        <c:forEach var="medInfo" items="${requestScope.medInfosDb}">
+                            <tr align="center">
+                                <td ><c:out value="${medInfo.diagId}"/></td>
+                                <td ><c:out value="${medInfo.diagName}"/></td>
+                                <td ><c:out value="${medInfo.medId}"/></td>
+                                <td ><c:out value="${medInfo.medName}"/></td>
+                                <td ><c:out value="${medInfo.medStart}"/></td>
+                                <td ><c:out value="${medInfo.medEnd}"/></td>
+                                <td >
+                                    <c:out value="${medInfo.medDone}"/>
+                                    <form method="get" action="<c:url value='/medicine'/>">
+                                        <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
+                                        <input type="submit" value="Отметка"/>
+                                    </form>
+                                </td>
+                                <td ><c:out value="${medInfo.empId}"/></td>
+                                <td ><c:out value="${medInfo.empSurname}"/></td>
+                                <td ><c:out value="${medInfo.posName}"/></td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form method="get" action="<c:url value='/medicine'/>">
+                        <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
+                        <input type="submit" value="Назначить лекарства"/>
+                    </form>
+                    </c:when>
+                    </c:choose>
+                </td>
+            </tr>
+        </table>
+        <br/>
+        <%----------------------------ПРОЦЕДУРЫ--------------------------------------%>
+        <table>
+            <tr>
+                <td>
+                    <c:set var="operMedPro" value="${requestScope.operMedPro}"/>
+                    <c:choose>
+                    <c:when test="${operMedPro==true}">
+                    <div>
+                        <h3>Процедуры</h3>
+                    </div>
+                    <table align="left" border="1">
+                        <tr align="center">
+                            <td>diag_id</td>
+                            <td>diag_name</td>
+                            <td>proc_id</td>
+                            <td>proc_name</td>
+                            <td>proc_date</td>
+                            <td>proc_done</td>
+                            <td>emp_id</td>
+                            <td>emp_surname</td>
+                            <td>pos_name</td>
+                        </tr>
+                        <c:forEach var="procInfo" items="${requestScope.procInfosDb}">
+                            <tr align="center">
+                                <td ><c:out value="${procInfo.diagId}"/></td>
+                                <td ><c:out value="${procInfo.diagName}"/></td>
+                                <td ><c:out value="${procInfo.procId}"/></td>
+                                <td ><c:out value="${procInfo.procName}"/></td>
+                                <td ><c:out value="${procInfo.procDate}"/></td>
+                                <td >
+                                    <c:out value="${procInfo.procDone}"/>
+                                    <form method="get" action="<c:url value='/procedure'/>">
+                                        <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
+                                        <input type="submit" value="Отметка"/>
+                                    </form>
+                                </td>
+                                <td ><c:out value="${procInfo.empId}"/></td>
+                                <td ><c:out value="${procInfo.empSurname}"/></td>
+                                <td ><c:out value="${procInfo.posName}"/></td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form method="get" action="<c:url value='/procedure'/>">
+                        <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
+                        <input type="submit" value="Назначить процедуры"/>
+                    </form>
+                    </c:when>
+                    </c:choose>
+                </td>
+            </tr>
+        </table>
+        <br/>
 
 
 
-<%--<form method="post" action="<c:url value='/update'/>">--%>
 
-    <%--<label>Новое имя: <input type="text" name="pName" /></label><br>--%>
-    <%--<label>Новая фамилия: <input type="text" name="pSurname" /></label><br>--%>
-    <%--<label>Новое отчество: <input type="text" name="pPatronymic" /></label><br>--%>
+        <div>
+            <form method="get" action="<c:url value='/procedure'/>">
+                <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
+                <input type="submit" value="Назначить процедуру"/>
+            </form>
+    <br/>
+    <br/>
+    <div>
+        <form method="get" action="<c:url value='/read'/>">
+            <%--<input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />--%>
+            <input type="submit" value="К списку пациентов"/>
+        </form>
+    </div>
 
-    <%--<input type="number" hidden name="pCardId" value="${requestScope.patient.pCardId}"/>--%>
 
-    <%--<input type="submit" value="Ok" name="Ok"><br>--%>
-<%--</form>--%>
-</body>
+
+    <%--<form method="post" action="<c:url value='/update'/>">--%>
+
+        <%--<label>Новое имя: <input type="text" name="pName" /></label><br>--%>
+        <%--<label>Новая фамилия: <input type="text" name="pSurname" /></label><br>--%>
+        <%--<label>Новое отчество: <input type="text" name="pPatronymic" /></label><br>--%>
+
+        <%--<input type="number" hidden name="pCardId" value="${requestScope.patient.pCardId}"/>--%>
+
+        <%--<input type="submit" value="Ok" name="Ok"><br>--%>
+    <%--</form>--%>
+    </body>
 </html>

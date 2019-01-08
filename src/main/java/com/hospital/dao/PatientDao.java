@@ -11,6 +11,8 @@ import com.hospital.interfaces.IPatientDao;
 import java.sql.*;
 import java.text.DateFormat;
 import java.util.List;
+
+import com.hospital.model.Address;
 import com.hospital.model.Patient;
 
 import java.text.SimpleDateFormat;
@@ -55,20 +57,31 @@ public class PatientDao implements IPatientDao {
         }
         nextId++;
         System.out.println("nextId: "+nextId);
-        statement="INSERT INTO patient(card_id, p_name, p_surname, p_patronymic, p_birth_date, p_sex, p_arrival_date) " +
-                "VALUES(?, ?, ?, ?, ?, ?, ?)";
+        statement="INSERT INTO patient(card_id, p_name, p_surname, p_patronymic, p_age, p_birth_date, p_sex, p_arrival_date) " +
+                "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
         ps=connection.prepareStatement(statement);
         ps.setInt(1, nextId);
         ps.setString(2, patient.getpName());
         ps.setString(3, patient.getpSurname());
         ps.setString(4, patient.getpPatronymic());
+        ps.setInt(5, patient.getpAge());
         d=new java.sql.Date(patient.getpBirthDate().getTime());
-        ps.setDate(5, d);
+        ps.setDate(6, d);
 //        System.out.println("pBirthDate: "+d);
-        ps.setString(6, patient.getpSex());
+        ps.setString(7, patient.getpSex());
         d=new java.sql.Date(patient.getpArrivalDate().getTime());
 //        System.out.println("pArrivalDate: "+d);
-        ps.setDate(7, d);
+        ps.setDate(8, d);
+        ps.executeUpdate();
+
+        statement="INSERT INTO address (card_id, city, street, house_number, flat_number) " +
+                "VALUES(?, ?, ?, ?, ?)";
+        ps=connection.prepareStatement(statement);
+        ps.setInt(1, nextId);
+        ps.setString(2, patient.getpAddress().getCity());
+        ps.setString(3, patient.getpAddress().getStreet());
+        ps.setInt(4, patient.getpAddress().getHouseNumber());
+        ps.setInt(5, patient.getpAddress().getFlatNumber());
         ps.executeUpdate();
 
 
@@ -183,18 +196,35 @@ public class PatientDao implements IPatientDao {
             p.setpName(rs.getString("p_name"));
             p.setpSurname(rs.getString("p_surname"));
             p.setpPatronymic(rs.getString("p_patronymic"));
+            p.setpAge(rs.getInt("p_age"));
             p.setpSex(rs.getString("p_sex"));
             p.setpBirthDate(rs.getDate("p_birth_date"));
             p.setpArrivalDate(rs.getDate("p_arrival_date"));
+        }
+
+        statement="SELECT * FROM address WHERE card_id=?";
+        ps=connection.prepareStatement(statement);
+        ps.setInt(1, key);
+        rs=ps.executeQuery();
+        while(rs.next()){
+            p.getpAddress().setCity(rs.getString("city"));
+            p.getpAddress().setStreet(rs.getString("street"));
+            p.getpAddress().setHouseNumber(rs.getInt("house_number"));
+            p.getpAddress().setFlatNumber(rs.getInt("flat_number"));
         }
 
         System.out.println("card_id:"+p.getpCardId());
         System.out.println("p_name:"+p.getpName());
         System.out.println("p_surname:"+p.getpSurname());
         System.out.println("p_patronymic:"+p.getpPatronymic());
+        System.out.println("p_age:"+p.getpAge());
         System.out.println("p_sex:"+p.getpSex());
         System.out.println("p_birth_date:"+p.getpBirthDate());
         System.out.println("p_arrival_date:"+p.getpArrivalDate());
+        System.out.println("p_city:"+p.getpAddress().getCity());
+        System.out.println("p_street:"+p.getpAddress().getStreet());
+        System.out.println("p_house:"+p.getpAddress().getHouseNumber());
+        System.out.println("p_flat:"+p.getpAddress().getFlatNumber());
         try{
             ps.close();
         }

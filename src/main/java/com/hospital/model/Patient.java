@@ -10,40 +10,48 @@ public class Patient {
     private String pName;
     private String pSurname;
     private String pPatronymic;
+    private int pAge;
     private String pSex;
+    private Date pBirthDate;
+    private Date pArrivalDate;
+    private Date pDischargeDate;
+    private Address pAddress;
 
     public Patient(){
-
+        pAddress=new Address();
     }
 
     public Patient(int pCardId,
                    String pName,
                    String pSurname,
                    String pPatronymic,
+                   int pAge,
                    String pSex,
                    Date pBirthDate,
-                   Date pArrivalDate) {
+                   Date pArrivalDate,
+                   Address pAddress) {
         this.pCardId = pCardId;
         this.pName = pName;
         this.pSurname = pSurname;
         this.pPatronymic = pPatronymic;
+        this.pAge = pAge;
         this.pSex = pSex;
         this.pBirthDate=pBirthDate;
         this.pArrivalDate=pArrivalDate;
+        this.pAddress=new Address(pAddress);
     }
     public Patient(Patient p){
         this.pCardId=p.pCardId;
         this.pName=p.pName;
         this.pSurname=p.pSurname;
+        this.pAge=p.pAge;
         this.pSex=p.pSex;
         this.pBirthDate=p.pBirthDate;
         this.pArrivalDate=p.pArrivalDate;
+        this.pAddress=new Address(p.pAddress);
     }
 
-    private Date pBirthDate;
-    private Date pArrivalDate;
-    private Date pDischargeDate;
-    private Address pAddress;
+
 
 
 
@@ -71,6 +79,14 @@ public class Patient {
         this.pSurname = pSurname;
     }
 
+    public int getpAge() {
+        return pAge;
+    }
+
+    public void setpAge(int pAge) {
+        this.pAge = pAge;
+    }
+
     public String getpPatronymic() {
         return pPatronymic;
     }
@@ -78,6 +94,7 @@ public class Patient {
     public void setpPatronymic(String pPatronymic) {
         this.pPatronymic = pPatronymic;
     }
+
 
     public Date getpBirthDate() {
         return pBirthDate;
@@ -116,7 +133,7 @@ public class Patient {
     }
 
     public void setpAddress(Address pAddress) {
-        this.pAddress = pAddress;
+        this.pAddress = new Address(pAddress);
     }
 
 

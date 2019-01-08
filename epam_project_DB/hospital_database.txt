@@ -17,6 +17,7 @@ CREATE TABLE patient(
 	p_name varchar(30) NOT NULL,
 	p_surname varchar(30) NOT NULL,
 	p_patronymic varchar(30) NOT NULL,
+	p_age number(3) NOT NULL,
 	p_birth_date Date NOT NULL,
 	p_sex varchar(10) NOT NULL,
 	p_arrival_date Date NOT NULL,
@@ -42,7 +43,7 @@ CREATE TABLE appointment(
 
 CREATE TABLE diagnosis(
 	diag_id number(11) NOT NULL PRIMARY KEY,
-	diag_name varchar(30) NOT NULL,
+	diag_name varchar(300) NOT NULL,
 	card_id number(11)
 );
 
@@ -73,13 +74,14 @@ CREATE TABLE employee(
 	emp_name varchar(30) NOT NULL,
 	emp_surname varchar(30) NOT NULL,
 	emp_patronymic varchar(30) NOT NULL,
+	emp_age number(3) NOT NULL,
 	emp_hire_date Date NOT NULL,
 	emp_pos_id number(11) NOT NULL
 );
 
 CREATE TABLE uuser(
 	user_id number(11) UNIQUE,
-	login varchar(30) NOT NULL,
+	login varchar(30) NOT NULL UNIQUE,
 	password varchar(30) NOT NULL
 );
 
