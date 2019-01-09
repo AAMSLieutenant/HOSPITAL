@@ -26,13 +26,26 @@ public class ProcedureDao {
         java.sql.Date d;
         d=new java.sql.Date(procDate.getTime());
 
-        String statement="INSERT INTO diag_proc " +
-                "VALUES(?,?,?,?)";
+        int nextId=0;
+        String statement="SELECT dp_id FROM diag_proc";
         PreparedStatement ps=connection.prepareStatement(statement);
-        ps.setInt(1, diagId);
-        ps.setDate(2, d);
-        ps.setInt(3, 0);
-        ps.setInt(4, procId);
+        ResultSet rs=ps.executeQuery();
+        while(rs.next()){
+            nextId=rs.getInt("dp_id");
+        }
+        nextId++;
+        System.out.println("ProcedureDao createDiagProc() nextId: "+nextId);
+
+
+
+        statement="INSERT INTO diag_proc " +
+                "VALUES(?,?,?,?,?)";
+        ps=connection.prepareStatement(statement);
+        ps.setInt(1, nextId);
+        ps.setInt(2, diagId);
+        ps.setDate(3, d);
+        ps.setInt(4, 0);
+        ps.setInt(5, procId);
         ps.executeUpdate();
 
     }
@@ -87,8 +100,8 @@ public class ProcedureDao {
         List<Integer> ids=new ArrayList<>();;
         List<ProcInfo> procInfos=new ArrayList<>();
         List<ProcInfo> temp=new ArrayList<>();
-        ids=getProcedureIds(pCardId);
-        if(ids.size()>0) {
+        if(getProcedureIds(pCardId)!=null) {
+            ids = getProcedureIds(pCardId);
             for (int i = 0; i < ids.size(); i++) {
                 temp = getProcedures(ids.get(i));
                 System.out.println("temp size: " + temp.size());
@@ -109,7 +122,7 @@ public class ProcedureDao {
         System.out.println("-----------------------------------");
         System.out.println("ProcedureInfo getProcedure()");
         ProcInfo procInfo=new ProcInfo();
-        String statement="SELECT dp.diag_id, d.diag_name,  dp.proc_id, pr.proc_name, dp.proc_date, dp.proc_done, pr.emp_id, e.emp_surname, p.pos_name " +
+        String statement="SELECT dp.dp_id, dp.diag_id, d.diag_name,  dp.proc_id, pr.proc_name, dp.proc_date, dp.proc_done, pr.emp_id, e.emp_surname, p.pos_name " +
                 "FROM diag_proc dp " +
                 "INNER JOIN diagnosis d ON((d.diag_id=dp.diag_id)AND(dp.diag_id=?)) " +
                 "INNER JOIN proced pr ON(pr.proc_id=dp.proc_id) " +
@@ -121,6 +134,7 @@ public class ProcedureDao {
         ps.setInt(1, diagId);
         ResultSet rs=ps.executeQuery();
         while(rs.next()){
+            procInfo.setDpId(rs.getInt("dp_id"));
             procInfo.setDiagId(rs.getInt("diag_id"));
             procInfo.setDiagName(rs.getString("diag_name"));
             procInfo.setProcId(rs.getInt("proc_id"));
@@ -201,5 +215,24 @@ public class ProcedureDao {
             ex.printStackTrace();
         }
         return procedures;
+    }
+
+
+    public void finishProcedure(List<ProcInfo> procInfos) throws Exception{
+
+        System.out.println("------------------------------------");
+        System.out.println("ProcedureDao finishProcedure()");
+        String statement="UPDATE diag_proc SET proc_done=1 WHERE dp_id=?";
+        PreparedStatement ps=connection.prepareStatement(statement);
+        Date curDate=new Date();
+        for(int i=0;i<procInfos.size();i++){
+            if(curDate.compareTo(procInfos.get(i).getProcDate())>=0){
+                ps.setInt(1, procInfos.get(i).getDpId());
+                ResultSet rs=ps.executeQuery();
+                procInfos.get(i).setProcDone(true);
+                System.out.println("procedure is finished");
+            }
+        }
+
     }
 }

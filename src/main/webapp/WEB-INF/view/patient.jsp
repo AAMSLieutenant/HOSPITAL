@@ -132,6 +132,7 @@
                     </div>
                             <table align="left" border="1">
                                 <tr align="center">
+                                    <td>do_id</td>
                                     <td>diag_id</td>
                                     <td>diag_name</td>
                                     <td>oper_id</td>
@@ -144,18 +145,13 @@
                                 </tr>
                                 <c:forEach var="operInfo" items="${requestScope.operInfosDb}">
                                     <tr align="center">
+                                        <td ><c:out value="${operInfo.doId}"/></td>
                                         <td ><c:out value="${operInfo.diagId}"/></td>
                                         <td ><c:out value="${operInfo.diagName}"/></td>
                                         <td ><c:out value="${operInfo.operId}"/></td>
                                         <td ><c:out value="${operInfo.operName}"/></td>
                                         <td ><c:out value="${operInfo.operDate}"/></td>
-                                        <td >
-                                            <c:out value="${operInfo.operDone}"/>
-                                            <form method="get" action="<c:url value='/operation'/>">
-                                                <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
-                                                <input type="submit" value="Отметка"/>
-                                            </form>
-                                        </td>
+                                        <td ><c:out value="${operInfo.operDone}"/></td>
                                         <td ><c:out value="${operInfo.doctorId}"/></td>
                                         <td ><c:out value="${operInfo.empSurname}"/></td>
                                         <td ><c:out value="${operInfo.posName}"/></td>
@@ -200,6 +196,7 @@
                     </div>
                     <table align="left" border="1">
                         <tr align="center">
+                            <td>dm_id</td>
                             <td>diag_id</td>
                             <td>diag_name</td>
                             <td>med_id</td>
@@ -213,19 +210,14 @@
                         </tr>
                         <c:forEach var="medInfo" items="${requestScope.medInfosDb}">
                             <tr align="center">
+                                <td ><c:out value="${medInfo.dmId}"/></td>
                                 <td ><c:out value="${medInfo.diagId}"/></td>
                                 <td ><c:out value="${medInfo.diagName}"/></td>
                                 <td ><c:out value="${medInfo.medId}"/></td>
                                 <td ><c:out value="${medInfo.medName}"/></td>
                                 <td ><c:out value="${medInfo.medStart}"/></td>
                                 <td ><c:out value="${medInfo.medEnd}"/></td>
-                                <td >
-                                    <c:out value="${medInfo.medDone}"/>
-                                    <form method="get" action="<c:url value='/medicine'/>">
-                                        <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
-                                        <input type="submit" value="Отметка"/>
-                                    </form>
-                                </td>
+                                <td ><c:out value="${medInfo.medDone}"/></td>
                                 <td ><c:out value="${medInfo.empId}"/></td>
                                 <td ><c:out value="${medInfo.empSurname}"/></td>
                                 <td ><c:out value="${medInfo.posName}"/></td>
@@ -272,6 +264,7 @@
                     <c:set var="operMedPro" value="${requestScope.operMedPro}"/>
                     <table align="left" border="1">
                         <tr align="center">
+                            <td>dp_id</td>
                             <td>diag_id</td>
                             <td>diag_name</td>
                             <td>proc_id</td>
@@ -284,18 +277,13 @@
                         </tr>
                         <c:forEach var="procInfo" items="${requestScope.procInfosDb}">
                             <tr align="center">
+                                <td ><c:out value="${procInfo.dpId}"/></td>
                                 <td ><c:out value="${procInfo.diagId}"/></td>
                                 <td ><c:out value="${procInfo.diagName}"/></td>
                                 <td ><c:out value="${procInfo.procId}"/></td>
                                 <td ><c:out value="${procInfo.procName}"/></td>
                                 <td ><c:out value="${procInfo.procDate}"/></td>
-                                <td >
-                                    <c:out value="${procInfo.procDone}"/>
-                                    <form method="get" action="<c:url value='/procedure'/>">
-                                        <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
-                                        <input type="submit" value="Отметка"/>
-                                    </form>
-                                </td>
+                                <td ><c:out value="${procInfo.procDone}"/></td>
                                 <td ><c:out value="${procInfo.empId}"/></td>
                                 <td ><c:out value="${procInfo.empSurname}"/></td>
                                 <td ><c:out value="${procInfo.posName}"/></td>

@@ -5,6 +5,7 @@ import java.util.Date;
 public class ProcInfo {
 
 
+    private int dpId;
     private int diagId;
     private String diagName;
     private int procId;
@@ -18,6 +19,15 @@ public class ProcInfo {
     public ProcInfo(){
 
     }
+
+    public int getDpId(){
+        return dpId;
+    }
+
+    public void setDpId(int dpId){
+        this.dpId=dpId;
+    }
+
 
     public int getDiagId() {
         return diagId;

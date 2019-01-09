@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,19 +27,35 @@ public class OperationDao {
 
         System.out.println("OperationDao createDiagOper()");
         java.sql.Date d;
+        int nextId=0;
         d=new java.sql.Date(operDate.getTime());
 
-        String statement="INSERT INTO diag_oper " +
-                "VALUES(?,?,?,?)";
+        String statement="SELECT do_id FROM diag_oper";
         PreparedStatement ps=connection.prepareStatement(statement);
-        ps.setInt(1, diagId);
-        ps.setDate(2, d);
-        ps.setInt(3, 0);
-        ps.setInt(4, operId);
+        ResultSet rs=ps.executeQuery();
+        while(rs.next()){
+            nextId=rs.getInt("do_id");
+        }
+        nextId++;
+        System.out.println("OperationDao createDiagOper() nextId: "+nextId);
+
+
+
+
+        statement="INSERT INTO diag_oper " +
+                "VALUES(?,?,?,?,?)";
+        ps=connection.prepareStatement(statement);
+        ps.setInt(1, nextId);
+        ps.setInt(2, diagId);
+        ps.setDate(3, d);
+        ps.setInt(4, 0);
+        ps.setInt(5, operId);
         ps.executeUpdate();
 
     }
 
+
+    //Возвращает все ID диагнозов данного пациента
     public List<Integer> getOperationIds(int cardId) throws Exception{
         System.out.println("--------------------------");
         System.out.println("OperationDao getOperationIds()");
@@ -62,34 +79,17 @@ public class OperationDao {
             }
         }
 
-//        List<Integer> ids=new ArrayList<>();
-//
-//        for(int i=0;i<temp.size();i++){
-//            if(ids.size()!=0) {
-//                if (!ids.contains(temp.get(i))) {
-//                    ids.add(temp.get(i));
-//                }
-//            }
-//            else{
-//                ids.add(temp.get(i));
-//            }
-//            i++;
-//        }
-//        System.out.println("------------");
-//        for (int i = 0; i < ids.size(); i++) {
-//            System.out.println("ids  diag_id: " + ids.get(i));
-//        }
-//        return ids;
         return temp;
     }
 
+    //Возвращает полный список операций по всем диагнозам для данного пациента
     public List<OperInfo> getAllDiagOper(int pCardId) throws Exception{
 
         List<Integer> ids=new ArrayList<>();
         List<OperInfo> operInfos=new ArrayList<>();
         List<OperInfo> temp=new ArrayList<>();
-        ids=getOperationIds(pCardId);
-        if(ids.size()>0) {
+        if(getOperationIds(pCardId)!=null) {
+            ids = getOperationIds(pCardId);
             for (int i = 0; i < ids.size(); i++) {
                 temp = getOperations(ids.get(i));
                 System.out.println("temp size: " + temp.size());
@@ -103,13 +103,15 @@ public class OperationDao {
         return operInfos;
     }
 
+
+    //По номеру диагноза пациента возвращает все назначенные на этот диагноз операции
     public List<OperInfo> getOperations(int diagId) throws Exception{
 
         List<OperInfo> operInfos=new ArrayList<>();
         System.out.println("-----------------------------------");
         System.out.println("OperationDao getPatientOperations()");
         OperInfo operInfo=new OperInfo();
-        String statement="SELECT do.diag_id, d.diag_name,  do.oper_id, o.oper_name, do.oper_date, do.oper_done, o.doctor_id, e.emp_surname, p.pos_name " +
+        String statement="SELECT do.do_id, do.diag_id, d.diag_name,  do.oper_id, o.oper_name, do.oper_date, do.oper_done, o.doctor_id, e.emp_surname, p.pos_name " +
                 "FROM diag_oper do " +
                 "INNER JOIN diagnosis d ON((d.diag_id=do.diag_id)AND(do.diag_id=?)) " +
                 "INNER JOIN operation o ON(o.oper_id=do.oper_id) " +
@@ -121,6 +123,7 @@ public class OperationDao {
         ps.setInt(1, diagId);
         ResultSet rs=ps.executeQuery();
         while(rs.next()){
+            operInfo.setDoId(rs.getInt("do_id"));
             operInfo.setDiagId(rs.getInt("diag_id"));
             operInfo.setDiagName(rs.getString("diag_name"));
             operInfo.setOperId(rs.getInt("oper_id"));
@@ -140,6 +143,7 @@ public class OperationDao {
 
 
             System.out.println("---------------------------------");
+            System.out.println("do_id"+operInfo.getDoId());
             System.out.println("diag_id"+operInfo.getDiagId());
             System.out.println("diag_name"+operInfo.getDiagName());
             System.out.println("oper_id"+operInfo.getOperId());
@@ -207,5 +211,23 @@ public class OperationDao {
         }
 //        return d;
         return operations;
+    }
+
+    public void finishOperation(List<OperInfo> operInfos) throws Exception{
+
+        System.out.println("------------------------------------");
+        System.out.println("OperationDao finishOperation()");
+        String statement="UPDATE diag_oper SET oper_done=1 WHERE do_id=?";
+        PreparedStatement ps=connection.prepareStatement(statement);
+        Date curDate=new Date();
+        for(int i=0;i<operInfos.size();i++){
+            if(curDate.compareTo(operInfos.get(i).getOperDate())>=0){
+                ps.setInt(1, operInfos.get(i).getDoId());
+                ResultSet rs=ps.executeQuery();
+                operInfos.get(i).setOperDone(true);
+                System.out.println("operation is finished");
+            }
+        }
+
     }
 }

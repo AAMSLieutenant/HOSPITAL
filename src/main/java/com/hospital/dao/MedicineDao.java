@@ -26,17 +26,29 @@ public class MedicineDao {
         System.out.println("MedicineDao createDiagMed()");
         java.sql.Date start;
         java.sql.Date end;
+        int nextId=0;
+        String statement="SELECT dm_id FROM diag_med";
+        PreparedStatement ps=connection.prepareStatement(statement);
+        ResultSet rs=ps.executeQuery();
+        while(rs.next()){
+            nextId=rs.getInt("dm_id");
+        }
+        nextId++;
+        System.out.println("OperationDao createDiagOper() nextId: "+nextId);
+
+
         start=new java.sql.Date(medStart.getTime());
         end=new java.sql.Date(medEnd.getTime());
 
-        String statement="INSERT INTO diag_med " +
-                "VALUES(?,?,?,?,?)";
-        PreparedStatement ps=connection.prepareStatement(statement);
-        ps.setInt(1, diagId);
-        ps.setDate(2, start);
-        ps.setDate(3, end);
-        ps.setInt(4, 0);
-        ps.setInt(5, medId);
+        statement="INSERT INTO diag_med " +
+                "VALUES(?,?,?,?,?,?)";
+        ps=connection.prepareStatement(statement);
+        ps.setInt(1, nextId);
+        ps.setInt(2, diagId);
+        ps.setDate(3, start);
+        ps.setDate(4, end);
+        ps.setInt(5, 0);
+        ps.setInt(6, medId);
         ps.executeUpdate();
 
     }
@@ -72,8 +84,8 @@ public class MedicineDao {
         List<Integer> ids=new ArrayList<>();;
         List<MedInfo> medInfos=new ArrayList<>();
         List<MedInfo> temp=new ArrayList<>();
-        ids=getMedicineIds(pCardId);
-        if(ids.size()>0) {
+        if(getMedicineIds(pCardId)!=null) {
+            ids=getMedicineIds(pCardId);
             for (int i = 0; i < ids.size(); i++) {
                 temp = getMedicine(ids.get(i));
                 System.out.println("temp size: " + temp.size());
@@ -94,7 +106,7 @@ public class MedicineDao {
         System.out.println("-----------------------------------");
         System.out.println("MedicineDao getMedicine()");
         MedInfo medInfo=new MedInfo();
-        String statement="SELECT dm.diag_id, d.diag_name,  dm.med_id, m.med_name, dm.med_start, dm.med_end, dm.med_done, m.emp_id, e.emp_surname, p.pos_name " +
+        String statement="SELECT dm.dm_id, dm.diag_id, d.diag_name,  dm.med_id, m.med_name, dm.med_start, dm.med_end, dm.med_done, m.emp_id, e.emp_surname, p.pos_name " +
                 "FROM diag_med dm " +
                 "INNER JOIN diagnosis d ON((d.diag_id=dm.diag_id)AND(dm.diag_id=?)) " +
                 "INNER JOIN medicine m ON(m.med_id=dm.med_id) " +
@@ -106,6 +118,7 @@ public class MedicineDao {
         ps.setInt(1, diagId);
         ResultSet rs=ps.executeQuery();
         while(rs.next()){
+            medInfo.setDmId(rs.getInt("dm_id"));
             medInfo.setDiagId(rs.getInt("diag_id"));
             medInfo.setDiagName(rs.getString("diag_name"));
             medInfo.setMedId(rs.getInt("med_id"));
@@ -126,6 +139,7 @@ public class MedicineDao {
 
 
             System.out.println("---------------------------------");
+            System.out.println("dm_id:"+medInfo.getDmId());
             System.out.println("diag_id:"+medInfo.getDiagId());
             System.out.println("diag_name:"+medInfo.getDiagName());
             System.out.println("med_id:"+medInfo.getMedId());
@@ -187,6 +201,24 @@ public class MedicineDao {
             ex.printStackTrace();
         }
         return medicine;
+    }
+
+    public void finishMedicine(List<MedInfo> medInfos) throws Exception{
+
+        System.out.println("------------------------------------");
+        System.out.println("MedicineDao finishMedicine()");
+        String statement="UPDATE diag_med SET med_done=1 WHERE dm_id=?";
+        PreparedStatement ps=connection.prepareStatement(statement);
+        Date curDate=new Date();
+        for(int i=0;i<medInfos.size();i++){
+            if(curDate.compareTo(medInfos.get(i).getMedEnd())>=0){
+                ps.setInt(1, medInfos.get(i).getDmId());
+                ResultSet rs=ps.executeQuery();
+                medInfos.get(i).setMedDone(true);
+                System.out.println("medicine is finished");
+            }
+        }
+
     }
 
 }

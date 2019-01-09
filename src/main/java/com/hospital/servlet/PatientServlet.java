@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -39,11 +40,35 @@ public class PatientServlet extends HttpServlet {
     private int operSize=0;
     private int medSize=0;
     private int procSize=0;
+    private Date curDate;
+    private String year;
+    private String month;
+    private String date;
+    private String fin;
 
     @Override
     public void init() throws ServletException {
 
 
+
+        curDate=new Date();
+        year=String.valueOf(curDate.getYear()+1900);
+        int m=(curDate.getMonth());
+        if(m<10){
+            month="0"+String.valueOf(m+1);
+        }
+        else{
+            month=String.valueOf(m+1);
+        }
+        int d=(curDate.getDate());
+        if(d<10){
+            date="0"+String.valueOf(d);
+        }
+        else{
+            date=String.valueOf(d);
+        }
+        fin=year+"-"+month+"-"+date;
+        System.out.println(fin);
 
         final Object patientsDb = getServletContext().getAttribute("patientsDb");
         final Object patientDao = getServletContext().getAttribute("patientDao");
@@ -150,10 +175,15 @@ public class PatientServlet extends HttpServlet {
             if(operMedPro==true) {
 
                 try {
-                    List<OperInfo> operInfos = this.operationDao.get().getAllDiagOper(this.currentId);
+                    List<OperInfo> operInfos=new ArrayList<OperInfo>();
+                    if(this.operationDao.get().getAllDiagOper(this.currentId)!=null) {
+                        operInfos = this.operationDao.get().getAllDiagOper(this.currentId);
+                    }
                     operSize=operInfos.size();
                     if(operSize>0) {
 //                    req.setAttribute("operSize",operSize);
+
+                        operationDao.get().finishOperation(operInfos);
 
                         for (int i = 0; i < operInfos.size(); i++) {
                             this.operInfosDb.put(i, operInfos.get(i));
@@ -166,10 +196,16 @@ public class PatientServlet extends HttpServlet {
                 }
 
                 try {
-                    List<MedInfo> medInfos = this.medicineDao.get().getAllDiagMed(this.currentId);
+                    List<MedInfo> medInfos=new ArrayList<MedInfo>();
+                    if(this.medicineDao.get().getAllDiagMed(this.currentId)!=null) {
+                       medInfos = this.medicineDao.get().getAllDiagMed(this.currentId);
+                    }
                     medSize=medInfos.size();
 //                    req.setAttribute("medSize",medSize);
                     if(medSize>0) {
+
+                        medicineDao.get().finishMedicine(medInfos);
+
                         for (int i = 0; i < medInfos.size(); i++) {
                             this.medInfosDb.put(i, medInfos.get(i));
                         }
@@ -181,7 +217,8 @@ public class PatientServlet extends HttpServlet {
                 }
 
                 try {
-                    List<ProcInfo> procInfos = this.procedureDao.get().getAllDiagProc(this.currentId);
+                    List<ProcInfo> procInfos=new ArrayList<ProcInfo>();
+                    procInfos = this.procedureDao.get().getAllDiagProc(this.currentId);
                     procSize=procInfos.size();
 //                    req.setAttribute("procSize",procSize);
                     if(procSize>0) {
@@ -204,6 +241,7 @@ public class PatientServlet extends HttpServlet {
         req.setAttribute("operSize",operSize);
         req.setAttribute("medSize",medSize);
         req.setAttribute("procSize",procSize);
+        req.setAttribute("fin", fin);
 
 
         req.getRequestDispatcher("/WEB-INF/view/patient.jsp")

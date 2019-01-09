@@ -93,6 +93,7 @@ CREATE TABLE position(
 );
 
 CREATE TABLE diag_oper(
+	do_id number(11) UNIQUE,
 	diag_id number(11),
 	oper_date Date NOT NULL,
 	oper_done number(1) NOT NULL,
@@ -100,6 +101,7 @@ CREATE TABLE diag_oper(
 );
 
 CREATE TABLE diag_med(
+	dm_id number(11) UNIQUE,
 	diag_id number(11),
 	med_start Date NOT NULL,
 	med_end Date NOT NULL,
@@ -108,6 +110,7 @@ CREATE TABLE diag_med(
 );
 
 CREATE TABLE diag_proc(
+	dp_id number(11) UNIQUE,
 	diag_id number(11),
 	proc_date Date NOT NULL,
 	proc_done number(1) NOT NULL,

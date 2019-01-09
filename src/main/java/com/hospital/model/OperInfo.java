@@ -5,6 +5,7 @@ import java.util.Date;
 public class OperInfo {
 
 
+    private int doId;
     private int diagId;
     private String diagName;
     private int operId;
@@ -18,6 +19,10 @@ public class OperInfo {
     public OperInfo(){
 
     }
+
+    public int getDoId() { return doId; }
+
+    public void setDoId(int doId) { this.doId=doId; }
 
     public int getDiagId() {
         return diagId;

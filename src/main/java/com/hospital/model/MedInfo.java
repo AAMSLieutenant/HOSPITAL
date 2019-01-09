@@ -5,6 +5,7 @@ import java.util.Date;
 public class MedInfo {
 
 
+    private int dmId;
     private int diagId;
     private String diagName;
     private int medId;
@@ -18,6 +19,14 @@ public class MedInfo {
 
     public MedInfo(){
 
+    }
+
+    public int getDmId() {
+        return dmId;
+    }
+
+    public void setDmId(int dmId) {
+        this.dmId = dmId;
     }
 
     public int getDiagId() {
