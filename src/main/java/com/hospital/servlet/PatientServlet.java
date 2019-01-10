@@ -45,12 +45,14 @@ public class PatientServlet extends HttpServlet {
     private String month;
     private String date;
     private String fin;
+    private List<Boolean> dones;
+    private int discharge=1;
 
     @Override
     public void init() throws ServletException {
 
 
-
+        dones=new ArrayList<>();
         curDate=new Date();
         year=String.valueOf(curDate.getYear()+1900);
         int m=(curDate.getMonth());
@@ -111,12 +113,17 @@ public class PatientServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        System.out.println("----------------------------------");
         System.out.println("PatientServlet doGet()");
+        System.out.println("----------------------------------");
         req.setCharacterEncoding("UTF-8");
-       operSize=0;
-       medSize=0;
-       procSize=0;
-
+        operSize=0;
+        medSize=0;
+        procSize=0;
+        discharge=1;
+//        System.out.println("----------------------------------");
+//        System.out.println("discharge start:"+discharge);
+//        System.out.println("----------------------------------");
         final String pCardId=req.getParameter("pCardId");
         final Patient patient=patientsDb.get(Integer.parseInt(pCardId));
         req.setAttribute("pCardId", pCardId);
@@ -185,6 +192,11 @@ public class PatientServlet extends HttpServlet {
 
                         operationDao.get().finishOperation(operInfos);
 
+                        for(int i=0;i<operInfos.size();i++) {
+                            dones.add(operInfos.get(i).isOperDone());
+                        }
+
+
                         for (int i = 0; i < operInfos.size(); i++) {
                             this.operInfosDb.put(i, operInfos.get(i));
                         }
@@ -206,6 +218,10 @@ public class PatientServlet extends HttpServlet {
 
                         medicineDao.get().finishMedicine(medInfos);
 
+                        for(int i=0;i<medInfos.size();i++) {
+                            dones.add(medInfos.get(i).isMedDone());
+                        }
+
                         for (int i = 0; i < medInfos.size(); i++) {
                             this.medInfosDb.put(i, medInfos.get(i));
                         }
@@ -222,6 +238,13 @@ public class PatientServlet extends HttpServlet {
                     procSize=procInfos.size();
 //                    req.setAttribute("procSize",procSize);
                     if(procSize>0) {
+
+                        procedureDao.get().finishProcedure(procInfos);
+
+                        for(int i=0;i<procInfos.size();i++) {
+                            dones.add(procInfos.get(i).isProcDone());
+                        }
+
                         for (int i = 0; i < procInfos.size(); i++) {
                             this.procInfosDb.put(i, procInfos.get(i));
                         }
@@ -234,6 +257,21 @@ public class PatientServlet extends HttpServlet {
 
             }
 
+//        System.out.println("----------------------------------");
+//        System.out.println("discharge before end:"+discharge);
+//        System.out.println("dones.size():"+dones.size());
+//        System.out.println("----------------------------------");
+            if(dones.size()!=0) {
+                for (int i = 0; i < dones.size(); i++) {
+                    if (dones.get(i) == false) {
+                        discharge = 0;
+                    }
+                }
+            }
+            dones=new ArrayList<>();
+//        System.out.println("----------------------------------");
+//        System.out.println("discharge end:"+discharge);
+//        System.out.println("----------------------------------");
 
         req.setAttribute("isApp", isApp);
         req.setAttribute("isDiag", isDiag);
@@ -242,9 +280,14 @@ public class PatientServlet extends HttpServlet {
         req.setAttribute("medSize",medSize);
         req.setAttribute("procSize",procSize);
         req.setAttribute("fin", fin);
+        req.setAttribute("discharge", discharge);
 
+        if(patient.getpDischargeDate()==null){
+            req.getRequestDispatcher("/WEB-INF/view/patient.jsp")
+                    .forward(req, resp);
+        }
 
-        req.getRequestDispatcher("/WEB-INF/view/patient.jsp")
+        req.getRequestDispatcher("/WEB-INF/view/patientDis.jsp")
                 .forward(req, resp);
 
     }

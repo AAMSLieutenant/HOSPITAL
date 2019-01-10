@@ -200,6 +200,7 @@ public class PatientDao implements IPatientDao {
             p.setpSex(rs.getString("p_sex"));
             p.setpBirthDate(rs.getDate("p_birth_date"));
             p.setpArrivalDate(rs.getDate("p_arrival_date"));
+            p.setpDischargeDate(rs.getDate("p_discharge_date"));
         }
 
         statement="SELECT * FROM address WHERE card_id=?";
@@ -220,6 +221,7 @@ public class PatientDao implements IPatientDao {
         System.out.println("p_age:"+p.getpAge());
         System.out.println("p_sex:"+p.getpSex());
         System.out.println("p_birth_date:"+p.getpBirthDate());
+        System.out.println("p_arrival_date:"+p.getpArrivalDate());
         System.out.println("p_arrival_date:"+p.getpArrivalDate());
         System.out.println("p_city:"+p.getpAddress().getCity());
         System.out.println("p_street:"+p.getpAddress().getStreet());
@@ -634,6 +636,20 @@ public class PatientDao implements IPatientDao {
 //
 //        return objects;
 
+    }
+
+
+    public void discharge(int pCardId) throws Exception{
+        Date curDate=new Date();
+        System.out.println("--------------------------------");
+        System.out.println("PatientDao discharge()");
+        System.out.println("--------------------------------");
+        String statement="UPDATE PATIENT SET p_discharge_date=? WHERE card_id=?";
+        PreparedStatement ps=connection.prepareStatement(statement);
+        java.sql.Date d=new java.sql.Date(curDate.getTime());
+        ps.setDate(1, d);
+        ps.setInt(2, pCardId);
+        ps.executeUpdate();
     }
 
     public void quit(){

@@ -1,8 +1,13 @@
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Title</title>
+
+    <link rel="stylesheet" href="F://Rostislav//EPAM//HOSPITAL//HOSPITAL//src//main//webapp//css//bootstrap.min.css">
+    <script src="F://Rostislav//EPAM//HOSPITAL//HOSPITAL//src//main//webapp//js//bootstrap.min.js"></script>
+
 
 </head>
 <body>
@@ -17,8 +22,8 @@
                         <td width="150">Отчество</td>
                         <td width="150">Дата рождения</td>
                         <td width="150">Дата поступления</td>
+                        <td width="150">Дата выписки</td>
                         <td width="150">Обновить</td>
-                        <td width="150">Удалить</td>
                         <td width="150">CardId</td>
                     </tr>
                     <c:forEach var="patient" items="${requestScope.patientsDb}">
@@ -28,6 +33,7 @@
                         <td ><c:out value="${patient.pPatronymic}"/></td>
                         <td ><c:out value="${patient.pBirthDate}"/></td>
                         <td ><c:out value="${patient.pArrivalDate}"/></td>
+                        <td ><c:out value="${patient.pDischargeDate}"/></td>
                        <%--<td valign="center">--%>
                             <%--<div>--%>
                             <%--<form method="get" action="<c:url value='/update'/>">--%>
@@ -43,14 +49,6 @@
                                     <input type="number" hidden name="pCardId" value="${patient.pCardId}" />
                                     <input type="submit" value="Личное дело"/>
                                 </form>
-                            </div>
-                        </td>
-                        <td valign="center">
-                            <div>
-                            <form method="post" action="<c:url value='/delete'/>">
-                            <input type="number" hidden name="pCardId" value="${patient.pCardId}" />
-                            <input type="submit" name="delete" value="Удалить"/>
-                            </form>
                             </div>
                         </td>
                         <td valign="center"><c:out value="${patient.pCardId}"/></td>

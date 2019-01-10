@@ -27,6 +27,17 @@
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
 
+    <!--Logout servlet-->
+    <servlet>
+        <servlet-name>DischargeServlet</servlet-name>
+        <servlet-class>com.hospital.servlet.DischargeServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DischargeServlet</servlet-name>
+        <url-pattern>/discharge</url-pattern>
+    </servlet-mapping>
+
     <!--Operation create servlet-->
     <servlet>
         <servlet-name>OperationServlet</servlet-name>

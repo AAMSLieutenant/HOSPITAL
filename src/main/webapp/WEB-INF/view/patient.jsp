@@ -307,10 +307,30 @@
             </c:when>
             </c:choose>
         </table>
+        <br/>
 
 
+        <c:set var="discharge" value="${requestScope.discharge}"/>
+        <c:choose>
+        <c:when test="${discharge==0}">
 
 
+        <form method="get" action="<c:url value='/read'/>">
+            <%--<input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />--%>
+            NO ABILITY TO DISCHARGE THE PATIENT
+            <input type="submit" disabled value="Выписать пациента"/>
+        </form>
+        </c:when>
+
+        <c:when test="${discharge==1}">
+
+        <form method="get" action="<c:url value='/discharge'/>">
+            <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
+            ABILITY TO DISCHARGE THE PATIENT
+            <input type="submit" value="Выписать пациента"/>
+        </form>
+        </c:when>
+        </c:choose>
         <br/>
         <form method="get" action="<c:url value='/read'/>">
             <%--<input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />--%>
