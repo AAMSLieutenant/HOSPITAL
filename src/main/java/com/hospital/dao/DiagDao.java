@@ -109,7 +109,7 @@ public class DiagDao {
 
 
         System.out.println("---------------------------------------------------------");
-        System.out.println("Count of cardIds: "+ids.size());
+        System.out.println("Count of diagIds: "+ids.size());
         for (int i = 0; i < ids.size(); i++) {
             System.out.println("current DIAG_ID: " + ids.get(i));
             diagnoses.add(read(ids.get(i)));

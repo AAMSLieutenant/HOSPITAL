@@ -19,18 +19,28 @@
     </div>
 
     <div class="form-group col-xs-6">
-    <h1>Добро пожаловать</h1>
+    <c:set var="login" value="${requestScope.login}"/>
+    <h1>Добро пожаловать, ${login}</h1>
+        <br>
     <%--<a href="<c:url value='/logout' />">Logout</a>--%>
     <%--<a href="<c:url value='/read' />">Получить список пациентов</a>--%>
-    <form method="get" action="<c:url value='/read'/>">
+        <p>
+        <form  method="get" action="<c:url value='/read'/>">
         <%--<input type="number" hidden name="pCardId" value="${patient.pCardId}" />--%>
         <%--<input type="submit" value="Получить список пациентов"/>--%>
-        <button type="submit" class="btn btn-primary  btn-md">Получить список пациентов</button>
-    </form>
-    <form method="get" action="<c:url value='/logout'/>">
-        <%--<input type="number" hidden name="pCardId" value="${patient.pCardId}" />--%>
-            <button type="submit" class="btn btn-primary  btn-md">Выйти</button>
-    </form>
+        <button type="submit" class="btn btn-primary  btn-md">Список пациентов</button><br>
+        <small id="passwordHelp" class="form-text text-muted">Работа с пациентами</small><br>
+        </form>
+        </p>
+        <p>
+        <form  method="get" action="<c:url value='/logout'/>">
+            <%--<input type="number" hidden name="pCardId" value="${patient.pCardId}" />--%>
+                <button type="submit" class="btn btn-primary  btn-danger">Выйти</button><br>
+                <small id="passwordHelp" class="form-text text-muted">Выйти из учетной записи</small><br>
+        </form>
+        </p>
+
+
     </div>
 </div>
 </body>

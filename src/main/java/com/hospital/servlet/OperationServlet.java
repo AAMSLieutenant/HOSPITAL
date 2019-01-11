@@ -116,6 +116,7 @@ public class OperationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        this.diagnosesDb.clear();
 
         System.out.println("-----------------------------------------");
         System.out.println("OperationServlet doGet() is started;");
@@ -127,6 +128,7 @@ public class OperationServlet extends HttpServlet {
             for(int i=0;i<diags.size();i++){
                 this.diagnosesDb.put(diags.get(i).getDiagId(), diags.get(i));
             }
+            System.out.println("diagnosesDb size():"+diagnosesDb.size());
             req.setAttribute("diagnosesDb", diagnosesDb.values());
         }
         catch(Exception e){
@@ -150,11 +152,12 @@ public class OperationServlet extends HttpServlet {
         }
 
 
+
 //
 
 
 
-
+        req.setAttribute("pCardId", pCardId);
         System.out.println("-----------------------------------------");
         System.out.println("OperationServlet doGet() is finished;");
         System.out.println("-----------------------------------------");

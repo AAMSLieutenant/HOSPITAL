@@ -82,22 +82,15 @@ public class MedicineServlet extends HttpServlet {
 
         final String diagId=req.getParameter("diagId");
         final String operId=req.getParameter("medId");
-        final String medStart=req.getParameter("medStart");
         final String medEnd=req.getParameter("medEnd");
 
 
         System.out.println("operationServlet doPost() Chosen STRING diagId:"+diagId);
         System.out.println("operationServlet doPost() Chosen STRING operId:"+operId);
-        System.out.println("operationServlet doPost() Chosen STRING medStart:"+medStart);
         System.out.println("operationServlet doPost() Chosen STRING medEnd:"+medEnd);
 
-        java.util.Date mStart=null;
+        java.util.Date mStart=curDate;
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            mStart=sdf.parse(medStart);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
         System.out.println("startDate: "+mStart);
 
 
@@ -129,6 +122,7 @@ public class MedicineServlet extends HttpServlet {
         System.out.println("-----------------------------------------");
         System.out.println("Medicine doGet() is started;");
         System.out.println("-----------------------------------------");
+        this.diagnosesDb.clear();
         pCardId=Integer.parseInt(req.getParameter("pCardId"));
         System.out.println("CURRENT PATIENT ID:"+pCardId);
         try {
@@ -161,6 +155,7 @@ public class MedicineServlet extends HttpServlet {
 //
 
         req.setAttribute("fin", fin);
+        req.setAttribute("pCardId", pCardId);
 
 
         System.out.println("-----------------------------------------");

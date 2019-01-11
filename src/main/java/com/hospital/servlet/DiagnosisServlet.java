@@ -93,7 +93,7 @@ public class DiagnosisServlet extends HttpServlet {
         pCardId=Integer.parseInt(req.getParameter("pCardId"));
         System.out.println("CURRENT PATIENT`S CARD ID:"+pCardId);
 
-
+        req.setAttribute("pCardId", pCardId);
 
         req.getRequestDispatcher("/WEB-INF/view/diagnosis.jsp").forward(req, resp);
 //

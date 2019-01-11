@@ -2,40 +2,55 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>createAppointment</title>
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <script src="../../js/bootstrap.min.js"></script>
 </head>
 <body>
+    <div class="container">
+        <div class="form-group col-xs-2">
+        </div>
+        <div class="form-group col-xs-6">
+            <div class="form-group">
 
-<h2>Введите данные приема</h2>
-<br />
+        <h2>Введите данные приема</h2>
+        <br />
 
-<form method="post" action="<c:url value='/appointment'/>">
-    <c:set var="fin" value="${requestScope.fin}"/>
-    <label>Дата приема: <input type="date" name="appDate" value="${fin}" readonly /></label><br>
-    <label>Стоимость приема: <input type="text" min="1" name="appValue" value="250" readonly /></label><br>
-    <label>Жалоба пациента: <textarea style="resize:none" name="appComplaint" cols="30" rows="10" minlength="10" required></textarea></label><br>
-    <label>Врач:
-    <select name="docId" size="1">
-        <c:forEach var="doctor" items="${requestScope.doctorsDb}">
-        <option value="${doctor.empId}">${doctor.empSurname} ${doctor.empName}, ${doctor.posName}</option>
-    <%--<option selected="selected" value="second"><c:out value="${requestScope.arr[1]}"/></option>--%>
-    <%--<option value="third"><c:out value="${requestScope.arr[2]}"/></option>--%>
-        </c:forEach>
-    </select></label>
-    <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
-    <input type="submit" value="Зарегистрировать"> <input type="reset" name="сброс"><br>
-</form>
+        <form method="post" action="<c:url value='/appointment'/>">
+            <c:set var="fin" value="${requestScope.fin}"/>
+
+            <label for="appDate">Дата приема:</label>
+            <input type="date" id="appDate" name="appDate" class="form-control" value="${fin}" readonly /><br>
+            <label for="appValue">Стоимость приема:</label>
+            <input type="text" id="appValue" class="form-control" min="1" name="appValue" value="250" readonly /><br>
+            <label for="appCompliant">Жалоба пациента:</label>
+            <textarea id="appCompliant" class="form-control" style="resize:none" placeholder="Не меньше 10 знаков" name="appComplaint" rows="8" minlength="10" required></textarea><br>
+            <label for="docId">Врач:</label>
+            <select name="docId" id="docId" class="form-control" size="1">
+                <c:forEach var="doctor" items="${requestScope.doctorsDb}">
+                <option value="${doctor.empId}">${doctor.empSurname} ${doctor.empName}, ${doctor.posName}</option>
+                </c:forEach>
+            </select>
+
+            <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
+            <br>
+            <button type="submit" class="btn btn-primary">Зарегистрировать</button>
+            <button type="reset" class="btn btn-danger">Сброс</button>
+            <br>
+        </form>
 
 
-<%--<form method="post" action="<c:url value='/update'/>">--%>
+        <form method="get" action="<c:url value='/patient'/>">
 
-<%--<label>Новое имя: <input type="text" name="pName" /></label><br>--%>
-<%--<label>Новая фамилия: <input type="text" name="pSurname" /></label><br>--%>
-<%--<label>Новое отчество: <input type="text" name="pPatronymic" /></label><br>--%>
+        <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
+        <button type="submit" class="btn btn-primary">К личному делу пациента</button>
 
-<%--<input type="number" hidden name="pCardId" value="${requestScope.patient.pCardId}"/>--%>
+        </form>
+            </div>
+        </div>
 
-<%--<input type="submit" value="Ok" name="Ok"><br>--%>
-<%--</form>--%>
+    </div>
+
+
 </body>
 </html>

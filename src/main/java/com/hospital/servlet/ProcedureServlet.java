@@ -122,6 +122,7 @@ public class ProcedureServlet extends HttpServlet {
         System.out.println("-----------------------------------------");
         System.out.println("ProcedureServlet doGet() is started;");
         System.out.println("-----------------------------------------");
+        this.diagnosesDb.clear();
         pCardId=Integer.parseInt(req.getParameter("pCardId"));
         System.out.println("CURRENT PATIENT ID:"+pCardId);
         try {
@@ -155,6 +156,7 @@ public class ProcedureServlet extends HttpServlet {
 
 
         req.setAttribute("fin", fin);
+        req.setAttribute("pCardId", pCardId);
 
         System.out.println("-----------------------------------------");
         System.out.println("Procedureervlet doGet() is finished;");

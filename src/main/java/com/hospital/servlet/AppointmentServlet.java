@@ -130,6 +130,7 @@ public class AppointmentServlet extends HttpServlet {
         System.out.println("-----------------------------------------");
 
         req.setAttribute("fin", fin);
+        req.setAttribute("pCardId", pCardId);
         req.getRequestDispatcher("/WEB-INF/view/appointment.jsp").forward(req, resp);
 
     }

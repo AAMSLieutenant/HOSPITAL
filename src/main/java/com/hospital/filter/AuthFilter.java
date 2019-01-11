@@ -42,9 +42,7 @@ public class AuthFilter implements Filter {
 
 //        PropertyConfigurator.configure("F:\\Rostislav\\EPAM\\HOSPITAL\\HOSPITAL\\src\\main\\resources\\log4j.properties");
 
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         logger.info("FILTER STARTED");
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
     }
 
     @Override
@@ -54,7 +52,7 @@ public class AuthFilter implements Filter {
 
             throws IOException, ServletException {
 
-
+        logger.info("FILTER STARTED");
         request.setCharacterEncoding("UTF-8");
         final HttpServletRequest req = (HttpServletRequest) request;
         final HttpServletResponse res = (HttpServletResponse) response;
@@ -86,8 +84,9 @@ public class AuthFilter implements Filter {
                 req.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(req, res);
             }
             else{
-//
-                res.sendRedirect(req.getContextPath() + "/read");
+                req.setAttribute("login", login);
+                req.getRequestDispatcher("/WEB-INF/view/admin_menu.jsp").forward(req, res);
+
 
             }
         }

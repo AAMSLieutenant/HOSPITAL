@@ -5,74 +5,77 @@
 <head>
     <title>Title</title>
 
-    <link rel="stylesheet" href="F://Rostislav//EPAM//HOSPITAL//HOSPITAL//src//main//webapp//css//bootstrap.min.css">
-    <script src="F://Rostislav//EPAM//HOSPITAL//HOSPITAL//src//main//webapp//js//bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <script src="../../js/bootstrap.min.js"></script>
 
 
 </head>
 <body>
-    <h2>Список бациентов больницы</h2><br />
-    <table>
-        <tr>
-            <td>
-                <table align="left" border="1">
-                    <tr align="center">
-                        <td width="150">Имя</td>
-                        <td width="150">Фамилия</td>
-                        <td width="150">Отчество</td>
-                        <td width="150">Дата рождения</td>
-                        <td width="150">Дата поступления</td>
-                        <td width="150">Дата выписки</td>
-                        <td width="150">Обновить</td>
-                        <td width="150">CardId</td>
-                    </tr>
-                    <c:forEach var="patient" items="${requestScope.patientsDb}">
-                    <tr align="center">
-                        <td ><c:out value="${patient.pName}"/></td>
-                        <td ><c:out value="${patient.pSurname}"/></td>
-                        <td ><c:out value="${patient.pPatronymic}"/></td>
-                        <td ><c:out value="${patient.pBirthDate}"/></td>
-                        <td ><c:out value="${patient.pArrivalDate}"/></td>
-                        <td ><c:out value="${patient.pDischargeDate}"/></td>
-                       <%--<td valign="center">--%>
-                            <%--<div>--%>
-                            <%--<form method="get" action="<c:url value='/update'/>">--%>
-                            <%--<input type="number" hidden name="pCardId" value="${patient.pCardId}" />--%>
-                            <%--<input type="submit" value="Редактировать"/>--%>
-                            <%--</form>--%>
-                            <%--</div>--%>
+<div class="form-group col-xs-1">
+</div>
+<div class="form-group col-xs-9">
 
-                        <%--</td>--%>
-                        <td valign="center">
-                            <div>
-                                <form method="get" action="<c:url value='/patient'/>">
-                                    <input type="number" hidden name="pCardId" value="${patient.pCardId}" />
-                                    <input type="submit" value="Личное дело"/>
-                                </form>
-                            </div>
-                        </td>
-                        <td valign="center"><c:out value="${patient.pCardId}"/></td>
-                    </tr>
-                    </c:forEach>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <%--<a href="<c:url value="/logout"/>">Logout</a>--%>
-                <form method="get" action="<c:url value='/logout'/>">
-                    <%--<input type="number" hidden name="pCardId" value="${patient.pCardId}" />--%>
-                    <input type="submit" value="Выйти"/>
-                </form>
-            </td>
-            <td>
-                <%--<a href="<c:url value="/logout"/>">Logout</a>--%>
-                <form method="get" action="<c:url value='/create'/>">
-                    <%--<input type="number" hidden name="pCardId" value="${patient.pCardId}" />--%>
-                    <input type="submit" value="Зарегистрировать пациента"/>
-                </form>
-            </td>
-        </tr>
-    </table>
+        <h2>Список бациентов больницы</h2><br />
+        <table>
+            <tr>
+                <td>
+                    <table class="table table-striped" border="1">
+                        <thead class="thead-dark">
+                        <tr >
+                            <th width="150">Имя</th>
+                            <th width="150">Фамилия</th>
+                            <th width="150">Отчество</th>
+                            <th width="150">Дата рождения</th>
+                            <th width="150">Дата поступления</th>
+                            <th width="150">Дата выписки</th>
+                            <th width="150">Обновить</th>
+                            <th width="150">CardId</th>
+                        </tr>
+                        </thead>
+                        <c:forEach var="patient" items="${requestScope.patientsDb}">
+                        <tr>
+                            <td ><c:out value="${patient.pName}"/></td>
+                            <td ><c:out value="${patient.pSurname}"/></td>
+                            <td ><c:out value="${patient.pPatronymic}"/></td>
+                            <td ><c:out value="${patient.pBirthDate}"/></td>
+                            <td ><c:out value="${patient.pArrivalDate}"/></td>
+                            <td ><c:out value="${patient.pDischargeDate}"/></td>
+                            <td valign="center">
+                                <div>
+                                    <form method="get" action="<c:url value='/patient'/>">
+                                        <input type="number" hidden name="pCardId" value="${patient.pCardId}" />
+                                        <button type="submit" class="btn btn-primary">Личное дело</button>
+                                        <%--<input type="submit" value="Личное дело"/>--%>
+                                    </form>
+                                </div>
+                            </td>
+                            <td valign="center"><c:out value="${patient.pCardId}"/></td>
+                        </tr>
+                        </c:forEach>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <%--<a href="<c:url value="/logout"/>">Logout</a>--%>
+                    <form method="get" action="<c:url value='/create'/>">
+                        <%--<input type="number" hidden name="pCardId" value="${patient.pCardId}" />--%>
+                        <button type="submit" class="btn btn-primary">Зарегистрировать пациента</button>
+                    </form>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                    <form method="get" action="<c:url value='/logout'/>">
+                        <%--<input type="number" hidden name="pCardId" value="${patient.pCardId}" />--%>
+                            <button type="submit" class="btn btn-danger">Выйти</button>
+                    </form>
+
+                </td>
+            </tr>
+        </table>
+</div>
 </body>
 </html>

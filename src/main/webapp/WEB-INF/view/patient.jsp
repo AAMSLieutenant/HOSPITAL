@@ -2,26 +2,43 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>PatientData</title>
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <script src="../../js/bootstrap.min.js"></script>
 </head>
-    <body>
+    <div>
+    <div class="container">
 
-        <div>pCardId: <c:out value="${requestScope.patient.pCardId}"/> </div>
-        <div>Имя: <c:out value="${requestScope.patient.pName}"/> </div>
-        <div>Фамилия: <c:out value="${requestScope.patient.pSurname}"/> </div>
-        <div>Отчество: <c:out value="${requestScope.patient.pPatronymic}"/> </div>
-        <div>Возраст: <c:out value="${requestScope.patient.pAge}"/> </div>
-        <div>Пол: <c:out value="${requestScope.patient.pSex}"/> </div>
-        <div>Дата рождения: <c:out value="${requestScope.patient.pBirthDate}"/> </div>
-        <div>Дата поступления: <c:out value="${requestScope.patient.pArrivalDate}"/> </div>
-        <br />
-        <div>АДРЕС</div>
-        <br />
-        <div>Город: <c:out value="${requestScope.patient.pAddress.city}"/> </div>
-        <div>Улица: <c:out value="${requestScope.patient.pAddress.street}"/> </div>
-        <div>Дом: <c:out value="${requestScope.patient.pAddress.houseNumber}"/> </div>
-        <div>Квартира: <c:out value="${requestScope.patient.pAddress.flatNumber}"/> </div>
-        <br />
+        <div class="form-group col-xs-10">
+            <div class="form-group">
+
+
+                <%--<div>pCardId: <c:out value="${requestScope.patient.pCardId}"/> </div>--%>
+                <label for="pName">Имя:</label>
+                <input type="text" id="pName" class="form-control" value="${requestScope.patient.pName}" readonly/><br>
+                <label for="pSurname">Фамилия:</label>
+                <input type="text" id="pSurname" class="form-control" value="${requestScope.patient.pSurname}" readonly/><br>
+                <label for="pPatronymic">Отчество:</label>
+                <input type="text" id="pPatronymic" class="form-control" value="${requestScope.patient.pPatronymic}" readonly/><br>
+                <label for="pAge">Возраст(полных лет):</label>
+                <input type="text" id="pAge" class="form-control" value="${requestScope.patient.pAge}" readonly/><br>
+                <label for="pSex">Пол:</label>
+                <input type="text" id="pSex" class="form-control" value="${requestScope.patient.pSex}" readonly/><br>
+                <label for="pBirthDate">Дата рождения:</label>
+                <input type="text" id="pBirthDate" class="form-control" value="${requestScope.patient.pBirthDate}" readonly/><br>
+                <label for="pArrivalDate">Дата поступления:</label>
+                <input type="datextte" id="pArrivalDate" class="form-control" value="${requestScope.patient.pArrivalDate}" readonly/><br>
+                <div>АДРЕС</div>
+                <br />
+                <label for="city">Город:</label>
+                <input type="text" id="city" class="form-control" value="${requestScope.patient.pAddress.city}" readonly/><br>
+                <label for="street">Улица:</label>
+                <input type="text" id="street" class="form-control" value="${requestScope.patient.pAddress.street}" readonly/><br>
+                <label for="houseNumber">Номер дома:</label>
+                <input type="text" id="houseNumber" class="form-control" value="${requestScope.patient.pAddress.houseNumber}" readonly/><br>
+                <label for="flatNumber">Номер квартиры:</label>
+                <input type="text" id="flatNumber" class="form-control" value="${requestScope.patient.pAddress.flatNumber}" readonly/><br>
+            </div>
 
         <div>
             <div><h3>Приемы</h3></div>
@@ -33,14 +50,15 @@
                     <c:set var="appointments" value="${requestScope.isApp}"/>
                     <c:choose>
                         <c:when test="${appointments==true}">
-                            <table align="left" border="1">
-                                <tr align="center">
-                                    <td>номер приема</td>
-                                    <td>дата приема</td>
-                                    <td>стоимость приема</td>
-                                    <td width="300">жалоба</td>
-                                    <td>доктор</td>
-                                    <td>карта</td>
+                            <table class="table table-striped" border="1">
+                                <thead>
+                                <tr>
+                                    <th>номер приема</th>
+                                    <th>дата приема</th>
+                                    <th>стоимость приема</th>
+                                    <th width="300">жалоба</th>
+                                    <th>доктор</th>
+                                    <th>карта</th>
                                 </tr>
                                 <c:forEach var="appointment" items="${requestScope.appointmentsDb}">
                                     <tr align="center">
@@ -61,7 +79,7 @@
                     <td>
                     <form method="get" action="<c:url value='/appointment'/>">
                         <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
-                        <input type="submit" value="Зарегистрировать прием"/>
+                        <button type="submit" class="btn btn-primary">Зарегистрировать прием</button>
                     </form>
                     </td>
                 </tr>
@@ -75,19 +93,21 @@
                 <td>
                     <c:set var="appointments" value="${requestScope.isApp}"/>
                     <c:choose>
-                        <c:when test="${appointments==true}">
-                            <div>
-                                <h3>Диагнозы</h3>
-                            </div>
+                    <c:when test="${appointments==true}">
+                        <div>
+                            <h3>Диагнозы</h3>
+                        </div>
                     <c:set var="diagnoses" value="${requestScope.isDiag}"/>
                     <c:choose>
                     <c:when test="${diagnoses==true}">
-                        <table align="left" border="1">
-                            <tr align="center">
-                                <td>номер диагноза</td>
-                                <td width="300">диагноз</td>
-                                <td>карта</td>
+                        <table class="table table-striped" border="1">
+                            <thead>
+                            <tr>
+                                <th>номер диагноза</th>
+                                <th width="300">диагноз</th>
+                                <th>карта</th>
                             </tr>
+                            </thead>
                             <c:forEach var="diagnosis" items="${requestScope.diagnosesDb}">
 
                                 <tr align="center">
@@ -106,13 +126,16 @@
                 <td>
                         <form method="get" action="<c:url value='/diagnosis'/>">
                             <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
-                            <input type="submit" value="Поставить дагноз"/>
+                            <button type="submit" class="btn btn-primary">Поставить диагноз</button>
                         </form>
                     </c:when>
                 </c:choose>
                 </td>
             </tr>
         </table>
+            <br>
+            <br>
+
 
 
     <%----------------------------ОПЕРАЦИИ--------------------------------------%>
@@ -124,25 +147,27 @@
                 <c:set var="operSize" value="${requestScope.operSize}"/>
                 <c:choose>
                 <c:when test="${operSize gt 0}">
-                    ${operSize}
+                    <%--${operSize}--%>
                 <td>
 
                     <div>
                         <h3>Операции</h3>
                     </div>
-                            <table align="left" border="1">
-                                <tr align="center">
-                                    <td>do_id</td>
-                                    <td>diag_id</td>
-                                    <td>diag_name</td>
-                                    <td>oper_id</td>
-                                    <td>oper_name</td>
-                                    <td>oper_date</td>
-                                    <td>oper_done</td>
-                                    <td>doctor_id</td>
-                                    <td>emp_surname</td>
-                                    <td>pos_name</td>
+                    <table class="table table-striped" border="1">
+                                <thead>
+                                <tr>
+                                    <th>do_id</th>
+                                    <th>diag_id</th>
+                                    <th>diag_name</th>
+                                    <th>oper_id</th>
+                                    <th>oper_name</th>
+                                    <th>oper_date</th>
+                                    <th>oper_done</th>
+                                    <th>doctor_id</th>
+                                    <th>emp_surname</th>
+                                    <th>pos_name</th>
                                 </tr>
+                                </thead>
                                 <c:forEach var="operInfo" items="${requestScope.operInfosDb}">
                                     <tr align="center">
                                         <td ><c:out value="${operInfo.doId}"/></td>
@@ -167,7 +192,7 @@
                 <td>
                     <form method="get" action="<c:url value='/operation'/>">
                         <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
-                        <input type="submit" value="Назначить операцию"/>
+                        <button type="submit" class="btn btn-primary">Назначить операцию</button>
                     </form>
 
                 </td>
@@ -194,20 +219,22 @@
                     <div>
                         <h3>Лекарства</h3>
                     </div>
-                    <table align="left" border="1">
+                    <table class="table table-striped" border="1">
+                        <thead>
                         <tr align="center">
-                            <td>dm_id</td>
-                            <td>diag_id</td>
-                            <td>diag_name</td>
-                            <td>med_id</td>
-                            <td>med_name</td>
-                            <td>med_start</td>
-                            <td>med_end</td>
-                            <td>med_done</td>
-                            <td>emp_id</td>
-                            <td>emp_surname</td>
-                            <td>pos_name</td>
+                            <th>dm_id</th>
+                            <th>diag_id</th>
+                            <th>diag_name</th>
+                            <th>med_id</th>
+                            <th>med_name</th>
+                            <th>med_start</th>
+                            <th>med_end</th>
+                            <th>med_done</th>
+                            <th>emp_id</th>
+                            <th>emp_surname</th>
+                            <th>pos_name</th>
                         </tr>
+                        </thead>
                         <c:forEach var="medInfo" items="${requestScope.medInfosDb}">
                             <tr align="center">
                                 <td ><c:out value="${medInfo.dmId}"/></td>
@@ -233,7 +260,7 @@
                 <td>
                     <form method="get" action="<c:url value='/medicine'/>">
                         <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
-                        <input type="submit" value="Назначить лекарства"/>
+                        <button type="submit" class="btn btn-primary">Назначить лекарства</button>
                     </form>
 
                 </td>
@@ -262,19 +289,21 @@
                     </div>
 
                     <c:set var="operMedPro" value="${requestScope.operMedPro}"/>
-                    <table align="left" border="1">
-                        <tr align="center">
-                            <td>dp_id</td>
-                            <td>diag_id</td>
-                            <td>diag_name</td>
-                            <td>proc_id</td>
-                            <td>proc_name</td>
-                            <td>proc_date</td>
-                            <td>proc_done</td>
-                            <td>emp_id</td>
-                            <td>emp_surname</td>
-                            <td>pos_name</td>
+                    <table class="table table-striped" border="1">
+                        <thead>
+                        <tr>
+                            <th>dp_id</th>
+                            <th>diag_id</th>
+                            <th>diag_name</th>
+                            <th>proc_id</th>
+                            <th>proc_name</th>
+                            <th>proc_date</th>
+                            <th>proc_done</th>
+                            <th>emp_id</th>
+                            <th>emp_surname</th>
+                            <th>pos_name</th>
                         </tr>
+                        </thead>
                         <c:forEach var="procInfo" items="${requestScope.procInfosDb}">
                             <tr align="center">
                                 <td ><c:out value="${procInfo.dpId}"/></td>
@@ -299,7 +328,7 @@
                 <td>
                     <form method="get" action="<c:url value='/procedure'/>">
                         <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
-                        <input type="submit" value="Назначить процедуры"/>
+                        <button type="submit" class="btn btn-primary">Зарегистрировать процедуры</button>
                     </form>
 
                 </td>
@@ -315,10 +344,10 @@
         <c:when test="${discharge==0}">
 
 
-        <form method="get" action="<c:url value='/read'/>">
+        <form method="get" action="<c:url value='/discharge'/>">
             <%--<input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />--%>
-            NO ABILITY TO DISCHARGE THE PATIENT
-            <input type="submit" disabled value="Выписать пациента"/>
+                <button type="submit" class="btn btn-danger" disabled>Выписать пациента</button><br>
+                <small id="dis1" class="form-text text-muted">Не все мероприятия завершены.</small><br>
         </form>
         </c:when>
 
@@ -326,17 +355,24 @@
 
         <form method="get" action="<c:url value='/discharge'/>">
             <input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />
-            ABILITY TO DISCHARGE THE PATIENT
-            <input type="submit" value="Выписать пациента"/>
+            <button type="submit" class="btn btn-danger">Выписать пациента</button><br>
+            <small id="dis2" class="form-text text-muted">Все мероприятия завершены.</small><br>
         </form>
         </c:when>
         </c:choose>
+
         <br/>
         <form method="get" action="<c:url value='/read'/>">
             <%--<input type="number" hidden name="pCardId" value="${requestScope.pCardId}" />--%>
-            <input type="submit" value="К списку пациентов"/>
+                <button type="submit" class="btn btn-primary">К списку пациентов</button>
         </form>
+
+
+
     </div>
 
+
+        </div>
+    </div>
     </body>
 </html>

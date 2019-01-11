@@ -108,6 +108,8 @@ public class PatientServlet extends HttpServlet {
             throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
 
+
+
     }
 
     @Override
