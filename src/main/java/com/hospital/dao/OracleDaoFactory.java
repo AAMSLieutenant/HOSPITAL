@@ -74,9 +74,9 @@ public class OracleDaoFactory{
 //
     public PatientDao getPatientDao() throws Exception
     {
-            logger.info("getPatientDao() returned connection");
+        logger.info("getPatientDao() returned connection");
 
-            return new PatientDao(getOracleConnection());
+        return new PatientDao(getOracleConnection());
 
 
     }
