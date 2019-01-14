@@ -1,10 +1,7 @@
 package com.hospital.servlet;
 
 import com.hospital.dao.DiagDao;
-import com.hospital.dao.MedicineDao;
-import com.hospital.dao.OperationDao;
 import com.hospital.dao.ProcedureDao;
-import com.hospital.interfaces.IAppointmentDao;
 import com.hospital.model.*;
 
 import javax.servlet.ServletException;
@@ -14,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -105,10 +101,6 @@ public class ProcedureServlet extends HttpServlet {
         }
 
 
-
-
-//);
-//
         System.out.println("-----------------------------------------");
         System.out.println("ProcedureServlet doPost() is finished;");
         System.out.println("-----------------------------------------");
@@ -150,9 +142,6 @@ public class ProcedureServlet extends HttpServlet {
         catch(Exception e){
             e.printStackTrace();
         }
-
-
-//
 
 
         req.setAttribute("fin", fin);

@@ -27,26 +27,17 @@
                     <input type="text" id="city" class="form-control" placeholder="город проживания" name="city" required/><br>
                     <input type="text" class="form-control" placeholder="улица" name="street" required/><br>
                     <input type="number" class="form-control" placeholder="номер дома" name="houseNumber" min="1"  required/></label><br>
-                   <input type="number" class="form-control" placeholder="номер квартиры" name="flatNumber" min="1" required/></label><br>
+                    <input type="number" class="form-control" placeholder="номер квартиры" name="flatNumber" min="1" required/></label><br>
                     <label for="sex">Пол:<br>
-                    <label class="radio-inline"><input type="radio" id="sex" name="pSex" value="male" required>мужской</label>
-                    <label class="radio-inline"><input type="radio" name="pSex" value="female" required>женский</label><br><br>
+                    <label class="radio-inline"><input type="radio" id="sex" name="pSex" value="муж" required>мужской</label>
+                    <label class="radio-inline"><input type="radio" name="pSex" value="жен" required>женский</label><br><br>
 
-                    <%--<input type="radio" id="sex" name="pSex" value="male" required>мужской--%>
-                    <%--<input type="radio" name="pSex" value="female" required>женский</label><br>--%>
                     <c:set var="fin" value="${requestScope.fin}"/>
                         <label for="birthDate">дата рождения:</label>
                     <input type="date" id="birthDate" class="form-control"  name="pBirthDate" min="1900-01-01" max="${fin}" required/><br>
                         <label for="arrivalDate">дата прибытия:</label>
                     <input type="date" id="arrivalDate" class="form-control" name="pArrivalDate" value="${fin}" readonly/><br>
 
-
-                    <%--<label>дата рождения: "${fin}" <input type="date" name="pBirthDate" min="1900-01-01" max="${fin}" required/></label><br>--%>
-                    <%--<label>дата прибытия: <input type="date" name="pArrivalDate" value="${fin}" readonly/></label><br>--%>
-                    <%--<br/>--%>
-                    <%--<label>АДРЕС--%>
-                    <%--<br/>--%>
-                    <%--<br/>--%>
 
                         <button type="submit" class="btn btn-primary">Зарегистрировать</button>
                         <button type="reset" class="btn btn-danger" >Сброс</button>

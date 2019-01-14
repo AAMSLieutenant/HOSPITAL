@@ -1,6 +1,6 @@
 package com.hospital.servlet;
 
-import com.hospital.interfaces.IAppointmentDao;
+import com.hospital.dao.AppointmentDao;
 import com.hospital.model.Appointment;
 import com.hospital.model.Employee;
 import javax.servlet.ServletException;
@@ -20,7 +20,7 @@ public class AppointmentServlet extends HttpServlet {
 
 
     private Integer pCardId=0;
-    private AtomicReference<IAppointmentDao> appointmentDao;
+    private AtomicReference<AppointmentDao> appointmentDao;
     private Map<Integer, Employee> doctorsDb;
     private Date curDate;
     private String year;
@@ -51,7 +51,7 @@ public class AppointmentServlet extends HttpServlet {
 
 
         final Object appointmentDao=getServletContext().getAttribute("appointmentDao");
-        this.appointmentDao=(AtomicReference<IAppointmentDao>)appointmentDao;
+        this.appointmentDao=(AtomicReference<AppointmentDao>)appointmentDao;
         this.doctorsDb=new ConcurrentHashMap<>();
     }
 
@@ -124,7 +124,6 @@ public class AppointmentServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-//        resp.sendRedirect(req.getContextPath() + "/appointment");
         System.out.println("-----------------------------------------");
         System.out.println("AppointmentServlet doGet() is finished;");
         System.out.println("-----------------------------------------");

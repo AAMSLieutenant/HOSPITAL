@@ -5,7 +5,7 @@
          version="3.1">
 
 
-    <!--filter check exist session for sign in-->
+    <!--AuthFilter-->
     <filter>
         <filter-name>AuthFilter</filter-name>
         <filter-class>com.hospital.filter.AuthFilter</filter-class>
@@ -27,7 +27,7 @@
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
 
-    <!--Logout servlet-->
+    <!--Discharge servlet-->
     <servlet>
         <servlet-name>DischargeServlet</servlet-name>
         <servlet-class>com.hospital.servlet.DischargeServlet</servlet-class>
@@ -38,7 +38,7 @@
         <url-pattern>/discharge</url-pattern>
     </servlet-mapping>
 
-    <!--Operation create servlet-->
+    <!--Operation creation servlet-->
     <servlet>
         <servlet-name>OperationServlet</servlet-name>
         <servlet-class>com.hospital.servlet.OperationServlet</servlet-class>
@@ -49,7 +49,7 @@
         <url-pattern>/operation</url-pattern>
     </servlet-mapping>
 
-    <!--Medicine create servlet-->
+    <!--Medicine creation servlet-->
     <servlet>
         <servlet-name>MedicineServlet</servlet-name>
         <servlet-class>com.hospital.servlet.MedicineServlet</servlet-class>
@@ -60,7 +60,7 @@
         <url-pattern>/medicine</url-pattern>
     </servlet-mapping>
 
-    <!--Procedure create servlet-->
+    <!--Procedure creation servlet-->
     <servlet>
         <servlet-name>ProcedureServlet</servlet-name>
         <servlet-class>com.hospital.servlet.ProcedureServlet</servlet-class>
@@ -74,11 +74,11 @@
 
     <!--Index page for app-->
     <servlet-mapping>
-        <servlet-name>GetStartPageServlet</servlet-name>
+        <servlet-name>GetIndexPageServlet</servlet-name>
         <url-pattern>/read</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>GetStartPageServlet</servlet-name>
+        <servlet-name>GetIndexPageServlet</servlet-name>
         <servlet-class>com.hospital.servlet.GetIndexPageServlet</servlet-class>
     </servlet>
 
@@ -113,31 +113,8 @@
     </servlet>
 
 
-    <!--Addition user-->
-    <servlet-mapping>
-        <servlet-name>AddUserServlet</servlet-name>
-        <url-pattern>/add_user</url-pattern>
-    </servlet-mapping>
 
-    <servlet>
-        <servlet-name>AddUserServlet</servlet-name>
-        <servlet-class>com.hospital.servlet.AddUserServlet</servlet-class>
-    </servlet>
-
-
-    <!--Delete user-->
-    <servlet-mapping>
-        <servlet-name>DeleteUserServlet</servlet-name>
-        <url-pattern>/delete</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>DeleteUserServlet</servlet-name>
-        <servlet-class>com.hospital.servlet.DeletePatientServlet</servlet-class>
-    </servlet>
-
-
-    <!--Update user-->
+    <!--Patient creation servlet-->
     <servlet-mapping>
         <servlet-name>CreatePatientServlet</servlet-name>
         <url-pattern>/create</url-pattern>

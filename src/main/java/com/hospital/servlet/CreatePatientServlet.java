@@ -1,6 +1,6 @@
 package com.hospital.servlet;
 
-import com.hospital.interfaces.IPatientDao;
+import com.hospital.dao.PatientDao;
 import com.hospital.model.Patient;
 
 import javax.servlet.ServletException;
@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class CreatePatientServlet extends HttpServlet {
 
 
-    private AtomicReference<IPatientDao> patientDao;
+    private AtomicReference<PatientDao> patientDao;
     private Integer currentId=0;
     private String year;
     private String month;
@@ -52,20 +52,13 @@ public class CreatePatientServlet extends HttpServlet {
         final Object patientsDb = getServletContext().getAttribute("patientsDb");
         final Object patientDao = getServletContext().getAttribute("patientDao");
 
-//        if (users == null || !(users instanceof ConcurrentHashMap)) {
-//
-//            throw new IllegalStateException("You're repo does not initialize!");
-//        } else {
-//
-//            this.users = (ConcurrentHashMap<Integer, User>) users;
-//        }
 
         if (patientsDb == null || !(patientsDb instanceof ConcurrentHashMap)) {
 
             throw new IllegalStateException("You're repo does not initialize!");
         } else {
 
-            this.patientDao=(AtomicReference<IPatientDao>) patientDao;
+            this.patientDao=(AtomicReference<PatientDao>) patientDao;
 
         }
     }
@@ -144,16 +137,6 @@ public class CreatePatientServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-//        final String id = req.getParameter("id");
-//        final String pCardId=req.getParameter("pCardId");
-//        if (Utils.idIsInvalid(id, users)) {
-//            resp.sendRedirect(req.getContextPath() + "/");
-//            return;
-//        }
-
-
-//        final Patient patient=patientsDb.get(Integer.parseInt(pCardId));
-//        req.setAttribute("patient", patient);
         req.setAttribute("fin", this.fin);
         req.getRequestDispatcher("/WEB-INF/view/createPatient.jsp")
                 .forward(req, resp);

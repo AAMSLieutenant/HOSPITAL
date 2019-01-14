@@ -43,3 +43,10 @@ values(18, 'Биопсия', 2000, 4);
 insert into proced
 values(19, 'Биопсия', 2000, 5);
 
+insert into proced
+values(20, 'Симптоматическое лечение', 300, 4);
+insert into proced
+values(21, 'Симптоматическое лечение', 300, 5);
+
+
+

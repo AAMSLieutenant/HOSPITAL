@@ -1,5 +1,7 @@
 package com.hospital.model;
 
+import java.util.Objects;
+
 public class Operation {
 
     private int operId;
@@ -118,5 +120,45 @@ public class Operation {
 
     public void setDiagnosis(String diagnosis) {
         this.diagnosis = diagnosis;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Operation)) return false;
+        Operation operation = (Operation) o;
+        return getOperId() == operation.getOperId() &&
+                getOperValue() == operation.getOperValue() &&
+                getOperLength() == operation.getOperLength() &&
+                getDoctorId() == operation.getDoctorId() &&
+                isOperDone() == operation.isOperDone() &&
+                Objects.equals(getOperName(), operation.getOperName()) &&
+                Objects.equals(getDiagnosis(), operation.getDiagnosis()) &&
+                Objects.equals(getName(), operation.getName()) &&
+                Objects.equals(getSurname(), operation.getSurname()) &&
+                Objects.equals(getPatronymic(), operation.getPatronymic()) &&
+                Objects.equals(getPosName(), operation.getPosName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getOperId(), getOperName(), getOperValue(), getOperLength(), getDoctorId(), getDiagnosis(), isOperDone(), getName(), getSurname(), getPatronymic(), getPosName());
+    }
+
+    @Override
+    public String toString() {
+        return "Operation{" +
+                "operId=" + operId +
+                ", operName='" + operName + '\'' +
+                ", operValue=" + operValue +
+                ", operLength=" + operLength +
+                ", doctorId=" + doctorId +
+                ", diagnosis='" + diagnosis + '\'' +
+                ", operDone=" + operDone +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                ", posName='" + posName + '\'' +
+                '}';
     }
 }

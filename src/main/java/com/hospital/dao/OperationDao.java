@@ -200,16 +200,13 @@ public class OperationDao {
 
         }
 
-//
-
-//
         try{
             ps.close();
         }
         catch(SQLException ex){
             ex.printStackTrace();
         }
-//        return d;
+
         return operations;
     }
 

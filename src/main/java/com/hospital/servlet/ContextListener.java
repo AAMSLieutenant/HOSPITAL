@@ -2,16 +2,12 @@ package com.hospital.servlet;
 
 
 import com.hospital.dao.*;
-import com.hospital.model.User;
-import com.hospital.interfaces.DaoFactory;
-import com.hospital.interfaces.IPatientDao;
-import com.hospital.interfaces.IAppointmentDao;
-import com.hospital.model.User;
-import com.hospital.util.Utils;
-import com.hospital.model.Patient;
-import com.hospital.model.Appointment;
 
-import javax.servlet.Servlet;
+
+import com.hospital.model.Patient;
+
+
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -21,8 +17,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import static com.hospital.model.User.ROLE.ADMIN;
-import static com.hospital.model.User.ROLE.USER;
+
 /*
 Эта сущность реализует область видимости всего приложения (максимум)
 Здесь лежат данные для всего приложения (видимые для всех сервлетов)
@@ -36,9 +31,8 @@ public class ContextListener implements ServletContextListener {
 
     private Map<Integer, Patient> patientsDb;//Коллекция пациентов
     private OracleDaoFactory factory;//Фабрика подключений
-    private AtomicReference<UserDAO> dao;//Времменый доступ к авторизвации
-    private AtomicReference<IPatientDao> patientDao;//ДАО для пациентов
-    private AtomicReference<IAppointmentDao> appointmentDao;//ДАО для приемов
+    private AtomicReference<PatientDao> patientDao;//ДАО для пациентов
+    private AtomicReference<AppointmentDao> appointmentDao;//ДАО для приемов
     private AtomicReference<DiagDao> diagDao;//ДАО для диагнозов
     private AtomicReference<UuserDao> userDao;
     private AtomicReference<OperationDao> operationDao;
@@ -52,12 +46,10 @@ public class ContextListener implements ServletContextListener {
         Locale.setDefault(Locale.US);
         final ServletContext servletContext = servletContextEvent.getServletContext();
 
-        dao = null;
-        patientDao=null;
-        appointmentDao=null;
-        diagDao=null;
 
-        dao = new AtomicReference<>(new UserDAO());
+
+
+
         patientDao = new AtomicReference<>();
         appointmentDao=new AtomicReference<>();
         diagDao=new AtomicReference<>();
@@ -68,10 +60,6 @@ public class ContextListener implements ServletContextListener {
         this.patientsDb=new ConcurrentHashMap<>();
         this.factory=new OracleDaoFactory();
 
-        dao.get().add(new User(1, "admin", "admin", ADMIN));
-        dao.get().add(new User(2, "user", "user", USER));
-
-        servletContext.setAttribute("dao", dao);
 
         try {
             this.appointmentDao.set(factory.getAppointmentDao());
@@ -110,6 +98,5 @@ public class ContextListener implements ServletContextListener {
     public void contextDestroyed(ServletContextEvent sce) {
         //Close recourse.
         patientsDb=null;
-        dao=null;
     }
 }

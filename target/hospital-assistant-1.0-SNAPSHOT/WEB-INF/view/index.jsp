@@ -25,11 +25,13 @@
                             <th width="150">Имя</th>
                             <th width="150">Фамилия</th>
                             <th width="150">Отчество</th>
+                            <th width="150">Возраст</th>
+                            <th width="150">Пол</th>
                             <th width="150">Дата рождения</th>
                             <th width="150">Дата поступления</th>
                             <th width="150">Дата выписки</th>
-                            <th width="150">Обновить</th>
-                            <th width="150">CardId</th>
+                            <th width="150">Подробности</th>
+                            <%--<th width="150">CardId</th>--%>
                         </tr>
                         </thead>
                         <c:forEach var="patient" items="${requestScope.patientsDb}">
@@ -37,9 +39,11 @@
                             <td ><c:out value="${patient.pName}"/></td>
                             <td ><c:out value="${patient.pSurname}"/></td>
                             <td ><c:out value="${patient.pPatronymic}"/></td>
-                            <td ><c:out value="${patient.pBirthDate}"/></td>
-                            <td ><c:out value="${patient.pArrivalDate}"/></td>
-                            <td ><c:out value="${patient.pDischargeDate}"/></td>
+                            <td ><c:out value="${patient.pAge}"/></td>
+                            <td ><c:out value="${patient.pSex}"/></td>
+                            <td ><c:out value="${patient.pBirthDateString}"/></td>
+                            <td ><c:out value="${patient.pArrivalDateString}"/></td>
+                            <td ><c:out value="${patient.pDischargeDateString}"/></td>
                             <td valign="center">
                                 <div>
                                     <form method="get" action="<c:url value='/patient'/>">
@@ -49,7 +53,7 @@
                                     </form>
                                 </div>
                             </td>
-                            <td valign="center"><c:out value="${patient.pCardId}"/></td>
+                            <%--<td valign="center"><c:out value="${patient.pCardId}"/></td>--%>
                         </tr>
                         </c:forEach>
                     </table>

@@ -1,9 +1,8 @@
 package com.hospital.filter;
 
-import com.hospital.dao.UserDAO;
+
 import com.hospital.dao.UuserDao;
-import com.hospital.interfaces.IAppointmentDao;
-import com.hospital.model.User;
+
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -86,7 +85,6 @@ public class AuthFilter implements Filter {
             else{
                 req.setAttribute("login", login);
                 req.getRequestDispatcher("/WEB-INF/view/admin_menu.jsp").forward(req, res);
-
 
             }
         }

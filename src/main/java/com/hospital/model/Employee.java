@@ -1,6 +1,8 @@
 package com.hospital.model;
 
 import java.util.Date;
+import java.util.Objects;
+
 import com.hospital.model.Position;
 
 public class Employee {
@@ -61,5 +63,33 @@ public class Employee {
 
     public void setPosName(String empPosName) {
         this.PosName = empPosName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Employee)) return false;
+        Employee employee = (Employee) o;
+        return getEmpId() == employee.getEmpId() &&
+                Objects.equals(getEmpName(), employee.getEmpName()) &&
+                Objects.equals(getEmpSurname(), employee.getEmpSurname()) &&
+                Objects.equals(getEmpPatronymic(), employee.getEmpPatronymic()) &&
+                Objects.equals(getPosName(), employee.getPosName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getEmpId(), getEmpName(), getEmpSurname(), getEmpPatronymic(), getPosName());
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "empId=" + empId +
+                ", empName='" + empName + '\'' +
+                ", empSurname='" + empSurname + '\'' +
+                ", empPatronymic='" + empPatronymic + '\'' +
+                ", PosName='" + PosName + '\'' +
+                '}';
     }
 }

@@ -1,25 +1,12 @@
 package com.hospital.servlet;
 
-import com.hospital.dao.DiagDao;
+
 import com.hospital.dao.PatientDao;
-import com.hospital.dao.UserDAO;
-import com.hospital.interfaces.IAppointmentDao;
-import com.hospital.model.Appointment;
-import com.hospital.model.Diagnosis;
-import com.hospital.model.Employee;
-import com.hospital.model.Patient;
-import com.hospital.dao.AppointmentDao;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class DischargeServlet extends HttpServlet {
@@ -61,7 +48,6 @@ public class DischargeServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-//        req.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(req, resp);
         resp.sendRedirect(req.getContextPath() + "/read");
     }
 }

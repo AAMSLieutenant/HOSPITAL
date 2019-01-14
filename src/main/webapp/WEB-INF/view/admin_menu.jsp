@@ -22,12 +22,9 @@
     <c:set var="login" value="${requestScope.login}"/>
     <h1>Добро пожаловать, ${login}</h1>
         <br>
-    <%--<a href="<c:url value='/logout' />">Logout</a>--%>
-    <%--<a href="<c:url value='/read' />">Получить список пациентов</a>--%>
+
         <p>
         <form  method="get" action="<c:url value='/read'/>">
-        <%--<input type="number" hidden name="pCardId" value="${patient.pCardId}" />--%>
-        <%--<input type="submit" value="Получить список пациентов"/>--%>
         <button type="submit" class="btn btn-primary  btn-md">Список пациентов</button><br>
         <small id="passwordHelp" class="form-text text-muted">Работа с пациентами</small><br>
         </form>
@@ -36,7 +33,7 @@
         <form  method="get" action="<c:url value='/logout'/>">
             <%--<input type="number" hidden name="pCardId" value="${patient.pCardId}" />--%>
                 <button type="submit" class="btn btn-primary  btn-danger">Выйти</button><br>
-                <small id="passwordHelp" class="form-text text-muted">Выйти из учетной записи</small><br>
+                <small id="exitHelp" class="form-text text-muted">Выйти из учетной записи</small><br>
         </form>
         </p>
 

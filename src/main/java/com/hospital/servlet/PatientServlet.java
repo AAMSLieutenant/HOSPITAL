@@ -1,8 +1,8 @@
 package com.hospital.servlet;
 
 import com.hospital.dao.*;
-import com.hospital.interfaces.IAppointmentDao;
-import com.hospital.interfaces.IPatientDao;
+
+
 import com.hospital.model.*;
 import com.sun.net.httpserver.HttpServer;
 
@@ -24,7 +24,7 @@ public class PatientServlet extends HttpServlet {
     private Integer currentId=0;//Айди выбранного пациента
     private Map<Integer, Patient> patientsDb;//Массив с пациентами
     private Map<Integer, Appointment> appointmentsDb;//Массив с приемами у врача данного пациента
-    private AtomicReference<IAppointmentDao> appointmentDao;//ДАО для работы с приемами
+    private AtomicReference<AppointmentDao> appointmentDao;//ДАО для работы с приемами
     private Map<Integer, Diagnosis> diagnosesDb;
     private AtomicReference<DiagDao> diagDao;
     private Map<Integer, OperInfo> operInfosDb;
@@ -33,7 +33,7 @@ public class PatientServlet extends HttpServlet {
     private AtomicReference<OperationDao> operationDao;
     private AtomicReference<MedicineDao> medicineDao;
     private AtomicReference<ProcedureDao> procedureDao;
-    private AtomicReference<IPatientDao> patientDao;//ДАО для работы с пациентом
+    private AtomicReference<PatientDao> patientDao;//ДАО для работы с пациентом
     private boolean isApp=false;//Поле для проверки наличия приемов конкретного пациента
     private boolean isDiag=false;
     private boolean operMedPro=false;
@@ -87,9 +87,9 @@ public class PatientServlet extends HttpServlet {
         } else {
 
             this.patientsDb = (ConcurrentHashMap<Integer, Patient>) patientsDb;
-            this.patientDao=(AtomicReference<IPatientDao>) patientDao;
+            this.patientDao=(AtomicReference<PatientDao>) patientDao;
             this.appointmentsDb=new ConcurrentHashMap<>();
-            this.appointmentDao=(AtomicReference<IAppointmentDao>) appointmentDao;
+            this.appointmentDao=(AtomicReference<AppointmentDao>) appointmentDao;
             this.diagDao=(AtomicReference<DiagDao>) diagDao;
             this.diagnosesDb=new ConcurrentHashMap<>();
             this.operationDao=(AtomicReference<OperationDao>) operationDao;
@@ -123,9 +123,7 @@ public class PatientServlet extends HttpServlet {
         medSize=0;
         procSize=0;
         discharge=1;
-//        System.out.println("----------------------------------");
-//        System.out.println("discharge start:"+discharge);
-//        System.out.println("----------------------------------");
+
         final String pCardId=req.getParameter("pCardId");
         final Patient patient=patientsDb.get(Integer.parseInt(pCardId));
         req.setAttribute("pCardId", pCardId);
@@ -198,7 +196,7 @@ public class PatientServlet extends HttpServlet {
                             dones.add(operInfos.get(i).isOperDone());
                         }
 
-
+                        this.operInfosDb.clear();
                         for (int i = 0; i < operInfos.size(); i++) {
                             this.operInfosDb.put(i, operInfos.get(i));
                         }
@@ -215,7 +213,7 @@ public class PatientServlet extends HttpServlet {
                        medInfos = this.medicineDao.get().getAllDiagMed(this.currentId);
                     }
                     medSize=medInfos.size();
-//                    req.setAttribute("medSize",medSize);
+
                     if(medSize>0) {
 
                         medicineDao.get().finishMedicine(medInfos);
@@ -223,7 +221,7 @@ public class PatientServlet extends HttpServlet {
                         for(int i=0;i<medInfos.size();i++) {
                             dones.add(medInfos.get(i).isMedDone());
                         }
-
+                        this.medInfosDb.clear();
                         for (int i = 0; i < medInfos.size(); i++) {
                             this.medInfosDb.put(i, medInfos.get(i));
                         }
@@ -238,7 +236,7 @@ public class PatientServlet extends HttpServlet {
                     List<ProcInfo> procInfos=new ArrayList<ProcInfo>();
                     procInfos = this.procedureDao.get().getAllDiagProc(this.currentId);
                     procSize=procInfos.size();
-//                    req.setAttribute("procSize",procSize);
+
                     if(procSize>0) {
 
                         procedureDao.get().finishProcedure(procInfos);
@@ -246,7 +244,7 @@ public class PatientServlet extends HttpServlet {
                         for(int i=0;i<procInfos.size();i++) {
                             dones.add(procInfos.get(i).isProcDone());
                         }
-
+                        this.procInfosDb.clear();
                         for (int i = 0; i < procInfos.size(); i++) {
                             this.procInfosDb.put(i, procInfos.get(i));
                         }
@@ -259,10 +257,7 @@ public class PatientServlet extends HttpServlet {
 
             }
 
-//        System.out.println("----------------------------------");
-//        System.out.println("discharge before end:"+discharge);
-//        System.out.println("dones.size():"+dones.size());
-//        System.out.println("----------------------------------");
+
             if(dones.size()!=0) {
                 for (int i = 0; i < dones.size(); i++) {
                     if (dones.get(i) == false) {
@@ -271,9 +266,7 @@ public class PatientServlet extends HttpServlet {
                 }
             }
             dones=new ArrayList<>();
-//        System.out.println("----------------------------------");
-//        System.out.println("discharge end:"+discharge);
-//        System.out.println("----------------------------------");
+
 
         req.setAttribute("isApp", isApp);
         req.setAttribute("isDiag", isDiag);

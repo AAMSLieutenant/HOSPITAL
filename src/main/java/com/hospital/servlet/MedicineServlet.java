@@ -2,8 +2,6 @@ package com.hospital.servlet;
 
 import com.hospital.dao.DiagDao;
 import com.hospital.dao.MedicineDao;
-import com.hospital.dao.OperationDao;
-import com.hospital.interfaces.IAppointmentDao;
 import com.hospital.model.*;
 
 import javax.servlet.ServletException;
@@ -13,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;

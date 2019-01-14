@@ -1,6 +1,7 @@
 package com.hospital.model;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class OperInfo {
 
@@ -15,8 +16,10 @@ public class OperInfo {
     private int doctorId;
     private String empSurname;
     private String posName;
+    private String operDateString;
 
     public OperInfo(){
+        operDateString=new String();
 
     }
 
@@ -61,7 +64,20 @@ public class OperInfo {
     }
 
     public void setOperDate(Date operDate) {
+
         this.operDate = operDate;
+        if(operDate!=null) {
+            String date = String.valueOf(operDate.getDate());
+            if(date.length()==1){
+                date="0"+date;
+            }
+            String month = String.valueOf(operDate.getMonth() + 1);
+            if(month.length()==1){
+                month="0"+month;
+            }
+            String year = String.valueOf(operDate.getYear() + 1900);
+            this.operDateString = date + "-" + month + "-" + year;
+        }
     }
 
     public boolean isOperDone() {
@@ -94,5 +110,49 @@ public class OperInfo {
 
     public void setPosName(String posName) {
         this.posName = posName;
+    }
+
+    public String getOperDateString(){
+        return this.operDateString;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof OperInfo)) return false;
+        OperInfo operInfo = (OperInfo) o;
+        return getDoId() == operInfo.getDoId() &&
+                getDiagId() == operInfo.getDiagId() &&
+                getOperId() == operInfo.getOperId() &&
+                isOperDone() == operInfo.isOperDone() &&
+                getDoctorId() == operInfo.getDoctorId() &&
+                Objects.equals(getDiagName(), operInfo.getDiagName()) &&
+                Objects.equals(getOperName(), operInfo.getOperName()) &&
+                Objects.equals(getOperDate(), operInfo.getOperDate()) &&
+                Objects.equals(getEmpSurname(), operInfo.getEmpSurname()) &&
+                Objects.equals(getPosName(), operInfo.getPosName()) &&
+                Objects.equals(getOperDateString(), operInfo.getOperDateString());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getDoId(), getDiagId(), getDiagName(), getOperId(), getOperName(), getOperDate(), isOperDone(), getDoctorId(), getEmpSurname(), getPosName(), getOperDateString());
+    }
+
+    @Override
+    public String toString() {
+        return "OperInfo{" +
+                "doId=" + doId +
+                ", diagId=" + diagId +
+                ", diagName='" + diagName + '\'' +
+                ", operId=" + operId +
+                ", operName='" + operName + '\'' +
+                ", operDate=" + operDate +
+                ", operDone=" + operDone +
+                ", doctorId=" + doctorId +
+                ", empSurname='" + empSurname + '\'' +
+                ", posName='" + posName + '\'' +
+                ", operDateString='" + operDateString + '\'' +
+                '}';
     }
 }

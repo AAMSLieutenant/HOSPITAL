@@ -22,7 +22,7 @@
                     <label for="diagId">Выберите диагноз:</label>
                         <select name="diagId" id="diagId" class="form-control" size="1" required>
                             <c:forEach var="diagnose" items="${requestScope.diagnosesDb}">
-                                <option value="${diagnose.diagId}">${diagnose.diagId} ${diagnose.diagName}</option>
+                                <option value="${diagnose.diagId}">${diagnose.diagName}</option>
                             </c:forEach>
                         </select>
                 </div>
@@ -33,8 +33,8 @@
                     <label for="procId">Выберите процедуру:</label>
                         <select name="procId" id="procId" class="form-control" size="1" required>
                             <c:forEach var="procedure" items="${requestScope.proceduresDb}">
-                                <option value="${procedure.procId}"> PROCEDURE ${procedure.procId} ${procedure.procName} ${procedure.procValue}
-                                        ${procedure.surname} ${procedure.name} ${procedure.patronymic} ${procedure.posName}</option>
+                                <option value="${procedure.procId}">${procedure.procName}, стоимость: ${procedure.procValue},
+                                        ответственный: ${procedure.surname} ${procedure.name}, ${procedure.posName}</option>
                             </c:forEach>
                         </select>
 

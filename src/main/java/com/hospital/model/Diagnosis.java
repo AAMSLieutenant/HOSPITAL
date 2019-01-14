@@ -1,5 +1,7 @@
 package com.hospital.model;
 
+import java.util.Objects;
+
 public class Diagnosis {
 
     private int diagId;
@@ -39,5 +41,29 @@ public class Diagnosis {
 
     public void setCardId(int cardId) {
         this.cardId = cardId;
+    }
+
+    @Override
+    public String toString() {
+        return "Diagnosis{" +
+                "diagId=" + diagId +
+                ", diagName='" + diagName + '\'' +
+                ", cardId=" + cardId +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Diagnosis)) return false;
+        Diagnosis diagnosis = (Diagnosis) o;
+        return getDiagId() == diagnosis.getDiagId() &&
+                getCardId() == diagnosis.getCardId() &&
+                Objects.equals(getDiagName(), diagnosis.getDiagName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getDiagId(), getDiagName(), getCardId());
     }
 }

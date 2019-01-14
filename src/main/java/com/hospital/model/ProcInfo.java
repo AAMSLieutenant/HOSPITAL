@@ -1,6 +1,7 @@
 package com.hospital.model;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class ProcInfo {
 
@@ -15,8 +16,10 @@ public class ProcInfo {
     private int empId;
     private String empSurname;
     private String posName;
+    private String procDateString;
 
     public ProcInfo(){
+        this.procDateString=new String();
 
     }
 
@@ -66,7 +69,20 @@ public class ProcInfo {
     }
 
     public void setProcDate(Date procDate) {
+
         this.procDate = procDate;
+        if(procDate!=null) {
+            String date = String.valueOf(procDate.getDate());
+            if(date.length()==1){
+                date="0"+date;
+            }
+            String month = String.valueOf(procDate.getMonth() + 1);
+            if(month.length()==1){
+                month="0"+month;
+            }
+            String year = String.valueOf(procDate.getYear() + 1900);
+            this.procDateString = date + "-" + month + "-" + year;
+        }
     }
 
     public boolean isProcDone() {
@@ -99,5 +115,49 @@ public class ProcInfo {
 
     public void setPosName(String posName) {
         this.posName = posName;
+    }
+
+    public String getProcDateString() {
+        return procDateString;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ProcInfo)) return false;
+        ProcInfo procInfo = (ProcInfo) o;
+        return getDpId() == procInfo.getDpId() &&
+                getDiagId() == procInfo.getDiagId() &&
+                getProcId() == procInfo.getProcId() &&
+                isProcDone() == procInfo.isProcDone() &&
+                getEmpId() == procInfo.getEmpId() &&
+                Objects.equals(getDiagName(), procInfo.getDiagName()) &&
+                Objects.equals(getProcName(), procInfo.getProcName()) &&
+                Objects.equals(getProcDate(), procInfo.getProcDate()) &&
+                Objects.equals(getEmpSurname(), procInfo.getEmpSurname()) &&
+                Objects.equals(getPosName(), procInfo.getPosName()) &&
+                Objects.equals(getProcDateString(), procInfo.getProcDateString());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getDpId(), getDiagId(), getDiagName(), getProcId(), getProcName(), getProcDate(), isProcDone(), getEmpId(), getEmpSurname(), getPosName(), getProcDateString());
+    }
+
+    @Override
+    public String toString() {
+        return "ProcInfo{" +
+                "dpId=" + dpId +
+                ", diagId=" + diagId +
+                ", diagName='" + diagName + '\'' +
+                ", procId=" + procId +
+                ", procName='" + procName + '\'' +
+                ", procDate=" + procDate +
+                ", procDone=" + procDone +
+                ", empId=" + empId +
+                ", empSurname='" + empSurname + '\'' +
+                ", posName='" + posName + '\'' +
+                ", procDateString='" + procDateString + '\'' +
+                '}';
     }
 }

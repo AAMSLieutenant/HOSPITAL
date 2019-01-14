@@ -24,7 +24,7 @@
             <label for="appValue">Стоимость приема:</label>
             <input type="text" id="appValue" class="form-control" min="1" name="appValue" value="250" readonly /><br>
             <label for="appCompliant">Жалоба пациента:</label>
-            <textarea id="appCompliant" class="form-control" style="resize:none" placeholder="Не меньше 10 знаков" name="appComplaint" rows="8" minlength="10" required></textarea><br>
+            <textarea id="appCompliant" class="form-control" style="resize:none" placeholder="Не меньше 10 знаков" name="appComplaint" rows="8" minlength="10" maxlength="200" required></textarea><br>
             <label for="docId">Врач:</label>
             <select name="docId" id="docId" class="form-control" size="1">
                 <c:forEach var="doctor" items="${requestScope.doctorsDb}">

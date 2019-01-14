@@ -1,6 +1,7 @@
 package com.hospital.model;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Medicine {
 
@@ -80,5 +81,39 @@ public class Medicine {
 
     public void setPosName(String posName) {
         this.posName = posName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Medicine)) return false;
+        Medicine medicine = (Medicine) o;
+        return getMedId() == medicine.getMedId() &&
+                getMedValue() == medicine.getMedValue() &&
+                getEmpId() == medicine.getEmpId() &&
+                Objects.equals(getMedName(), medicine.getMedName()) &&
+                Objects.equals(getName(), medicine.getName()) &&
+                Objects.equals(getSurname(), medicine.getSurname()) &&
+                Objects.equals(getPatronymic(), medicine.getPatronymic()) &&
+                Objects.equals(getPosName(), medicine.getPosName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getMedId(), getMedName(), getMedValue(), getEmpId(), getName(), getSurname(), getPatronymic(), getPosName());
+    }
+
+    @Override
+    public String toString() {
+        return "Medicine{" +
+                "medId=" + medId +
+                ", medName='" + medName + '\'' +
+                ", medValue=" + medValue +
+                ", empId=" + empId +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                ", posName='" + posName + '\'' +
+                '}';
     }
 }

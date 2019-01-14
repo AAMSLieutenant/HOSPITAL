@@ -18,7 +18,7 @@
                 <form method="post" action="<c:url value='/diagnosis'/>">
 
                     <label for="diagName">Диагноз: </label>
-                    <textarea style="resize:none" id="diagName" class="form-control" placeholder="Не менее 5 знаков" name="diagName" cols="30" rows="10" minlength="5" required></textarea><br>
+                    <textarea style="resize:none" id="diagName" class="form-control" placeholder="Не менее 5 знаков" name="diagName" cols="30" rows="10" minlength="5" maxlength="200" required></textarea><br>
                     <button type="submit" class="btn btn-primary">Поставить</button>
                     <button type="reset" class="btn btn-danger">Сброс</button>
                 </form>

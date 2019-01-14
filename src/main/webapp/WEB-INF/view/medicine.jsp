@@ -22,7 +22,7 @@
                     <label for="diagId">Выберите диагноз:</label>
                         <select name="diagId" id="diagId" class="form-control" size="1" required>
                             <c:forEach var="diagnose" items="${requestScope.diagnosesDb}">
-                                <option value="${diagnose.diagId}">${diagnose.diagId} ${diagnose.diagName}</option>
+                                <option value="${diagnose.diagId}">${diagnose.diagName}</option>
                             </c:forEach>
                         </select>
                 </div>
@@ -33,8 +33,8 @@
                     <label for="medId">Выберите препараты:</label>
                         <select name="medId" id="medId" class="form-control" size="1" required>
                             <c:forEach var="medicine" items="${requestScope.medicineDb}">
-                                <option value="${medicine.medId}"> MEDICINE ${medicine.medId} ${medicine.medName} ${medicine.medValue}
-                                        ${medicine.surname} ${medicine.name} ${medicine.patronymic} ${medicine.posName}</option>
+                                <option value="${medicine.medId}"> ${medicine.medName}, стоимость: ${medicine.medValue},
+                                        ответственный: ${medicine.surname} ${medicine.name}, ${medicine.posName}</option>
                             </c:forEach>
                         </select>
 
@@ -47,7 +47,7 @@
                     <label for="medStart">Дата назначения препарата:</label>
                         <input type="date" id="medStart" class="form-control" name="medStart" value="${fin}"  disabled/>
                 </div>
-                <br/
+                <br/>
                 <div>
                     <label for="medEnd">Дата окончания приема препарата: </label>
                         <input type="date" id="medEnd" class="form-control" name="medEnd" min="${fin}" required/>

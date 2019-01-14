@@ -48,20 +48,22 @@ public class Position {
         this.idMd = idMd;
     }
 
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Position)) return false;
         Position position = (Position) o;
-        return posId == position.posId &&
-                idMd == position.idMd &&
-                Objects.equals(posName, position.posName) &&
-                Objects.equals(posSalary, position.posSalary);
+        return getPosId() == position.getPosId() &&
+                isIdMd() == position.isIdMd() &&
+                Objects.equals(getPosName(), position.getPosName()) &&
+                Objects.equals(getPosSalary(), position.getPosSalary());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(posId, posName, posSalary, idMd);
+        return Objects.hash(getPosId(), getPosName(), getPosSalary(), isIdMd());
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.hospital.model;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Appointment {
 
@@ -10,8 +11,10 @@ public class Appointment {
     private String appComplaint;
     private int docId;
     private int cardId;
+    private String appDateString;
 
     public Appointment(){
+        this.appDateString=new String();
 
     }
 
@@ -53,7 +56,20 @@ public class Appointment {
     }
 
     public void setAppDate(Date appDate) {
+
         this.appDate = appDate;
+        if(appDate!=null) {
+            String date = String.valueOf(appDate.getDate());
+            if(date.length()==1){
+                date="0"+date;
+            }
+            String month = String.valueOf(appDate.getMonth() + 1);
+            if(month.length()==1){
+                month="0"+month;
+            }
+            String year = String.valueOf(appDate.getYear() + 1900);
+            this.appDateString = date + "-" + month + "-" + year;
+        }
     }
 
     public int getAppValue() {
@@ -84,4 +100,37 @@ public class Appointment {
         this.cardId = cardId;
     }
 
+    public String getAppDateString(){
+        return this.appDateString;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Appointment)) return false;
+        Appointment that = (Appointment) o;
+        return getAppId() == that.getAppId() &&
+                getAppValue() == that.getAppValue() &&
+                getDocId() == that.getDocId() &&
+                getCardId() == that.getCardId() &&
+                Objects.equals(getAppDate(), that.getAppDate()) &&
+                Objects.equals(getAppComplaint(), that.getAppComplaint());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getAppId(), getAppDate(), getAppValue(), getAppComplaint(), getDocId(), getCardId());
+    }
+
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "appId=" + appId +
+                ", appDate=" + appDate +
+                ", appValue=" + appValue +
+                ", appComplaint='" + appComplaint + '\'' +
+                ", docId=" + docId +
+                ", cardId=" + cardId +
+                '}';
+    }
 }

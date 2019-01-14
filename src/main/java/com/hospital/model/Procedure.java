@@ -1,5 +1,7 @@
 package com.hospital.model;
 
+import java.util.Objects;
+
 public class Procedure {
 
     private int procId;
@@ -77,5 +79,39 @@ public class Procedure {
 
     public void setPosName(String posName) {
         this.posName = posName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Procedure)) return false;
+        Procedure procedure = (Procedure) o;
+        return getProcId() == procedure.getProcId() &&
+                getProcValue() == procedure.getProcValue() &&
+                getEmpId() == procedure.getEmpId() &&
+                Objects.equals(getProcName(), procedure.getProcName()) &&
+                Objects.equals(getName(), procedure.getName()) &&
+                Objects.equals(getSurname(), procedure.getSurname()) &&
+                Objects.equals(getPatronymic(), procedure.getPatronymic()) &&
+                Objects.equals(getPosName(), procedure.getPosName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getProcId(), getProcName(), getProcValue(), getEmpId(), getName(), getSurname(), getPatronymic(), getPosName());
+    }
+
+    @Override
+    public String toString() {
+        return "Procedure{" +
+                "procId=" + procId +
+                ", procName='" + procName + '\'' +
+                ", procValue=" + procValue +
+                ", empId=" + empId +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                ", posName='" + posName + '\'' +
+                '}';
     }
 }

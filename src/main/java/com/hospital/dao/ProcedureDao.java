@@ -74,24 +74,6 @@ public class ProcedureDao {
             }
         }
 
-//        List<Integer> ids=new ArrayList<>();
-//
-//        for(int i=0;i<temp.size();i++){
-//            if(ids.size()!=0) {
-//                if (!ids.contains(temp.get(i))) {
-//                    ids.add(temp.get(i));
-//                }
-//            }
-//            else{
-//                ids.add(temp.get(i));
-//            }
-//            i++;
-//        }
-//        System.out.println("------------");
-//        for (int i = 0; i < ids.size(); i++) {
-//            System.out.println("ids  diag_id: " + ids.get(i));
-//        }
-//        return ids;
         return temp;
     }
 

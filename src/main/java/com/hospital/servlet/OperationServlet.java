@@ -1,8 +1,8 @@
 package com.hospital.servlet;
 
+import com.hospital.dao.AppointmentDao;
 import com.hospital.dao.DiagDao;
 import com.hospital.dao.OperationDao;
-import com.hospital.interfaces.IAppointmentDao;
 import com.hospital.model.*;
 
 import javax.servlet.ServletException;
@@ -23,7 +23,7 @@ public class OperationServlet extends HttpServlet {
 
 
     private Integer pCardId=0;
-    private AtomicReference<IAppointmentDao> appointmentDao;
+    private AtomicReference<AppointmentDao> appointmentDao;
     private AtomicReference<DiagDao> diagDao;
     private AtomicReference<OperationDao> operationDao;
     private Map<Integer, Employee> doctorsDb;
