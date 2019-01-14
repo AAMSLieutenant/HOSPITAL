@@ -45,11 +45,11 @@ class PatientDaoTest {
         Date ad=new Date();
         Date dd=new Date();
 
-        patExp.setpCardId(1);
-        patExp.setpName("Андрей");
-        patExp.setpSurname("Васильев");
-        patExp.setpPatronymic("Иванович");
-        patExp.setpSex("муж");
+//        patExp.setpCardId(1);
+//        patExp.setpName("Андрей");
+//        patExp.setpSurname("Васильев");
+//        patExp.setpPatronymic("Иванович");
+//        patExp.setpSex("муж");
         patExp.setpAge(43);
         patExp.setpArrivalDate(ad);
         patExp.setpBirthDate(bd);
