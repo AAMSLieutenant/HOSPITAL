@@ -1,25 +1,33 @@
 package com.hospital.dao;
 
-import com.hospital.model.Patient;
+
 import com.hospital.model.Uuser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
+
+
+/**
+ * @author Rostislav Stakhov
+ * Dao class for working with the USer object
+ */
 public class UuserDao {
     private final Connection connection;//Объект соединения с БД
+    private static final Logger logger= LoggerFactory.getLogger(ProcedureDao.class);
 
     public UuserDao(Connection connection)
     {
         this.connection = connection;
-        System.out.println("UuserDao received connection");
+        logger.info("UuserDao received connection");
     }
 
     public String authorize(String login, String password) throws Exception{
 
-        System.out.println("UuserDao authorize()");
+        logger.info("UuserDao authorize()");
         String statement="SELECT login, password FROM uuser";
         PreparedStatement ps=connection.prepareStatement(statement);
         ResultSet rs=ps.executeQuery();
@@ -37,8 +45,8 @@ public class UuserDao {
         try{
             ps.close();
         }
-        catch(SQLException ex){
-            ex.printStackTrace();
+        catch(Exception ex){
+            logger.error(ex.getMessage());
         }
         return new String("-1");
     }

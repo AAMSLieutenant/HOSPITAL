@@ -1,20 +1,26 @@
 package com.hospital.dao;
 
-import com.hospital.filter.AuthFilter;
+
 import com.hospital.model.Appointment;
 import com.hospital.model.Employee;
-import com.hospital.model.Patient;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.SimpleDateFormat;
+
+
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+/**
+ * @author Rostislav Stakhov
+ * Dao class for working with the Appointment object
+ */
 public class AppointmentDao{
 
     private final Connection connection;//Объект соединения с БД
@@ -210,8 +216,8 @@ public class AppointmentDao{
         try{
             ps.close();
         }
-        catch(SQLException ex){
-            ex.printStackTrace();
+        catch(Exception ex){
+            logger.error(ex.getMessage());
         }
 
         return emps;

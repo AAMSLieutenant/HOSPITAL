@@ -10,13 +10,16 @@ import java.sql.*;
 import java.util.List;
 
 import com.hospital.model.Patient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Date;
 
+
 /**
- *
  * @author Rostislav Stakhov
+ * Dao class for working with the Patient object
  */
 public class PatientDao{
 
@@ -25,15 +28,12 @@ public class PatientDao{
 
 
     private final Connection connection;//Объект соединения с БД
-//    private static final org.apache.log4j.Logger log= Logger.getLogger(PatientDao.class);
-//    static {
-//        PropertyConfigurator.configure("log4j.properties");
-//    }
+    private static final Logger logger= LoggerFactory.getLogger(PatientDao.class);
 
     public PatientDao(Connection connection)
     {
         this.connection = connection;
-        System.out.println("PatientDao received connection");
+        logger.info("PatientDao received connection");
     }
 
     /** Создает новую запись и соответствующий ей объект */
@@ -41,7 +41,7 @@ public class PatientDao{
 
         java.sql.Date d;
         int nextId=0;
-        System.out.println("PatientDao create()");
+        logger.info("PatientDao create()");
         String statement="SELECT card_id FROM patient";
         PreparedStatement ps=connection.prepareStatement(statement);
         ResultSet rs=ps.executeQuery();
@@ -49,7 +49,7 @@ public class PatientDao{
             nextId=rs.getInt("card_id");
         }
         nextId++;
-        System.out.println("nextId: "+nextId);
+        logger.info("nextId: "+nextId);
         statement="INSERT INTO patient(card_id, p_name, p_surname, p_patronymic, p_age, p_birth_date, p_sex, p_arrival_date) " +
                 "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
         ps=connection.prepareStatement(statement);
@@ -60,10 +60,10 @@ public class PatientDao{
         ps.setInt(5, patient.getpAge());
         d=new java.sql.Date(patient.getpBirthDate().getTime());
         ps.setDate(6, d);
-//        System.out.println("pBirthDate: "+d);
+//        logger.info("pBirthDate: "+d);
         ps.setString(7, patient.getpSex());
         d=new java.sql.Date(patient.getpArrivalDate().getTime());
-//        System.out.println("pArrivalDate: "+d);
+//        logger.info("pArrivalDate: "+d);
         ps.setDate(8, d);
         ps.executeUpdate();
 
@@ -77,6 +77,13 @@ public class PatientDao{
         ps.setInt(5, patient.getpAddress().getFlatNumber());
         ps.executeUpdate();
 
+        try{
+            ps.close();
+        }
+        catch(Exception ex){
+            logger.error(ex.getMessage());
+        }
+
 
 
     }
@@ -84,7 +91,7 @@ public class PatientDao{
     /** Возвращает объект соответствующий записи с первичным ключом key или null */
     public Patient read(int key) throws Exception{
 
-        System.out.println("PatientDao read()");
+        logger.info("PatientDao read()");
         String statement="SELECT * from patient WHERE card_id=?";
         PreparedStatement ps=connection.prepareStatement(statement);
         ps.setInt(1, key);
@@ -115,44 +122,45 @@ public class PatientDao{
             p.getpAddress().setFlatNumber(rs.getInt("flat_number"));
         }
 
-        System.out.println("card_id:"+p.getpCardId());
-        System.out.println("p_name:"+p.getpName());
-        System.out.println("p_surname:"+p.getpSurname());
-        System.out.println("p_patronymic:"+p.getpPatronymic());
-        System.out.println("p_age:"+p.getpAge());
-        System.out.println("p_sex:"+p.getpSex());
-        System.out.println("p_birth_date:"+p.getpBirthDate());
-        System.out.println("p_arrival_date:"+p.getpArrivalDate());
-        System.out.println("p_discharge_date:"+p.getpDischargeDate());
-        System.out.println("p_city:"+p.getpAddress().getCity());
-        System.out.println("p_street:"+p.getpAddress().getStreet());
-        System.out.println("p_house:"+p.getpAddress().getHouseNumber());
-        System.out.println("p_flat:"+p.getpAddress().getFlatNumber());
+        logger.info("card_id:"+p.getpCardId());
+        logger.info("p_name:"+p.getpName());
+        logger.info("p_surname:"+p.getpSurname());
+        logger.info("p_patronymic:"+p.getpPatronymic());
+        logger.info("p_age:"+p.getpAge());
+        logger.info("p_sex:"+p.getpSex());
+        logger.info("p_birth_date:"+p.getpBirthDate());
+        logger.info("p_arrival_date:"+p.getpArrivalDate());
+        logger.info("p_discharge_date:"+p.getpDischargeDate());
+        logger.info("p_city:"+p.getpAddress().getCity());
+        logger.info("p_street:"+p.getpAddress().getStreet());
+        logger.info("p_house:"+p.getpAddress().getHouseNumber());
+        logger.info("p_flat:"+p.getpAddress().getFlatNumber());
+
+
         try{
             ps.close();
         }
-        catch(SQLException ex){
-            ex.printStackTrace();
+        catch(Exception ex){
+            logger.error(ex.getMessage());
         }
+
+
+
         return p;
-
-
-
-
     }
 
     /** Сохраняет состояние объекта Employee в базе данных */
     public void update(int key, Patient patient) throws Exception{
 
         boolean flag=false;
-        System.out.println("PatientDao update()");
+        logger.info("PatientDao update()");
         String statement="SELECT CARD_ID FROM PATIENT";
         PreparedStatement ps=connection.prepareStatement(statement);
         ResultSet rs=ps.executeQuery();
         while(rs.next()){
             if(rs.getInt("card_id")==key){
                 flag=true;
-                System.out.println("PatientDao update() MATCH: "+rs.getLong("card_id"));
+                logger.info("PatientDao update() MATCH: "+rs.getLong("card_id"));
                 break;
             }
         }
@@ -166,6 +174,13 @@ public class PatientDao{
             ps.executeUpdate();
         }
 
+        try{
+            ps.close();
+        }
+        catch(Exception ex){
+            logger.error(ex.getMessage());
+        }
+
 
     }
 
@@ -173,14 +188,14 @@ public class PatientDao{
     public void delete(int key) throws Exception{
 
         boolean flag=false;
-        System.out.println("PatientDao delete()");
+        logger.info("PatientDao delete()");
         String statement="SELECT card_id from PATIENT";
         PreparedStatement ps=connection.prepareStatement(statement);
         ResultSet rs=ps.executeQuery();
         while(rs.next()){
             if(rs.getInt("card_id")==key){
                 flag=true;
-                System.out.println("MATCH: "+rs.getInt("card_id"));
+                logger.info("MATCH: "+rs.getInt("card_id"));
                 break;
             }
         }
@@ -189,60 +204,67 @@ public class PatientDao{
             ps.setInt(1, key);
             ps.executeUpdate();
         }
-//
 
+        try{
+            ps.close();
+        }
+        catch(Exception ex){
+            logger.error(ex.getMessage());
+        }
 
     }
 
     /** Возвращает список объектов соответствующих всем записям в базе данных */
     public List<Patient> getAll() throws Exception{
 
-        System.out.println("PatientDao getAll()");
+        logger.info("PatientDao getAll()");
         List<Integer> ids=new ArrayList<>();
         List<Patient> patients=new ArrayList<>();
 
         String statement="SELECT card_id FROM patient";
-        System.out.println("read statement: "+statement);
+        logger.info("read statement: "+statement);
         PreparedStatement ps=connection.prepareStatement(statement);
         ResultSet rs=ps.executeQuery();
         while(rs.next()){
             ids.add(rs.getInt("card_id"));
         }
-        System.out.println("---------------------------------------------------------");
-//        System.out.println("Count of cardIds: "+ids.size());
+        logger.info("---------------------------------------------------------");
+//        logger.info("Count of cardIds: "+ids.size());
         for(int i=0;i<ids.size();i++){
-            System.out.println("current CARD_ID: "+ids.get(i));
+            logger.info("current CARD_ID: "+ids.get(i));
             patients.add(read(ids.get(i)));
         }
 
+        try{
+            ps.close();
+        }
+        catch(Exception ex){
+            logger.error(ex.getMessage());
+        }
+
+
         return patients;
-
-
     }
 
 
     public void discharge(int pCardId) throws Exception{
         Date curDate=new Date();
-        System.out.println("--------------------------------");
-        System.out.println("PatientDao discharge()");
-        System.out.println("--------------------------------");
+        logger.info("--------------------------------");
+        logger.info("PatientDao discharge()");
+        logger.info("--------------------------------");
         String statement="UPDATE PATIENT SET p_discharge_date=? WHERE card_id=?";
         PreparedStatement ps=connection.prepareStatement(statement);
         java.sql.Date d=new java.sql.Date(curDate.getTime());
         ps.setDate(1, d);
         ps.setInt(2, pCardId);
         ps.executeUpdate();
+        try{
+            ps.close();
+        }
+        catch(Exception ex){
+            logger.error(ex.getMessage());
+        }
     }
-
-    public void quit(){
-
-
-    }
-
-
-
-
-
 
 
 }

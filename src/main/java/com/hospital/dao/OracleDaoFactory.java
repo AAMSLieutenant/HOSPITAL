@@ -1,29 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.hospital.dao;
 
 
 
-
-
-
 import oracle.jdbc.pool.OracleDataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-
-import javax.sql.DataSource;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.*;
-import java.util.Properties;
+
+
+
 
 
 /**
- *
  * @author Rostislav Stakhov
+ * Dao class for creating the basic connection objects and delegating them to the appropriate Dao classes
  */
 public class OracleDaoFactory{
 
@@ -33,30 +24,30 @@ public class OracleDaoFactory{
     private String user = "admin";//Логин пользователя
     private String password = "admin";//Пароль пользователя
     private String url = "jdbc:oracle:thin:@localhost:1521:xe";//URL адрес
-    private String driver = "oracle.jdbc.driver.OracleDriver";//Имя драйвера
+    private String driver = "oracle.jdbc.driver.OracleDriver";
     private OracleDataSource oracleDS = null;
     private Connection connection = null;
+    private static final Logger logger= LoggerFactory.getLogger(OracleDaoFactory.class);
 
 
     public OracleDaoFactory()
     {
         try
         {
-//            log.info("-------- Oracle JDBC Connection Testing ------");
+            logger.info("-------- Oracle JDBC Connection Testing ------");
             Class.forName(driver);//Регистрируем драйвер
-//            connection=DriverManager.getConnection(url, user, password);
             connection=getOracleConnection();
         }
 
         catch (ClassNotFoundException e)
         {
-//            log.error("JDBC Driver class load failture");
+            logger.error("JDBC Driver class load failture");
             e.printStackTrace();
         }
         catch(SQLException e){
             e.printStackTrace();
         }
-//        log.info("Oracle JDBC Driver Registered!");
+        logger.info("Oracle JDBC Driver Registered!");
 
     }
 
@@ -76,16 +67,14 @@ public class OracleDaoFactory{
 
     public Connection getConnection() throws SQLException
     {
-//        log.info("DB Connection returned");
-//        return DriverManager.getConnection(url, user, password);
+        logger.info("DB Connection returned");
         return this.connection;
-
 
     }
 //
     public PatientDao getPatientDao() throws Exception
     {
-            System.out.println("getPatientDao() returned connection");
+            logger.info("getPatientDao() returned connection");
 
             return new PatientDao(getOracleConnection());
 
@@ -93,38 +82,38 @@ public class OracleDaoFactory{
     }
 
     public AppointmentDao getAppointmentDao() throws Exception{
-        System.out.println("getAppointmentDao() returned connection");
+        logger.info("getAppointmentDao() returned connection");
 
         return new AppointmentDao(getOracleConnection());
     }
 
     public DiagDao getDiagDao() throws Exception{
-        System.out.println("getDiagDao() returned connection");
+        logger.info("getDiagDao() returned connection");
 
         return new DiagDao(getOracleConnection());
     }
 
     public UuserDao getUuserDao() throws Exception{
-        System.out.println("getUuserDao() returned connection");
+        logger.info("getUuserDao() returned connection");
 
         return new UuserDao(getOracleConnection());
     }
 
     public OperationDao getOperationDao() throws Exception{
-        System.out.println("getOperationDao() returned connection");
+        logger.info("getOperationDao() returned connection");
 
         return new OperationDao(getOracleConnection());
     }
 
     public MedicineDao getMedicineDao() throws Exception{
-        System.out.println("getMedicineDao() returned connection");
+        logger.info("getMedicineDao() returned connection");
 
         return new MedicineDao(getOracleConnection());
     }
 
     public ProcedureDao getProcedureDao() throws Exception{
 
-        System.out.println("getProcedureDao() returned connection");
+        logger.info("getProcedureDao() returned connection");
         return new ProcedureDao(getOracleConnection());
     }
 

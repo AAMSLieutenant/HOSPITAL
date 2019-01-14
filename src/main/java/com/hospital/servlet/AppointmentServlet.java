@@ -3,6 +3,9 @@ package com.hospital.servlet;
 import com.hospital.dao.AppointmentDao;
 import com.hospital.model.Appointment;
 import com.hospital.model.Employee;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,10 +19,16 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
 
+
+/**
+ * @author Rostislav Stakhov
+ * Servlet for creating patient appointments
+ */
 public class AppointmentServlet extends HttpServlet {
 
 
     private Integer pCardId=0;
+    private static final Logger logger= LoggerFactory.getLogger(AppointmentServlet.class);
     private AtomicReference<AppointmentDao> appointmentDao;
     private Map<Integer, Employee> doctorsDb;
     private Date curDate;
@@ -60,9 +69,9 @@ public class AppointmentServlet extends HttpServlet {
             throws ServletException, IOException
     {
 
-        System.out.println("-----------------------------------------");
-        System.out.println("AppointmentServlet doPost() is started;");
-        System.out.println("-----------------------------------------");
+        logger.info("-----------------------------------------");
+        logger.info("AppointmentServlet doPost() is started;");
+        logger.info("-----------------------------------------");
 
         req.setCharacterEncoding("UTF-8");
 
@@ -71,10 +80,10 @@ public class AppointmentServlet extends HttpServlet {
         final String appComplaint=req.getParameter("appComplaint");
         final String docId=req.getParameter("docId");
 
-        System.out.println("appointment doPost() Chosen STRING appDate:"+appDate);
-        System.out.println("appointment doPost() Chosen STRING appValue:"+appValue);
-        System.out.println("appointment doPost() Chosen STRING appComplaint:"+appComplaint);
-        System.out.println("appointment doPost() Chosen STRING docId:"+docId);
+        logger.info("appointment doPost() Chosen STRING appDate:"+appDate);
+        logger.info("appointment doPost() Chosen STRING appValue:"+appValue);
+        logger.info("appointment doPost() Chosen STRING appComplaint:"+appComplaint);
+        logger.info("appointment doPost() Chosen STRING docId:"+docId);
 
 
         Appointment appointment=new Appointment();
@@ -87,20 +96,20 @@ public class AppointmentServlet extends HttpServlet {
         try {
             d=sdf.parse(appDate);
         } catch (ParseException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         appointment.setAppDate(d);
         try{
             appointmentDao.get().create(appointment);
         }
         catch (Exception e){
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
         req.setAttribute("pCardId", pCardId);
-        System.out.println("-----------------------------------------");
-        System.out.println("AppointmentServlet doPost() is finished;");
-        System.out.println("-----------------------------------------");
+        logger.info("-----------------------------------------");
+        logger.info("AppointmentServlet doPost() is finished;");
+        logger.info("-----------------------------------------");
         resp.sendRedirect(req.getContextPath() + "/patient?pCardId="+pCardId);
     }
 
@@ -108,11 +117,11 @@ public class AppointmentServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        System.out.println("-----------------------------------------");
-        System.out.println("AppointmentServlet doGet() is started;");
-        System.out.println("-----------------------------------------");
+        logger.info("-----------------------------------------");
+        logger.info("AppointmentServlet doGet() is started;");
+        logger.info("-----------------------------------------");
         pCardId=Integer.parseInt(req.getParameter("pCardId"));
-        System.out.println("CURRENT PATIENT ID:"+pCardId);
+        logger.info("CURRENT PATIENT ID:"+pCardId);
         try {
             List<Employee> emps = this.appointmentDao.get().getDoctors();
             for(int i=0;i<emps.size();i++){
@@ -121,12 +130,12 @@ public class AppointmentServlet extends HttpServlet {
             req.setAttribute("doctorsDb", doctorsDb.values());
         }
         catch(Exception e){
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
-        System.out.println("-----------------------------------------");
-        System.out.println("AppointmentServlet doGet() is finished;");
-        System.out.println("-----------------------------------------");
+        logger.info("-----------------------------------------");
+        logger.info("AppointmentServlet doGet() is finished;");
+        logger.info("-----------------------------------------");
 
         req.setAttribute("fin", fin);
         req.setAttribute("pCardId", pCardId);

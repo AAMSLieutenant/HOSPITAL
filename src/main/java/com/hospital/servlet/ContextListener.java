@@ -5,7 +5,8 @@ import com.hospital.dao.*;
 
 
 import com.hospital.model.Patient;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 import javax.servlet.ServletContext;
@@ -26,9 +27,15 @@ import java.util.concurrent.ConcurrentHashMap;
 2. Добавить аннтоацию @WebListener
  */
 
+/**
+ * @author Rostislav Stakhov
+ * Listener for the whole project resourses
+ */
 @WebListener
 public class ContextListener implements ServletContextListener {
 
+
+    private static final Logger logger= LoggerFactory.getLogger(ContextListener.class);
     private Map<Integer, Patient> patientsDb;//Коллекция пациентов
     private OracleDaoFactory factory;//Фабрика подключений
     private AtomicReference<PatientDao> patientDao;//ДАО для пациентов
@@ -42,7 +49,7 @@ public class ContextListener implements ServletContextListener {
     //Базовый метод, применяется тогда, когда приложение запускается
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-
+        logger.info("ContextListener initialized");
         Locale.setDefault(Locale.US);
         final ServletContext servletContext = servletContextEvent.getServletContext();
 
@@ -59,8 +66,6 @@ public class ContextListener implements ServletContextListener {
         this.userDao=new AtomicReference<>();
         this.patientsDb=new ConcurrentHashMap<>();
         this.factory=new OracleDaoFactory();
-
-
         try {
             this.appointmentDao.set(factory.getAppointmentDao());
             this.diagDao.set(factory.getDiagDao());
@@ -76,7 +81,7 @@ public class ContextListener implements ServletContextListener {
             }
         }
         catch(Exception e){
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
         servletContext.setAttribute("factory", factory);

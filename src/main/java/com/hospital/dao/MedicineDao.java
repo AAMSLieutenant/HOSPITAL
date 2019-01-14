@@ -2,28 +2,36 @@ package com.hospital.dao;
 
 
 import com.hospital.model.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
+/**
+ * @author Rostislav Stakhov
+ * Dao class for working with the Medicine object
+ */
 public class MedicineDao {
 
     private final Connection connection;//Объект соединения с БД
+    private static final Logger logger= LoggerFactory.getLogger(MedicineDao.class);
 
     public MedicineDao(Connection connection)
     {
         this.connection = connection;
-        System.out.println("MedicineDao received connection");
+        logger.info("MedicineDao received connection");
     }
 
     public void createDiagMed(int diagId, Date medStart, Date medEnd, int medId) throws Exception{
 
-        System.out.println("MedicineDao createDiagMed()");
+        logger.info("MedicineDao createDiagMed()");
         java.sql.Date start;
         java.sql.Date end;
         int nextId=0;
@@ -34,7 +42,7 @@ public class MedicineDao {
             nextId=rs.getInt("dm_id");
         }
         nextId++;
-        System.out.println("OperationDao createDiagOper() nextId: "+nextId);
+        logger.info("OperationDao createDiagOper() nextId: "+nextId);
 
 
         start=new java.sql.Date(medStart.getTime());
@@ -51,11 +59,18 @@ public class MedicineDao {
         ps.setInt(6, medId);
         ps.executeUpdate();
 
+        try{
+            ps.close();
+        }
+        catch(Exception ex){
+            logger.error(ex.getMessage());
+        }
+
     }
 
     public List<Integer> getMedicineIds(int cardId) throws Exception{
-        System.out.println("--------------------------");
-        System.out.println("MedicineDao getMedicineIds()");
+        logger.info("--------------------------");
+        logger.info("MedicineDao getMedicineIds()");
         List<Integer> temp=new ArrayList<>();
         String statement="SELECT DISTINCT d.diag_id " +
                 "FROM diagnosis d " +
@@ -67,13 +82,20 @@ public class MedicineDao {
             temp.add(rs.getInt("diag_id"));
         }
         if(temp.size()==0){
-            System.out.println("NO MEDICINE FOR THE PATIENT NUMBER "+cardId);
+            logger.info("NO MEDICINE FOR THE PATIENT NUMBER "+cardId);
             return null;
         }
         else{
             for (int i = 0; i < temp.size(); i++) {
-                System.out.println("diag_id with MEDICINE for patient: " + temp.get(i));
+                logger.info("diag_id with MEDICINE for patient: " + temp.get(i));
             }
+        }
+
+        try{
+            ps.close();
+        }
+        catch(Exception ex){
+            logger.error(ex.getMessage());
         }
         return temp;
     }
@@ -88,14 +110,15 @@ public class MedicineDao {
             ids=getMedicineIds(pCardId);
             for (int i = 0; i < ids.size(); i++) {
                 temp = getMedicine(ids.get(i));
-                System.out.println("temp size: " + temp.size());
+                logger.info("temp size: " + temp.size());
                 ;
                 for (int j = 0; j < temp.size(); j++) {
                     medInfos.add(temp.get(j));
                 }
             }
         }
-        System.out.println("final count of the medicine: "+medInfos.size());
+        logger.info("final count of the medicine: "+medInfos.size());
+
         return medInfos;
     }
 
@@ -103,8 +126,8 @@ public class MedicineDao {
     public List<MedInfo> getMedicine(int diagId) throws Exception{
 
         List<MedInfo> medInfos=new ArrayList<>();
-        System.out.println("-----------------------------------");
-        System.out.println("MedicineDao getMedicine()");
+        logger.info("-----------------------------------");
+        logger.info("MedicineDao getMedicine()");
         MedInfo medInfo=new MedInfo();
         String statement="SELECT dm.dm_id, dm.diag_id, d.diag_name,  dm.med_id, m.med_name, dm.med_start, dm.med_end, dm.med_done, m.emp_id, e.emp_surname, p.pos_name " +
                 "FROM diag_med dm " +
@@ -113,7 +136,7 @@ public class MedicineDao {
                 "INNER JOIN employee e ON(m.emp_id=e.emp_id) " +
                 "INNER JOIN position p ON(e.emp_pos_id=p.pos_id)";
 
-        System.out.println("current diagId: "+diagId);
+        logger.info("current diagId: "+diagId);
         PreparedStatement ps=connection.prepareStatement(statement);
         ps.setInt(1, diagId);
         ResultSet rs=ps.executeQuery();
@@ -138,38 +161,43 @@ public class MedicineDao {
 
 
 
-            System.out.println("---------------------------------");
-            System.out.println("dm_id:"+medInfo.getDmId());
-            System.out.println("diag_id:"+medInfo.getDiagId());
-            System.out.println("diag_name:"+medInfo.getDiagName());
-            System.out.println("med_id:"+medInfo.getMedId());
-            System.out.println("med_name:"+medInfo.getMedName());
-            System.out.println("med_start:"+medInfo.getMedStart());
-            System.out.println("med_end:"+medInfo.getMedEnd());
-            System.out.println("med_done:"+medInfo.isMedDone());
-            System.out.println("emp_id"+medInfo.getEmpId());
-            System.out.println("emp_surname:"+medInfo.getEmpSurname());
-            System.out.println("pos_name:"+medInfo.getPosName());
+            logger.info("---------------------------------");
+            logger.info("dm_id:"+medInfo.getDmId());
+            logger.info("diag_id:"+medInfo.getDiagId());
+            logger.info("diag_name:"+medInfo.getDiagName());
+            logger.info("med_id:"+medInfo.getMedId());
+            logger.info("med_name:"+medInfo.getMedName());
+            logger.info("med_start:"+medInfo.getMedStart());
+            logger.info("med_end:"+medInfo.getMedEnd());
+            logger.info("med_done:"+medInfo.isMedDone());
+            logger.info("emp_id"+medInfo.getEmpId());
+            logger.info("emp_surname:"+medInfo.getEmpSurname());
+            logger.info("pos_name:"+medInfo.getPosName());
 
             medInfos.add(medInfo);
             medInfo=new MedInfo();
         }
 
+        try{
+            ps.close();
+        }
+        catch(Exception ex){
+            logger.error(ex.getMessage());
+        }
 
-//
         return medInfos;
     }
 
 
     public List<Medicine> getAll() throws Exception {
-        System.out.println("-----------------------");
-        System.out.println("MedicineDao getAllMedicine()");
+        logger.info("-----------------------");
+        logger.info("MedicineDao getAllMedicine()");
         List<Medicine> medicine=new ArrayList<>();
         String statement="SELECT m.med_id, m.med_name, m.med_value, e.emp_id, e.emp_surname, e.emp_patronymic, e.emp_name, p.pos_name " +
                 "FROM medicine m " +
                 "INNER JOIN employee e ON(m.emp_id=e.emp_id) " +
                 "INNER JOIN position p ON(e.emp_pos_id=p.pos_id)";
-        System.out.println(statement);
+        logger.info(statement);
         PreparedStatement ps=connection.prepareStatement(statement);
         ResultSet rs=ps.executeQuery();
         Medicine m=new Medicine();
@@ -182,31 +210,31 @@ public class MedicineDao {
             m.setSurname(rs.getString("emp_surname"));
             m.setPatronymic(rs.getString("emp_patronymic"));
             m.setPosName(rs.getString("pos_name"));
-            System.out.println("med_id:"+m.getMedId());
-            System.out.println("med_name:"+m.getMedName());
-            System.out.println("med_value:"+m.getMedValue());
-            System.out.println("emp_id:"+m.getEmpId());
-            System.out.println("emp_name:"+m.getName());
-            System.out.println("emp_surname:"+m.getSurname());
-            System.out.println("emp_patronymic:"+m.getPatronymic());
-            System.out.println("pos_name:"+m.getPosName());
-            System.out.println("-------------------------------------");
+            logger.info("med_id:"+m.getMedId());
+            logger.info("med_name:"+m.getMedName());
+            logger.info("med_value:"+m.getMedValue());
+            logger.info("emp_id:"+m.getEmpId());
+            logger.info("emp_name:"+m.getName());
+            logger.info("emp_surname:"+m.getSurname());
+            logger.info("emp_patronymic:"+m.getPatronymic());
+            logger.info("pos_name:"+m.getPosName());
+            logger.info("-------------------------------------");
             medicine.add(m);
             m=new Medicine();
         }
         try{
             ps.close();
         }
-        catch(SQLException ex){
-            ex.printStackTrace();
+        catch(Exception ex){
+            logger.error(ex.getMessage());
         }
         return medicine;
     }
 
     public void finishMedicine(List<MedInfo> medInfos) throws Exception{
 
-        System.out.println("------------------------------------");
-        System.out.println("MedicineDao finishMedicine()");
+        logger.info("------------------------------------");
+        logger.info("MedicineDao finishMedicine()");
         String statement="UPDATE diag_med SET med_done=1 WHERE dm_id=?";
         PreparedStatement ps=connection.prepareStatement(statement);
         Date curDate=new Date();
@@ -215,10 +243,17 @@ public class MedicineDao {
                 ps.setInt(1, medInfos.get(i).getDmId());
                 ResultSet rs=ps.executeQuery();
                 medInfos.get(i).setMedDone(true);
-                System.out.println("medicine is finished");
+                logger.info("medicine is finished");
             }
         }
 
+
+        try{
+            ps.close();
+        }
+        catch(Exception ex){
+            logger.error(ex.getMessage());
+        }
     }
 
 }

@@ -1,31 +1,36 @@
 package com.hospital.dao;
 
-import com.hospital.model.Diagnosis;
+
 import com.hospital.model.Operation;
 import com.hospital.model.OperInfo;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
+/**
+ * @author Rostislav Stakhov
+ * Dao class for working with the Operation object
+ */
 public class OperationDao {
 
     private final Connection connection;//Объект соединения с БД
+    private static final Logger logger= LoggerFactory.getLogger(OperationDao.class);
 
     public OperationDao(Connection connection)
     {
         this.connection = connection;
-        System.out.println("OperationDao received connection");
+        logger.info("OperationDao received connection");
     }
 
     public void createDiagOper(int diagId, Date operDate, int operId) throws Exception{
 
-        System.out.println("OperationDao createDiagOper()");
+        logger.info("OperationDao createDiagOper()");
         java.sql.Date d;
         int nextId=0;
         d=new java.sql.Date(operDate.getTime());
@@ -37,7 +42,7 @@ public class OperationDao {
             nextId=rs.getInt("do_id");
         }
         nextId++;
-        System.out.println("OperationDao createDiagOper() nextId: "+nextId);
+        logger.info("OperationDao createDiagOper() nextId: "+nextId);
 
 
 
@@ -52,13 +57,20 @@ public class OperationDao {
         ps.setInt(5, operId);
         ps.executeUpdate();
 
+        try{
+            ps.close();
+        }
+        catch(Exception ex){
+            logger.error(ex.getMessage());
+        }
+
     }
 
 
     //Возвращает все ID диагнозов данного пациента
     public List<Integer> getOperationIds(int cardId) throws Exception{
-        System.out.println("--------------------------");
-        System.out.println("OperationDao getOperationIds()");
+        logger.info("--------------------------");
+        logger.info("OperationDao getOperationIds()");
         List<Integer> temp=new ArrayList<>();
         String statement="SELECT DISTINCT d.diag_id " +
                 "FROM diagnosis d " +
@@ -79,6 +91,13 @@ public class OperationDao {
             }
         }
 
+        try{
+            ps.close();
+        }
+        catch(Exception ex){
+            logger.error(ex.getMessage());
+        }
+
         return temp;
     }
 
@@ -92,14 +111,16 @@ public class OperationDao {
             ids = getOperationIds(pCardId);
             for (int i = 0; i < ids.size(); i++) {
                 temp = getOperations(ids.get(i));
-                System.out.println("temp size: " + temp.size());
+                logger.info("temp size: " + temp.size());
                 ;
                 for (int j = 0; j < temp.size(); j++) {
                     operInfos.add(temp.get(j));
                 }
             }
         }
-        System.out.println("final count of the operations: "+operInfos.size());
+        logger.info("final count of the operations: "+operInfos.size());
+
+
         return operInfos;
     }
 
@@ -108,8 +129,8 @@ public class OperationDao {
     public List<OperInfo> getOperations(int diagId) throws Exception{
 
         List<OperInfo> operInfos=new ArrayList<>();
-        System.out.println("-----------------------------------");
-        System.out.println("OperationDao getPatientOperations()");
+        logger.info("-----------------------------------");
+        logger.info("OperationDao getPatientOperations()");
         OperInfo operInfo=new OperInfo();
         String statement="SELECT do.do_id, do.diag_id, d.diag_name,  do.oper_id, o.oper_name, do.oper_date, do.oper_done, o.doctor_id, e.emp_surname, p.pos_name " +
                 "FROM diag_oper do " +
@@ -118,7 +139,7 @@ public class OperationDao {
                 "INNER JOIN employee e ON(o.doctor_id=e.emp_id) " +
                 "INNER JOIN position p ON(e.emp_pos_id=p.pos_id)";
 
-        System.out.println("current diagId: "+diagId);
+        logger.info("current diagId: "+diagId);
         PreparedStatement ps=connection.prepareStatement(statement);
         ps.setInt(1, diagId);
         ResultSet rs=ps.executeQuery();
@@ -142,22 +163,30 @@ public class OperationDao {
 
 
 
-            System.out.println("---------------------------------");
-            System.out.println("do_id"+operInfo.getDoId());
-            System.out.println("diag_id"+operInfo.getDiagId());
-            System.out.println("diag_name"+operInfo.getDiagName());
-            System.out.println("oper_id"+operInfo.getOperId());
-            System.out.println("oper_name"+operInfo.getOperName());
-            System.out.println("oper_date"+operInfo.getOperDate());
-            System.out.println("oper_done"+operInfo.isOperDone());
-            System.out.println("doctor_id"+operInfo.getDoctorId());
-            System.out.println("emp_surname"+operInfo.getEmpSurname());
-            System.out.println("pos_name"+operInfo.getPosName());
+            logger.info("---------------------------------");
+            logger.info("do_id"+operInfo.getDoId());
+            logger.info("diag_id"+operInfo.getDiagId());
+            logger.info("diag_name"+operInfo.getDiagName());
+            logger.info("oper_id"+operInfo.getOperId());
+            logger.info("oper_name"+operInfo.getOperName());
+            logger.info("oper_date"+operInfo.getOperDate());
+            logger.info("oper_done"+operInfo.isOperDone());
+            logger.info("doctor_id"+operInfo.getDoctorId());
+            logger.info("emp_surname"+operInfo.getEmpSurname());
+            logger.info("pos_name"+operInfo.getPosName());
 
             operInfos.add(operInfo);
             operInfo=new OperInfo();
         }
 
+
+
+        try{
+            ps.close();
+        }
+        catch(Exception ex){
+            logger.error(ex.getMessage());
+        }
 
 //
         return operInfos;
@@ -165,13 +194,13 @@ public class OperationDao {
 
 
     public List<Operation> getAll() throws Exception {
-        System.out.println("OperationDao read()");
+        logger.info("OperationDao read()");
         List<Operation> operations=new ArrayList<>();
         String statement="SELECT o.oper_id, o.oper_name, o.oper_value, o.oper_length, o.doctor_id, e.emp_id, e.emp_surname, e.emp_patronymic, e.emp_name, p.pos_name " +
                 "FROM operation o " +
                 "INNER JOIN employee e ON(o.doctor_id=e.emp_id) " +
                 "INNER JOIN position p ON(e.emp_pos_id=p.pos_id)";
-        System.out.println(statement);
+        logger.info(statement);
         PreparedStatement ps=connection.prepareStatement(statement);
         ResultSet rs=ps.executeQuery();
         Operation o=new Operation();
@@ -185,16 +214,16 @@ public class OperationDao {
            o.setSurname(rs.getString("emp_surname"));
            o.setPatronymic(rs.getString("emp_patronymic"));
            o.setPosName(rs.getString("pos_name"));
-            System.out.println("oper_id:"+o.getOperId());
-            System.out.println("oper_name:"+o.getOperName());
-            System.out.println("oper_value:"+o.getOperValue());
-            System.out.println("oper_length:"+o.getOperLength());
-            System.out.println("doctor_id:"+o.getDoctorId());
-            System.out.println("emp_name:"+o.getName());
-            System.out.println("emp_surname:"+o.getSurname());
-            System.out.println("emp_patronymic:"+o.getPatronymic());
-            System.out.println("pos_name:"+o.getPosName());
-            System.out.println("-------------------------------------");
+            logger.info("oper_id:"+o.getOperId());
+            logger.info("oper_name:"+o.getOperName());
+            logger.info("oper_value:"+o.getOperValue());
+            logger.info("oper_length:"+o.getOperLength());
+            logger.info("doctor_id:"+o.getDoctorId());
+            logger.info("emp_name:"+o.getName());
+            logger.info("emp_surname:"+o.getSurname());
+            logger.info("emp_patronymic:"+o.getPatronymic());
+            logger.info("pos_name:"+o.getPosName());
+            logger.info("-------------------------------------");
            operations.add(o);
            o=new Operation();
 
@@ -203,8 +232,8 @@ public class OperationDao {
         try{
             ps.close();
         }
-        catch(SQLException ex){
-            ex.printStackTrace();
+        catch(Exception ex){
+            logger.error(ex.getMessage());
         }
 
         return operations;
@@ -212,8 +241,8 @@ public class OperationDao {
 
     public void finishOperation(List<OperInfo> operInfos) throws Exception{
 
-        System.out.println("------------------------------------");
-        System.out.println("OperationDao finishOperation()");
+        logger.info("------------------------------------");
+        logger.info("OperationDao finishOperation()");
         String statement="UPDATE diag_oper SET oper_done=1 WHERE do_id=?";
         PreparedStatement ps=connection.prepareStatement(statement);
         Date curDate=new Date();
@@ -222,8 +251,15 @@ public class OperationDao {
                 ps.setInt(1, operInfos.get(i).getDoId());
                 ResultSet rs=ps.executeQuery();
                 operInfos.get(i).setOperDone(true);
-                System.out.println("operation is finished");
+                logger.info("operation is finished");
             }
+        }
+
+        try{
+            ps.close();
+        }
+        catch(Exception ex){
+            logger.error(ex.getMessage());
         }
 
     }

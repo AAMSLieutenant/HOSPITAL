@@ -3,6 +3,9 @@ package com.hospital.servlet;
 import com.hospital.dao.DiagDao;
 import com.hospital.model.Diagnosis;
 import com.hospital.model.Employee;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,9 +15,14 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * @author Rostislav Stakhov
+ * Servlet for creating patient diagnosis
+ */
 public class DiagnosisServlet extends HttpServlet {
 
 
+    private static final Logger logger= LoggerFactory.getLogger(DiagnosisServlet.class);
     private Integer pCardId=0;
     private AtomicReference<DiagDao> diagDao;
     private Map<Integer, Employee> doctorsDb;
@@ -34,13 +42,13 @@ public class DiagnosisServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException
     {
-        System.out.println("----------------------------------");
-        System.out.println("DiagnosisServlet doPost()");
+        logger.info("----------------------------------");
+        logger.info("DiagnosisServlet doPost()");
         req.setCharacterEncoding("UTF-8");
 //
         final String diagName=req.getParameter("diagName");
 //
-        System.out.println("diagnosis doPost() STRING diagName:"+diagName);
+        logger.info("diagnosis doPost() STRING diagName:"+diagName);
 
 
         Diagnosis diagnosis=new Diagnosis();
@@ -50,7 +58,7 @@ public class DiagnosisServlet extends HttpServlet {
             diagDao.get().create(diagnosis);
         }
         catch (Exception e){
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
 
@@ -63,10 +71,10 @@ public class DiagnosisServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        System.out.println("----------------------------------");
-        System.out.println("DiagnosisServlet doGet()");
+        logger.info("----------------------------------");
+        logger.info("DiagnosisServlet doGet()");
         pCardId=Integer.parseInt(req.getParameter("pCardId"));
-        System.out.println("CURRENT PATIENT`S CARD ID:"+pCardId);
+        logger.info("CURRENT PATIENT`S CARD ID:"+pCardId);
 
         req.setAttribute("pCardId", pCardId);
 

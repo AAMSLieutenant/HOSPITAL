@@ -5,6 +5,8 @@ import com.hospital.dao.*;
 
 import com.hospital.model.*;
 import com.sun.net.httpserver.HttpServer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,8 +21,13 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
 
 
+/**
+ * @author Rostislav Stakhov
+ * Servlet for giving info about each patient
+ */
 public class PatientServlet extends HttpServlet {
 
+    private static final Logger logger= LoggerFactory.getLogger(PatientServlet.class);
     private Integer currentId=0;//Айди выбранного пациента
     private Map<Integer, Patient> patientsDb;//Массив с пациентами
     private Map<Integer, Appointment> appointmentsDb;//Массив с приемами у врача данного пациента
@@ -70,7 +77,7 @@ public class PatientServlet extends HttpServlet {
             date=String.valueOf(d);
         }
         fin=year+"-"+month+"-"+date;
-        System.out.println(fin);
+        logger.info(fin);
 
         final Object patientsDb = getServletContext().getAttribute("patientsDb");
         final Object patientDao = getServletContext().getAttribute("patientDao");
@@ -81,10 +88,6 @@ public class PatientServlet extends HttpServlet {
         final Object procedureDao=getServletContext().getAttribute("procedureDao");
 
         //Получаем из контекста и берем копии
-        if (patientsDb == null || !(patientsDb instanceof ConcurrentHashMap)) {
-
-            throw new IllegalStateException("You're repo does not initialize!");
-        } else {
 
             this.patientsDb = (ConcurrentHashMap<Integer, Patient>) patientsDb;
             this.patientDao=(AtomicReference<PatientDao>) patientDao;
@@ -99,7 +102,7 @@ public class PatientServlet extends HttpServlet {
             this.medInfosDb=new ConcurrentHashMap<>();
             this.procInfosDb=new ConcurrentHashMap<>();
 
-        }
+
 
     }
 
@@ -108,16 +111,14 @@ public class PatientServlet extends HttpServlet {
             throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
 
-
-
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        System.out.println("----------------------------------");
-        System.out.println("PatientServlet doGet()");
-        System.out.println("----------------------------------");
+        logger.info("----------------------------------");
+        logger.info("PatientServlet doGet()");
+        logger.info("----------------------------------");
         req.setCharacterEncoding("UTF-8");
         operSize=0;
         medSize=0;
@@ -129,13 +130,13 @@ public class PatientServlet extends HttpServlet {
         req.setAttribute("pCardId", pCardId);
         req.setAttribute("patient", patient);
         this.currentId=Integer.parseInt(pCardId);
-        System.out.println("pCardId: "+pCardId);
+        logger.info("pCardId: "+pCardId);
 
         try {
             List<Appointment> apps = appointmentDao.get().getAllById(this.currentId);
             if (apps.size() != 0) {
-                System.out.println("PatientServlet appointmentDao.getAllById() has info");
-                System.out.println("apps.size(): " + apps.size());
+                logger.info("PatientServlet appointmentDao.getAllById() has info");
+                logger.info("apps.size(): " + apps.size());
                 isApp = true;
                 this.appointmentsDb.clear();
                 for (int i = 0; i < apps.size(); i++) {
@@ -147,13 +148,13 @@ public class PatientServlet extends HttpServlet {
 
             } else {
                 isApp = false;
-                System.out.println("PatientServlet appointmentDao.getAllById() IS NULL");
+                logger.info("PatientServlet appointmentDao.getAllById() IS NULL");
             }
 
             List<Diagnosis> diags = diagDao.get().getAllById(this.currentId);
             if (diags.size() != 0) {
-                System.out.println("PatientServlet diagDao.getAllById() has info");
-                System.out.println("diags.size(): " + diags.size());
+                logger.info("PatientServlet diagDao.getAllById() has info");
+                logger.info("diags.size(): " + diags.size());
                 isDiag = true;
                 this.diagnosesDb.clear();
                 for (int i = 0; i < diags.size(); i++) {
@@ -163,10 +164,10 @@ public class PatientServlet extends HttpServlet {
                 req.setAttribute("diagnosesDb", diagnosesDb.values());
             } else {
                 isDiag = false;
-                System.out.println("PatientServlet diagDao.getAllById() IS NULL");
+                logger.info("PatientServlet diagDao.getAllById() IS NULL");
             }
         }catch(Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
         if((isDiag==true)&&(isApp==true))
@@ -176,9 +177,9 @@ public class PatientServlet extends HttpServlet {
         else{
             operMedPro=false;
         }
-        System.out.println("-------------------------PatientServlet isApp=="+isApp+"---------------------------");
-        System.out.println("-------------------------PatientServlet isDiag=="+isDiag+"---------------------------");
-        System.out.println("-------------------------PatientServlet OperMEdPro=="+operMedPro+"---------------------------");
+        logger.info("-------------------------PatientServlet isApp=="+isApp+"---------------------------");
+        logger.info("-------------------------PatientServlet isDiag=="+isDiag+"---------------------------");
+        logger.info("-------------------------PatientServlet OperMEdPro=="+operMedPro+"---------------------------");
             if(operMedPro==true) {
 
                 try {
@@ -204,7 +205,7 @@ public class PatientServlet extends HttpServlet {
                     }
 
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.error(e.getMessage());
                 }
 
                 try {
@@ -229,7 +230,7 @@ public class PatientServlet extends HttpServlet {
 
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.error(e.getMessage());
                 }
 
                 try {
@@ -252,7 +253,7 @@ public class PatientServlet extends HttpServlet {
 
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.error(e.getMessage());
                 }
 
             }

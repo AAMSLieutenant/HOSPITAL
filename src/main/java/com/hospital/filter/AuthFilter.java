@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.concurrent.atomic.AtomicReference;
 
 
@@ -25,6 +24,7 @@ import org.slf4j.LoggerFactory;
 import static java.util.Objects.nonNull;
 
 /**
+ * @author Rostislav Stakhov
  * Acidification filter.
  */
 public class AuthFilter implements Filter {
@@ -36,10 +36,6 @@ public class AuthFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
-
-
-//        PropertyConfigurator.configure("F:\\Rostislav\\EPAM\\HOSPITAL\\HOSPITAL\\src\\main\\resources\\log4j.properties");
 
         logger.info("FILTER STARTED");
     }
@@ -96,6 +92,7 @@ public class AuthFilter implements Filter {
 
     @Override
     public void destroy() {
+
     }
 
 }

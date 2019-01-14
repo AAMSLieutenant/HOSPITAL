@@ -2,6 +2,8 @@ package com.hospital.servlet;
 
 import com.hospital.dao.PatientDao;
 import com.hospital.model.Patient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +15,10 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * @author Rostislav Stakhov
+ * Main servlet for patients table data
+ */
 /*
 Сервлет для вывода данных
  */
@@ -21,6 +27,7 @@ public class GetIndexPageServlet extends HttpServlet {
 
     private Map<Integer, Patient> patientsDb;
     private AtomicReference<PatientDao> patientDao;
+    private static final Logger logger= LoggerFactory.getLogger(GetIndexPageServlet.class);
     /*
     Метод запуска сервлета
      */
@@ -32,14 +39,11 @@ public class GetIndexPageServlet extends HttpServlet {
         final Object patientsDb = getServletContext().getAttribute("patientsDb");
         final Object patientDao=getServletContext().getAttribute("patientDao");
 
-        if (patientsDb == null || !(patientsDb instanceof ConcurrentHashMap)) {
 
-            throw new IllegalStateException("You're repo does not initialize!");
-        } else {
 
-            this.patientsDb = (ConcurrentHashMap<Integer, Patient>) patientsDb;
-            this.patientDao=(AtomicReference<PatientDao>)patientDao;
-        }
+        this.patientsDb = (ConcurrentHashMap<Integer, Patient>) patientsDb;
+        this.patientDao=(AtomicReference<PatientDao>)patientDao;
+
 
     }
 
@@ -57,7 +61,7 @@ public class GetIndexPageServlet extends HttpServlet {
                 this.patientsDb.put(pats.get(i).getpCardId(),pats.get(i));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
 

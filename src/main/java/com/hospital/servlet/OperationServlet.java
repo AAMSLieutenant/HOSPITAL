@@ -4,6 +4,8 @@ import com.hospital.dao.AppointmentDao;
 import com.hospital.dao.DiagDao;
 import com.hospital.dao.OperationDao;
 import com.hospital.model.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,9 +21,14 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * @author Rostislav Stakhov
+ * Servlet for appointing patient operations
+ */
 public class OperationServlet extends HttpServlet {
 
 
+    private static final Logger logger= LoggerFactory.getLogger(OperationServlet.class);
     private Integer pCardId=0;
     private AtomicReference<AppointmentDao> appointmentDao;
     private AtomicReference<DiagDao> diagDao;
@@ -71,9 +78,9 @@ public class OperationServlet extends HttpServlet {
             throws ServletException, IOException
     {
 
-        System.out.println("-----------------------------------------");
-        System.out.println("AppointmentServlet doPost() is started;");
-        System.out.println("-----------------------------------------");
+        logger.info("-----------------------------------------");
+        logger.info("AppointmentServlet doPost() is started;");
+        logger.info("-----------------------------------------");
 
         req.setCharacterEncoding("UTF-8");
 
@@ -82,24 +89,24 @@ public class OperationServlet extends HttpServlet {
         final String operDate=req.getParameter("operDate");
 
 
-        System.out.println("operationServlet doPost() Chosen STRING diagId:"+diagId);
-        System.out.println("operationServlet doPost() Chosen STRING operId:"+operId);
-        System.out.println("operationServlet doPost() Chosen STRING operDate:"+operDate);
+        logger.info("operationServlet doPost() Chosen STRING diagId:"+diagId);
+        logger.info("operationServlet doPost() Chosen STRING operId:"+operId);
+        logger.info("operationServlet doPost() Chosen STRING operDate:"+operDate);
 
         java.util.Date oDate=null;
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
         try {
             oDate=sdf.parse(operDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
+        } catch (ParseException pe) {
+            logger.error(pe.getMessage());
         }
-        System.out.println("operDate: "+oDate);
+        logger.info("operDate: "+oDate);
 
         try {
             this.operationDao.get().createDiagOper(Integer.parseInt(diagId), oDate, Integer.parseInt(operId));
         }
         catch(Exception e){
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
 
@@ -107,9 +114,9 @@ public class OperationServlet extends HttpServlet {
 
 //);
 //
-        System.out.println("-----------------------------------------");
-        System.out.println("OperationServlet doPost() is finished;");
-        System.out.println("-----------------------------------------");
+        logger.info("-----------------------------------------");
+        logger.info("OperationServlet doPost() is finished;");
+        logger.info("-----------------------------------------");
         resp.sendRedirect(req.getContextPath() + "/patient?pCardId="+pCardId);
     }
 
@@ -118,37 +125,37 @@ public class OperationServlet extends HttpServlet {
             throws ServletException, IOException {
         this.diagnosesDb.clear();
 
-        System.out.println("-----------------------------------------");
-        System.out.println("OperationServlet doGet() is started;");
-        System.out.println("-----------------------------------------");
+        logger.info("-----------------------------------------");
+        logger.info("OperationServlet doGet() is started;");
+        logger.info("-----------------------------------------");
         pCardId=Integer.parseInt(req.getParameter("pCardId"));
-        System.out.println("CURRENT PATIENT ID:"+pCardId);
+        logger.info("CURRENT PATIENT ID:"+pCardId);
         try {
             List<Diagnosis> diags = this.diagDao.get().getAllById(pCardId);
             for(int i=0;i<diags.size();i++){
                 this.diagnosesDb.put(diags.get(i).getDiagId(), diags.get(i));
             }
-            System.out.println("diagnosesDb size():"+diagnosesDb.size());
+            logger.info("diagnosesDb size():"+diagnosesDb.size());
             req.setAttribute("diagnosesDb", diagnosesDb.values());
         }
         catch(Exception e){
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
         try {
             List<Operation> opers = this.operationDao.get().getAll();
 
-//            System.out.println("opers size: "+opers.size());
+//            logger.info("opers size: "+opers.size());
             for(int i=0;i<opers.size();i++){
-//                System.out.println("i: "+i+" operId: "+opers.get(i).getOperId());
+//                logger.info("i: "+i+" operId: "+opers.get(i).getOperId());
                 this.operationsDb.put(opers.get(i).getOperId(), opers.get(i));
             }
-//            System.out.println("OperationsDb size: "+this.operationsDb.size());
+//            logger.info("OperationsDb size: "+this.operationsDb.size());
             req.setAttribute("fin", fin);
             req.setAttribute("operationsDb", operationsDb.values());
         }
         catch(Exception e){
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
 
@@ -158,9 +165,9 @@ public class OperationServlet extends HttpServlet {
 
 
         req.setAttribute("pCardId", pCardId);
-        System.out.println("-----------------------------------------");
-        System.out.println("OperationServlet doGet() is finished;");
-        System.out.println("-----------------------------------------");
+        logger.info("-----------------------------------------");
+        logger.info("OperationServlet doGet() is finished;");
+        logger.info("-----------------------------------------");
         req.getRequestDispatcher("/WEB-INF/view/operation.jsp").forward(req, resp);
 
     }

@@ -1,6 +1,8 @@
 package com.hospital.dao;
 
 import com.hospital.model.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,19 +12,26 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
+
+/**
+ * @author Rostislav Stakhov
+ * Dao class for working with the Procedure object
+ */
 public class ProcedureDao {
 
     private final Connection connection;//Объект соединения с БД
+    private static final Logger logger= LoggerFactory.getLogger(ProcedureDao.class);
 
     public ProcedureDao(Connection connection)
     {
         this.connection = connection;
-        System.out.println("MedicineDao received connection");
+        logger.info("MedicineDao received connection");
     }
 
     public void createDiagProc(int diagId, Date procDate, int procId) throws Exception{
 
-        System.out.println("ProcedureDao createDiagProc()");
+        logger.info("ProcedureDao createDiagProc()");
         java.sql.Date d;
         d=new java.sql.Date(procDate.getTime());
 
@@ -34,7 +43,7 @@ public class ProcedureDao {
             nextId=rs.getInt("dp_id");
         }
         nextId++;
-        System.out.println("ProcedureDao createDiagProc() nextId: "+nextId);
+        logger.info("ProcedureDao createDiagProc() nextId: "+nextId);
 
 
 
@@ -48,12 +57,19 @@ public class ProcedureDao {
         ps.setInt(5, procId);
         ps.executeUpdate();
 
+
+        try{
+            ps.close();
+        }
+        catch(Exception ex){
+            logger.error(ex.getMessage());
+        }
     }
 
 
     public List<Integer> getProcedureIds(int cardId) throws Exception{
-        System.out.println("--------------------------");
-        System.out.println("ProcedureDao getProcedureIds()");
+        logger.info("--------------------------");
+        logger.info("ProcedureDao getProcedureIds()");
         List<Integer> temp=new ArrayList<>();
         String statement="SELECT DISTINCT d.diag_id " +
                 "FROM diagnosis d " +
@@ -65,13 +81,20 @@ public class ProcedureDao {
             temp.add(rs.getInt("diag_id"));
         }
         if(temp.size()==0){
-            System.out.println("NO PROCEDURES FOR THE PATIENT NUMBER "+cardId);
+            logger.info("NO PROCEDURES FOR THE PATIENT NUMBER "+cardId);
             return null;
         }
         else{
             for (int i = 0; i < temp.size(); i++) {
-                System.out.println("diag_id with procedures for patient: " + temp.get(i));
+                logger.info("diag_id with procedures for patient: " + temp.get(i));
             }
+        }
+
+        try{
+            ps.close();
+        }
+        catch(Exception ex){
+            logger.error(ex.getMessage());
         }
 
         return temp;
@@ -86,14 +109,16 @@ public class ProcedureDao {
             ids = getProcedureIds(pCardId);
             for (int i = 0; i < ids.size(); i++) {
                 temp = getProcedures(ids.get(i));
-                System.out.println("temp size: " + temp.size());
+                logger.info("temp size: " + temp.size());
                 ;
                 for (int j = 0; j < temp.size(); j++) {
                     procInfos.add(temp.get(j));
                 }
             }
         }
-        System.out.println("final count of the procedures: "+procInfos.size());
+        logger.info("final count of the procedures: "+procInfos.size());
+
+
         return procInfos;
     }
 
@@ -101,8 +126,8 @@ public class ProcedureDao {
     public List<ProcInfo> getProcedures(int diagId) throws Exception{
 
         List<ProcInfo> procInfos=new ArrayList<>();
-        System.out.println("-----------------------------------");
-        System.out.println("ProcedureInfo getProcedure()");
+        logger.info("-----------------------------------");
+        logger.info("ProcedureInfo getProcedure()");
         ProcInfo procInfo=new ProcInfo();
         String statement="SELECT dp.dp_id, dp.diag_id, d.diag_name,  dp.proc_id, pr.proc_name, dp.proc_date, dp.proc_done, pr.emp_id, e.emp_surname, p.pos_name " +
                 "FROM diag_proc dp " +
@@ -111,7 +136,7 @@ public class ProcedureDao {
                 "INNER JOIN employee e ON(pr.emp_id=e.emp_id) " +
                 "INNER JOIN position p ON(e.emp_pos_id=p.pos_id)";
 
-        System.out.println("current diagId: "+diagId);
+        logger.info("current diagId: "+diagId);
         PreparedStatement ps=connection.prepareStatement(statement);
         ps.setInt(1, diagId);
         ResultSet rs=ps.executeQuery();
@@ -135,37 +160,42 @@ public class ProcedureDao {
 
 
 
-            System.out.println("---------------------------------");
-            System.out.println("diag_id:"+procInfo.getDiagId());
-            System.out.println("diag_name:"+procInfo.getDiagName());
-            System.out.println("proc_id:"+procInfo.getProcId());
-            System.out.println("proc_name:"+procInfo.getProcName());
-            System.out.println("proc_start:"+procInfo.getProcDate());
-            System.out.println("proc_done:"+procInfo.isProcDone());
-            System.out.println("emp_id"+procInfo.getEmpId());
-            System.out.println("emp_surname:"+procInfo.getEmpSurname());
-            System.out.println("pos_name:"+procInfo.getPosName());
+            logger.info("---------------------------------");
+            logger.info("diag_id:"+procInfo.getDiagId());
+            logger.info("diag_name:"+procInfo.getDiagName());
+            logger.info("proc_id:"+procInfo.getProcId());
+            logger.info("proc_name:"+procInfo.getProcName());
+            logger.info("proc_start:"+procInfo.getProcDate());
+            logger.info("proc_done:"+procInfo.isProcDone());
+            logger.info("emp_id"+procInfo.getEmpId());
+            logger.info("emp_surname:"+procInfo.getEmpSurname());
+            logger.info("pos_name:"+procInfo.getPosName());
 
             procInfos.add(procInfo);
             procInfo=new ProcInfo();
         }
 
 
-//
+        try{
+            ps.close();
+        }
+        catch(Exception ex){
+            logger.error(ex.getMessage());
+        }
         return procInfos;
     }
 
 
 
     public List<Procedure> getAll() throws Exception {
-        System.out.println("-----------------------");
-        System.out.println("ProcedureDao getAllMedicine()");
+        logger.info("-----------------------");
+        logger.info("ProcedureDao getAllMedicine()");
         List<Procedure> procedures=new ArrayList<>();
         String statement="SELECT pr.proc_id, pr.proc_name, pr.proc_value, e.emp_id, e.emp_surname, e.emp_patronymic, e.emp_name, p.pos_name " +
                 "FROM proced pr " +
                 "INNER JOIN employee e ON(pr.emp_id=e.emp_id) " +
                 "INNER JOIN position p ON(e.emp_pos_id=p.pos_id)";
-        System.out.println(statement);
+        logger.info(statement);
         PreparedStatement ps=connection.prepareStatement(statement);
         ResultSet rs=ps.executeQuery();
         Procedure p=new Procedure();
@@ -178,15 +208,15 @@ public class ProcedureDao {
             p.setSurname(rs.getString("emp_surname"));
             p.setPatronymic(rs.getString("emp_patronymic"));
             p.setPosName(rs.getString("pos_name"));
-            System.out.println("med_id:"+p.getProcId());
-            System.out.println("med_name:"+p.getProcName());
-            System.out.println("med_value:"+p.getProcValue());
-            System.out.println("emp_id:"+p.getEmpId());
-            System.out.println("emp_name:"+p.getName());
-            System.out.println("emp_surname:"+p.getSurname());
-            System.out.println("emp_patronymic:"+p.getPatronymic());
-            System.out.println("pos_name:"+p.getPosName());
-            System.out.println("-------------------------------------");
+            logger.info("med_id:"+p.getProcId());
+            logger.info("med_name:"+p.getProcName());
+            logger.info("med_value:"+p.getProcValue());
+            logger.info("emp_id:"+p.getEmpId());
+            logger.info("emp_name:"+p.getName());
+            logger.info("emp_surname:"+p.getSurname());
+            logger.info("emp_patronymic:"+p.getPatronymic());
+            logger.info("pos_name:"+p.getPosName());
+            logger.info("-------------------------------------");
             procedures.add(p);
             p=new Procedure();
         }
@@ -196,14 +226,21 @@ public class ProcedureDao {
         catch(SQLException ex){
             ex.printStackTrace();
         }
+
+        try{
+            ps.close();
+        }
+        catch(Exception ex){
+            logger.error(ex.getMessage());
+        }
         return procedures;
     }
 
 
     public void finishProcedure(List<ProcInfo> procInfos) throws Exception{
 
-        System.out.println("------------------------------------");
-        System.out.println("ProcedureDao finishProcedure()");
+        logger.info("------------------------------------");
+        logger.info("ProcedureDao finishProcedure()");
         String statement="UPDATE diag_proc SET proc_done=1 WHERE dp_id=?";
         PreparedStatement ps=connection.prepareStatement(statement);
         Date curDate=new Date();
@@ -212,8 +249,15 @@ public class ProcedureDao {
                 ps.setInt(1, procInfos.get(i).getDpId());
                 ResultSet rs=ps.executeQuery();
                 procInfos.get(i).setProcDone(true);
-                System.out.println("procedure is finished");
+                logger.info("procedure is finished");
             }
+        }
+
+        try{
+            ps.close();
+        }
+        catch(Exception ex){
+            logger.error(ex.getMessage());
         }
 
     }

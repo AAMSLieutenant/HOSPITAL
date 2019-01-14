@@ -3,6 +3,8 @@ package com.hospital.servlet;
 import com.hospital.dao.DiagDao;
 import com.hospital.dao.MedicineDao;
 import com.hospital.model.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,9 +19,14 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * @author Rostislav Stakhov
+ * Servlet for appointing medicine for the patient
+ */
 public class MedicineServlet extends HttpServlet {
 
 
+    private static final Logger logger= LoggerFactory.getLogger(MedicineServlet.class);
     private Integer pCardId=0;
     private AtomicReference<DiagDao> diagDao;
     private AtomicReference<MedicineDao> medicineDao;
@@ -71,9 +78,9 @@ public class MedicineServlet extends HttpServlet {
             throws ServletException, IOException
     {
 
-        System.out.println("-----------------------------------------");
-        System.out.println("MedicineServlet doPost() is started;");
-        System.out.println("-----------------------------------------");
+        logger.info("-----------------------------------------");
+        logger.info("MedicineServlet doPost() is started;");
+        logger.info("-----------------------------------------");
 
         req.setCharacterEncoding("UTF-8");
 
@@ -82,33 +89,33 @@ public class MedicineServlet extends HttpServlet {
         final String medEnd=req.getParameter("medEnd");
 
 
-        System.out.println("operationServlet doPost() Chosen STRING diagId:"+diagId);
-        System.out.println("operationServlet doPost() Chosen STRING operId:"+operId);
-        System.out.println("operationServlet doPost() Chosen STRING medEnd:"+medEnd);
+        logger.info("operationServlet doPost() Chosen STRING diagId:"+diagId);
+        logger.info("operationServlet doPost() Chosen STRING operId:"+operId);
+        logger.info("operationServlet doPost() Chosen STRING medEnd:"+medEnd);
 
         java.util.Date mStart=curDate;
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-        System.out.println("startDate: "+mStart);
+        logger.info("startDate: "+mStart);
 
 
         java.util.Date mEnd=null;
         try {
             mEnd=sdf.parse(medEnd);
         } catch (ParseException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
-        System.out.println("endDate: "+mEnd);
+        logger.info("endDate: "+mEnd);
 
         try {
             this.medicineDao.get().createDiagMed(Integer.parseInt(diagId), mStart, mEnd, Integer.parseInt(operId));
         }
         catch(Exception e){
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
-        System.out.println("-----------------------------------------");
-        System.out.println("MedicineServlet doPost() is finished;");
-        System.out.println("-----------------------------------------");
+        logger.info("-----------------------------------------");
+        logger.info("MedicineServlet doPost() is finished;");
+        logger.info("-----------------------------------------");
         resp.sendRedirect(req.getContextPath() + "/patient?pCardId="+pCardId);
     }
 
@@ -116,12 +123,12 @@ public class MedicineServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        System.out.println("-----------------------------------------");
-        System.out.println("Medicine doGet() is started;");
-        System.out.println("-----------------------------------------");
+        logger.info("-----------------------------------------");
+        logger.info("Medicine doGet() is started;");
+        logger.info("-----------------------------------------");
         this.diagnosesDb.clear();
         pCardId=Integer.parseInt(req.getParameter("pCardId"));
-        System.out.println("CURRENT PATIENT ID:"+pCardId);
+        logger.info("CURRENT PATIENT ID:"+pCardId);
         try {
             List<Diagnosis> diags = this.diagDao.get().getAllById(pCardId);
             for(int i=0;i<diags.size();i++){
@@ -130,22 +137,22 @@ public class MedicineServlet extends HttpServlet {
             req.setAttribute("diagnosesDb", diagnosesDb.values());
         }
         catch(Exception e){
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
         try {
             List<Medicine> meds = this.medicineDao.get().getAll();
 
-            System.out.println("meds size: "+meds.size());
+            logger.info("meds size: "+meds.size());
             for(int i=0;i<meds.size();i++){
-//                System.out.println("i: "+i+" operId: "+opers.get(i).getOperId());
+//                logger.info("i: "+i+" operId: "+opers.get(i).getOperId());
                 this.medicineDb.put(meds.get(i).getMedId(), meds.get(i));
             }
-            System.out.println("medicineDb size: "+this.medicineDb.size());
+            logger.info("medicineDb size: "+this.medicineDb.size());
             req.setAttribute("medicineDb", medicineDb.values());
         }
         catch(Exception e){
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
 
@@ -155,9 +162,9 @@ public class MedicineServlet extends HttpServlet {
         req.setAttribute("pCardId", pCardId);
 
 
-        System.out.println("-----------------------------------------");
-        System.out.println("MedicineServlet doGet() is finished;");
-        System.out.println("-----------------------------------------");
+        logger.info("-----------------------------------------");
+        logger.info("MedicineServlet doGet() is finished;");
+        logger.info("-----------------------------------------");
         req.getRequestDispatcher("/WEB-INF/view/medicine.jsp").forward(req, resp);
 
     }

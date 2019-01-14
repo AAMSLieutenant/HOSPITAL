@@ -1,19 +1,3 @@
-Раздел Servlet (Сервлеты) 
-=============================
-
-####Плейлист на YouTube:  <https://www.youtube.com/playlist?list=PL7Bt6mWpiizZq71c4wuBl7lmY-M7nen_J>
-
-Чтобы склонировать репозиторий через `https`, в папке с будущим проектом, введите в консоль:
-
-       $ git clone https://github.com/triodjangopiter/servlet-tutorial.git
-
-
-Краткая информация об уроках
-------------
-
-
-Урок №1. Конфигурирование нового проекта и настройка `apache-tomcat 8.5.15`.
-------------
 
 Ветка: `lesson/01.get_started`
 
