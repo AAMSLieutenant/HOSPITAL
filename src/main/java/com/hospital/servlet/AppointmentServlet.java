@@ -92,7 +92,7 @@ public class AppointmentServlet extends HttpServlet {
         appointment.setAppValue(Integer.parseInt(appValue));
         appointment.setAppComplaint(appComplaint);
         Date d=null;
-        SimpleDateFormat sdf=new SimpleDateFormat("YYYY-MM-dd");
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
         try {
             d=sdf.parse(appDate);
         } catch (ParseException e) {

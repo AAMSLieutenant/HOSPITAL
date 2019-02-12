@@ -34,9 +34,9 @@ class DiagDaoTest {
         Diagnosis diagExp=new Diagnosis();
         Diagnosis diagAct=new Diagnosis();
 
-        diagExp.setDiagId(4);
-        diagExp.setDiagName("Язва желудка");
-        diagExp.setCardId(2);
+        diagExp.setDiagId(1);
+        diagExp.setDiagName("Вирусное орви");
+        diagExp.setCardId(1);
 
 
         try{

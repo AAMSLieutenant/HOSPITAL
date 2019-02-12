@@ -34,7 +34,7 @@ class AppointmentDaoTest {
     @Test
     void read() {
 
-        String d="2018-12-30";
+        String d="2019-01-14";
         Date date=new Date();
         Appointment appointmentExp=new Appointment();
         Appointment appointmentAct=new Appointment();
@@ -45,15 +45,14 @@ class AppointmentDaoTest {
         catch(ParseException pe){
             pe.printStackTrace();
         }
-        appointmentExp.setAppId(2);
+        appointmentExp.setAppId(1);
         appointmentExp.setAppDate(date);
         appointmentExp.setAppValue(250);
         appointmentExp.setDocId(1);
-        appointmentExp.setDocId(1);
-        appointmentExp.setCardId(3);
-        appointmentExp.setAppComplaint("asdasdasas");
+        appointmentExp.setCardId(1);
+        appointmentExp.setAppComplaint("Очень сильная боль в горле");
         try{
-            appointmentAct=appointmentDao.read(2);
+            appointmentAct=appointmentDao.read(1);
         }
         catch(Exception e){
             e.printStackTrace();

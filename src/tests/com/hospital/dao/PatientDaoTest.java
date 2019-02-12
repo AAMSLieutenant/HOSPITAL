@@ -41,27 +41,30 @@ class PatientDaoTest {
         address.setStreet("Крещатик");
         address.setHouseNumber(22);
         address.setFlatNumber(32);
-        Date bd=new Date();
-        Date ad=new Date();
-        Date dd=new Date();
+        String bd="1976-07-10";
+        String ad="2018-12-20";
+//        String dd=;
 
-//        patExp.setpCardId(1);
-//        patExp.setpName("Андрей");
-//        patExp.setpSurname("Васильев");
-//        patExp.setpPatronymic("Иванович");
-//        patExp.setpSex("муж");
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            patExp.setpBirthDate(sdf.parse(bd));
+            patExp.setpArrivalDate(sdf.parse(ad));
+        }
+        catch(ParseException pe){
+            pe.printStackTrace();
+        }
+
+        patExp.setpCardId(1);
+        patExp.setpName("Андрей");
+        patExp.setpSurname("Васильев");
+        patExp.setpPatronymic("Иванович");
+        patExp.setpSex("муж");
         patExp.setpAge(43);
-        patExp.setpArrivalDate(ad);
-        patExp.setpBirthDate(bd);
-        patExp.setpDischargeDate(dd);
 
         patExp.setpAddress(address);
 
-        try{
-            patAct=patientDao.read(1);
-            patAct.setpArrivalDate(ad);
-            patAct.setpBirthDate(bd);
-            patAct.setpDischargeDate(dd);
+        try {
+            patAct = patientDao.read(1);
         }
         catch(Exception e){
             e.printStackTrace();
